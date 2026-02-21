@@ -1,0 +1,58 @@
+---
+import LanguageSwitch from '../components/LanguageSwitch.astro';
+import { withBase } from '../lib/paths';
+import '../styles/global.css';
+
+const { title, description = '', lang = 'pl' } = Astro.props;
+
+const labels =
+  lang === 'pl'
+    ? {
+        project: 'Projekt',
+        downloads: 'Pobieranie',
+        updates: 'Aktualnosci',
+        bio: 'Bio'
+      }
+    : {
+        project: 'Project',
+        downloads: 'Downloads',
+        updates: 'Updates',
+        bio: 'Bio'
+      };
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
+    <link rel="icon" href={withBase('/favicon.ico')} />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+  </head>
+  <body>
+    <div class="site-bg"></div>
+    <header class="main-header">
+      <a class="brand" href={withBase(`/${lang}/`)}>GS</a>
+      <nav>
+        <a href={withBase(`/${lang}/project/`)}>{labels.project}</a>
+        <a href={withBase(`/${lang}/downloads/`)}>{labels.downloads}</a>
+        <a href={withBase(`/${lang}/updates/`)}>{labels.updates}</a>
+        <a href={withBase(`/${lang}/bio/`)}>{labels.bio}</a>
+      </nav>
+      <LanguageSwitch />
+    </header>
+
+    <main class="container">
+      <slot />
+    </main>
+
+    <footer class="main-footer">
+      <p>Nowe technologie w rozwoju narzedzi i kompetencji technologicznych dla wspolczesnej muzyki</p>
+      <p>09.2025 - 02.2026</p>
+    </footer>
+  </body>
+</html>
+

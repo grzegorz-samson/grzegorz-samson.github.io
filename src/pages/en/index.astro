@@ -1,0 +1,49 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import HeroCta from '../../components/HeroCta.astro';
+import FeatureGrid from '../../components/FeatureGrid.astro';
+import { withBase } from '../../lib/paths';
+---
+
+<PageLayout
+  lang="en"
+  title="Scholarship project portfolio"
+  description="Project website: VST tool, composition, and conference materials."
+>
+  <HeroCta
+    title="Generative Granular Synthesizer VST"
+    subtitle="Scholarship project page: New technologies for developing tools and technological competences for contemporary music."
+    imageSrc={withBase('/images/plugin-hero.svg')}
+    imageAlt="VST plugin visual"
+    badges={['Open source', 'VST3', 'AI-assisted', 'Sep 2025 - Feb 2026']}
+    primaryCta={{ label: 'Download plugin', href: withBase('/en/downloads/') }}
+    secondaryCtas={[
+      { label: 'View project', href: withBase('/en/project/') },
+      { label: 'Updates', href: withBase('/en/updates/') }
+    ]}
+  />
+
+  <section>
+    <p class="section-kicker">Site scope</p>
+    <FeatureGrid
+      items={[
+        {
+          title: 'VST + docs',
+          text: 'Public plugin release, technical documentation, and usage guide.',
+          href: withBase('/en/project/#vst')
+        },
+        {
+          title: 'Audio composition',
+          text: 'A composition created with the plugin plus process notes.',
+          href: withBase('/en/project/#composition')
+        },
+        {
+          title: 'Research / conference',
+          text: 'Presentation materials: abstract, slides, recording, and notes.',
+          href: withBase('/en/project/#research')
+        }
+      ]}
+    />
+  </section>
+</PageLayout>
+

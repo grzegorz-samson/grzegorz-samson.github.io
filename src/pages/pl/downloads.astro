@@ -1,0 +1,36 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import ReleaseCard from '../../components/ReleaseCard.astro';
+---
+
+<PageLayout
+  lang="pl"
+  title="Pobieranie | Projekt stypendialny"
+  description="Wersje pluginu VST, wymagania i dokumentacja."
+>
+  <section class="content-stack">
+    <p class="section-kicker">Pobieranie</p>
+    <h2>Najnowsze wydanie</h2>
+    <ReleaseCard
+      name="Generatywny syntezator granularny VST"
+      version="v0.1.0-alpha"
+      date="2026-02-21"
+      downloadUrl="https://example.com"
+      notes={['Link placeholder - podmien na Twoj hosting binarek.', 'Wersja testowa do dokumentacji i prezentacji.']}
+      checksum={{ algo: 'SHA256', value: 'TO_BE_ADDED' }}
+    />
+  </section>
+
+  <section id="docs" class="content-stack">
+    <p class="section-kicker">Dokumentacja</p>
+    <h2>Materialy uzytkowe</h2>
+    <div class="text-panel">
+      <ul>
+        <li>Quickstart instalacji i konfiguracji VST.</li>
+        <li>Opis parametrow i workflow twórczego.</li>
+        <li>FAQ oraz lista znanych ograniczen.</li>
+      </ul>
+    </div>
+  </section>
+</PageLayout>
+

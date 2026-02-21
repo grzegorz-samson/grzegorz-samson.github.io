@@ -1,0 +1,36 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import ReleaseCard from '../../components/ReleaseCard.astro';
+---
+
+<PageLayout
+  lang="en"
+  title="Downloads | Scholarship project"
+  description="VST plugin releases, requirements, and documentation."
+>
+  <section class="content-stack">
+    <p class="section-kicker">Downloads</p>
+    <h2>Latest release</h2>
+    <ReleaseCard
+      name="Generative Granular Synthesizer VST"
+      version="v0.1.0-alpha"
+      date="2026-02-21"
+      downloadUrl="https://example.com"
+      notes={['Placeholder link - replace with your external binary hosting.', 'Test release used for documentation and demos.']}
+      checksum={{ algo: 'SHA256', value: 'TO_BE_ADDED' }}
+    />
+  </section>
+
+  <section id="docs" class="content-stack">
+    <p class="section-kicker">Documentation</p>
+    <h2>User materials</h2>
+    <div class="text-panel">
+      <ul>
+        <li>Installation and setup quickstart.</li>
+        <li>Parameter reference and creative workflow.</li>
+        <li>FAQ and known limitations.</li>
+      </ul>
+    </div>
+  </section>
+</PageLayout>
+

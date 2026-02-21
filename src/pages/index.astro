@@ -1,0 +1,17 @@
+---
+import { withBase } from '../lib/paths';
+const plUrl = withBase('/pl/');
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta http-equiv="refresh" content={`0; url=${plUrl}`} />
+    <title>Scholarship Project</title>
+  </head>
+  <body>
+    <p>Redirecting to <a href={plUrl}>Polish site</a>...</p>
+  </body>
+</html>

@@ -1,0 +1,137 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import HeroCta from '../../components/HeroCta.astro';
+import FeatureGrid from '../../components/FeatureGrid.astro';
+import ReleaseCard from '../../components/ReleaseCard.astro';
+import Timeline from '../../components/Timeline.astro';
+import MediaEmbedSoundCloud from '../../components/MediaEmbedSoundCloud.astro';
+import MediaEmbedYouTube from '../../components/MediaEmbedYouTube.astro';
+import CTAContact from '../../components/CTAContact.astro';
+import { withBase } from '../../lib/paths';
+---
+
+<PageLayout
+  lang="pl"
+  title="Projekt stypendialny | Generatywny syntezator granularny VST"
+  description="Polaczona strona narzedzia VST, kompozycji i materialow badawczych projektu stypendialnego."
+>
+  <HeroCta
+    title="Generatywny syntezator granularny VST"
+    subtitle="Nowe technologie w rozwoju narzedzi i kompetencji technologicznych dla wspolczesnej muzyki."
+    imageSrc={withBase('/images/plugin-hero.svg')}
+    imageAlt="Interfejs pluginu VST"
+    badges={['Open source', 'Real-time sound design', 'Scholarship 2025/2026']}
+    primaryCta={{ label: 'Pobieranie', href: withBase('/pl/downloads/') }}
+    secondaryCtas={[
+      { label: 'Dokumentacja', href: withBase('/pl/downloads/#docs') },
+      { label: 'Demo YouTube', href: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', external: true }
+    ]}
+  />
+
+  <section>
+    <p class="section-kicker">3 glowne rezultaty</p>
+    <FeatureGrid
+      items={[
+        {
+          title: 'Wtyczka VST',
+          text: 'Narzędzie do generatywnego projektowania struktur i tekstur dzwiekowych.',
+          href: '#vst'
+        },
+        {
+          title: 'Kompozycja',
+          text: 'Utwor stworzony z wykorzystaniem projektowanego pluginu.',
+          href: '#composition'
+        },
+        {
+          title: 'Research / konferencja',
+          text: 'Materialy prezentacji i wnioski z wydarzen branzowych.',
+          href: '#research'
+        }
+      ]}
+    />
+  </section>
+
+  <section id="vst" class="content-stack">
+    <p class="section-kicker">VST / narzedzie</p>
+    <h2>Wtyczka VST</h2>
+    <div class="text-panel">
+      <p>
+        Glownym rezultatem projektu jest autorski plugin VST do generatywnego projektowania dzwieku,
+        zgodnie z zalozeniami zadania 3 (10.2025 - 12.2025) i zadania 6 (01.2026 - 02.2026).
+      </p>
+      <ul>
+        <li>Generowanie i modulacja struktur granularnych w czasie rzeczywistym.</li>
+        <li>Workflow nastawiony na eksperymentalny sound design i praktyke kompozytorska.</li>
+        <li>Udostepnienie narzedzia i dokumentacji jako otwarty rezultat projektu.</li>
+      </ul>
+    </div>
+
+    <ReleaseCard
+      name="Generatywny syntezator granularny VST"
+      version="v0.1.0-alpha"
+      date="2026-02-21"
+      downloadUrl="https://example.com"
+      notes={[
+        'Windows x64 (placeholder)',
+        'Docelowo link do hostingu zewnetrznego z wersjami i changelogiem.'
+      ]}
+      checksum={{ algo: 'SHA256', value: 'TO_BE_ADDED' }}
+    />
+  </section>
+
+  <section id="composition" class="content-stack">
+    <p class="section-kicker">Kompozycja</p>
+    <h2>Utwor zrealizowany z pluginem</h2>
+    <div class="text-panel">
+      <p>
+        Sekcja realizuje cel zadania 4 (12.2025 - 01.2026): prezentacja kompozycji powstalej z wykorzystaniem
+        wtyczki i dokumentacji procesu twórczego.
+      </p>
+    </div>
+    <MediaEmbedSoundCloud url="https://soundcloud.com/forss/flickermood" />
+  </section>
+
+  <section id="research" class="content-stack">
+    <p class="section-kicker">Research / konferencja</p>
+    <h2>Materialy badawcze i konferencyjne</h2>
+    <div class="text-panel">
+      <p>
+        Sekcja odpowiada zadaniu 2 (10.2025 - 11.2025): prezentacja rezultatow projektu podczas
+        konferencji miedzynarodowej oraz publikacja materialow wspierajacych.
+      </p>
+      <ul>
+        <li>Abstrakt i opis koncepcji narzedzia.</li>
+        <li>Slajdy / poster i nagranie prezentacji.</li>
+        <li>Wnioski z feedbacku srodowiska miedzynarodowego.</li>
+      </ul>
+    </div>
+    <MediaEmbedYouTube url="https://www.youtube.com/watch?v=dQw4w9WgXcQ" title="Przykladowe wideo konferencyjne" />
+  </section>
+
+  <section class="content-stack">
+    <p class="section-kicker">Harmonogram</p>
+    <h2>Milestones projektu</h2>
+    <Timeline
+      items={[
+        { label: 'Kursy i szkolenia (zadanie 1)', date: '09.2025 - 10.2025', status: 'done' },
+        { label: 'Konferencja miedzynarodowa (zadanie 2)', date: '10.2025 - 11.2025', status: 'done' },
+        { label: 'Opracowanie pluginu VST (zadanie 3)', date: '10.2025 - 12.2025', status: 'in-progress' },
+        { label: 'Kompozycja z pluginem (zadanie 4)', date: '12.2025 - 01.2026', status: 'in-progress' },
+        { label: 'Warsztaty i wyklady (zadanie 5)', date: '12.2025 - 02.2026', status: 'planned' },
+        { label: 'Dokumentacja i dystrybucja (zadanie 6)', date: '01.2026 - 02.2026', status: 'planned' }
+      ]}
+    />
+  </section>
+
+  <CTAContact
+    title="Wspolpraca"
+    text="Obszary wspolpracy: audio software, sound design, projekty artystyczno-badawcze."
+    primary={{ label: 'Kontakt e-mail', href: 'mailto:you@example.com' }}
+    secondary={[
+      { label: 'GitHub', href: 'https://github.com/' },
+      { label: 'YouTube', href: 'https://youtube.com/' },
+      { label: 'SoundCloud', href: 'https://soundcloud.com/' }
+    ]}
+  />
+</PageLayout>
+

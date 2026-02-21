@@ -1,0 +1,30 @@
+---
+const { url, title = 'YouTube video' } = Astro.props;
+
+function toEmbed(input: string) {
+  if (input.includes('/embed/')) return input;
+  try {
+    const parsed = new URL(input);
+    const videoId = parsed.searchParams.get('v');
+    if (videoId) return `https://www.youtube.com/embed/${videoId}`;
+    if (parsed.hostname.includes('youtu.be')) {
+      const id = parsed.pathname.replace('/', '');
+      return `https://www.youtube.com/embed/${id}`;
+    }
+  } catch {
+    return input;
+  }
+  return input;
+}
+---
+
+<div class="media-wrap">
+  <iframe
+    src={toEmbed(url)}
+    title={title}
+    loading="lazy"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+  />
+</div>
+

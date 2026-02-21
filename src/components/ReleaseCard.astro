@@ -1,0 +1,25 @@
+---
+const { name, version, date, downloadUrl, notes = [], checksum } = Astro.props;
+---
+
+<article class="release-card">
+  <div class="release-head">
+    <h3>{name}</h3>
+    <p>{version} | {date}</p>
+  </div>
+
+  <a class="button button-primary" href={downloadUrl} target="_blank" rel="noreferrer">Download (external)</a>
+
+  {notes.length > 0 && (
+    <ul>
+      {notes.map((note: string) => <li>{note}</li>)}
+    </ul>
+  )}
+
+  {checksum && (
+    <p class="checksum">
+      {checksum.algo}: <code>{checksum.value}</code>
+    </p>
+  )}
+</article>
+

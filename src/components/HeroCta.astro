@@ -1,0 +1,41 @@
+---
+const {
+  title,
+  subtitle,
+  imageSrc,
+  imageAlt = '',
+  primaryCta,
+  secondaryCtas = [],
+  badges = []
+} = Astro.props;
+---
+
+<section class="hero-grid">
+  <div class="hero-copy">
+    <p class="section-kicker">Scholarship Project</p>
+    <h1>{title}</h1>
+    {subtitle && <p class="lead">{subtitle}</p>}
+
+    {badges.length > 0 && (
+      <div class="badge-row">
+        {badges.map((badge: string) => <span class="badge">{badge}</span>)}
+      </div>
+    )}
+
+    <div class="hero-cta-row">
+      <a class="button button-primary" href={primaryCta?.href} target={primaryCta?.external ? '_blank' : undefined} rel="noreferrer">
+        {primaryCta?.label}
+      </a>
+      {secondaryCtas.map((cta: { label: string; href: string; external?: boolean }) => (
+        <a class="button button-ghost" href={cta.href} target={cta.external ? '_blank' : undefined} rel="noreferrer">
+          {cta.label}
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <div class="hero-image-wrap">
+    <img src={imageSrc} alt={imageAlt} loading="eager" />
+  </div>
+</section>
+

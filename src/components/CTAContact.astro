@@ -1,0 +1,17 @@
+---
+const { title, text, primary, secondary = [] } = Astro.props;
+---
+
+<section class="contact-cta">
+  <h2>{title}</h2>
+  <p>{text}</p>
+  <div class="hero-cta-row">
+    <a class="button button-primary" href={primary.href} target={primary.external ? '_blank' : undefined} rel="noreferrer">
+      {primary.label}
+    </a>
+    {secondary.map((item: { label: string; href: string }) => (
+      <a class="button button-ghost" href={item.href} target="_blank" rel="noreferrer">{item.label}</a>
+    ))}
+  </div>
+</section>
+
