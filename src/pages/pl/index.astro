@@ -8,18 +8,19 @@ import { withBase } from '../../lib/paths';
 <PageLayout
   lang="pl"
   title="Portfolio projektu stypendialnego"
-  description="Strona projektu: narzedzie VST, kompozycja i materialy konferencyjne."
+  description="Strona projektu: narzędzie VST, kompozycja i materiały konferencyjne."
 >
   <HeroCta
+    kicker="Projekt stypendialny"
     title="Generatywny syntezator granularny VST"
-    subtitle="Strona projektu stypendialnego: Nowe technologie w rozwoju narzedzi i kompetencji technologicznych dla wspolczesnej muzyki."
+    subtitle="Strona projektu stypendialnego: „Nowe technologie w rozwoju narzędzi i kompetencji technologicznych dla współczesnej muzyki”."
     imageSrc={withBase('/images/plugin-hero.svg')}
     imageAlt="Wizualizacja pluginu VST"
     badges={['Open source', 'VST3', 'AI-assisted', '09.2025 - 02.2026']}
-    primaryCta={{ label: 'Pobierz plugin', href: withBase('/pl/downloads/') }}
+    primaryCta={{ label: 'Wtyczka VST', href: withBase('/pl/downloads/') }}
     secondaryCtas={[
       { label: 'Zobacz projekt', href: withBase('/pl/project/') },
-      { label: 'Aktualnosci', href: withBase('/pl/updates/') }
+      { label: 'Nauka (ADC 2025)', href: withBase('/pl/science/') }
     ]}
   />
 
@@ -29,21 +30,20 @@ import { withBase } from '../../lib/paths';
       items={[
         {
           title: 'VST + dokumentacja',
-          text: 'Publiczny plugin, dokumentacja techniczna i instrukcja uzycia.',
-          href: withBase('/pl/project/#vst')
+          text: 'Publiczna wtyczka, dokumentacja techniczna i instrukcja użycia.',
+          href: withBase('/pl/downloads/')
         },
         {
           title: 'Kompozycja audio',
-          text: 'Utwor stworzony narzedziem VST wraz z notatka procesu.',
+          text: 'Utwór stworzony narzędziem VST wraz z notatką procesu.',
           href: withBase('/pl/project/#composition')
         },
         {
-          title: 'Research / konferencja',
-          text: 'Materialy wystapienia: abstrakt, slajdy, nagranie i notatki.',
-          href: withBase('/pl/project/#research')
+          title: 'Nauka i konferencje',
+          text: 'Materiały ADC 2025: poster, opis metod i kontekst badawczy projektu.',
+          href: withBase('/pl/science/')
         }
       ]}
     />
   </section>
 </PageLayout>
-

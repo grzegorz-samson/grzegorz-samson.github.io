@@ -1,5 +1,14 @@
 ---
-const { name, version, date, downloadUrl, notes = [], checksum } = Astro.props;
+const {
+  name,
+  version,
+  date,
+  downloadUrl,
+  downloadLabel = 'Download (external)',
+  pendingLabel = 'Download coming soon',
+  notes = [],
+  checksum
+} = Astro.props;
 ---
 
 <article class="release-card">
@@ -8,7 +17,13 @@ const { name, version, date, downloadUrl, notes = [], checksum } = Astro.props;
     <p>{version} | {date}</p>
   </div>
 
-  <a class="button button-primary" href={downloadUrl} target="_blank" rel="noreferrer">Download (external)</a>
+  {downloadUrl ? (
+    <a class="button button-primary" href={downloadUrl} target="_blank" rel="noreferrer">
+      {downloadLabel}
+    </a>
+  ) : (
+    <p class="release-pending">{pendingLabel}</p>
+  )}
 
   {notes.length > 0 && (
     <ul>
@@ -22,4 +37,3 @@ const { name, version, date, downloadUrl, notes = [], checksum } = Astro.props;
     </p>
   )}
 </article>
-

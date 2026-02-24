@@ -1,0 +1,47 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { withBase } from '../../lib/paths';
+---
+
+<PageLayout
+  lang="pl"
+  title="Warsztaty | Projekt stypendialny"
+  description="Warsztaty i działania edukacyjne realizowane w ramach projektu."
+>
+  <section class="content-stack">
+    <p class="section-kicker">Warsztaty</p>
+    <h2>Otwarte warsztaty | 27.02.2026</h2>
+    <div class="text-panel">
+      <p>
+        Warsztaty odbyły się na Nowym Kampusie AMFN (sala 235) i obejmowały dwa bloki tematyczne:
+        kreatywne użycie technologii generatywnych oraz wprowadzenie do projektowania wtyczek VST.
+      </p>
+      <ul>
+        <li>17:00-18:15: „Wykorzystanie technologii generatywnych w kreacji dźwięku”.</li>
+        <li>18:30-19:45: „Wstęp do projektowania wtyczek VST” z prezentacją autorskiej wtyczki.</li>
+      </ul>
+    </div>
+    <div class="workshop-poster">
+      <img src={withBase('/assets/workshops/warsztaty-27-02-2026-gs.png')} alt="Plakat warsztatów z dnia 27.02.2026" loading="lazy" />
+    </div>
+  </section>
+
+  <section class="content-stack">
+    <p class="section-kicker">Zakres merytoryczny</p>
+    <h2>Program i odbiorcy</h2>
+    <div class="text-panel">
+      <ul>
+        <li>Transformery w przetwarzaniu multimodalnym i ich użycie w procesie kreatywnym.</li>
+        <li>Przykłady praktycznego zastosowania modeli generatywnych w pracy z dźwiękiem.</li>
+        <li>Przegląd standardu JUCE i narzędzi do tworzenia/modyfikacji pluginów VST.</li>
+        <li>Prezentacja workflow dla osób studiujących reżyserię dźwięku, sound design, kompozycję i teorię muzyki.</li>
+      </ul>
+      <p>
+        Przed częścią VST rekomendowane było przygotowanie środowiska: Visual Studio Code, JUCE, Git/GitHub Desktop.
+      </p>
+      <p>
+        Dla osób uczestniczących zdalnie przewidziano kontakt organizacyjny przez Teams.
+      </p>
+    </div>
+  </section>
+</PageLayout>

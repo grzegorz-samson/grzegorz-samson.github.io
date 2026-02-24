@@ -1,0 +1,33 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { withBase } from '../../lib/paths';
+---
+
+<PageLayout
+  lang="en"
+  title="Science | Scholarship project"
+  description="Research and conference materials, including ADC 2025."
+>
+  <section class="content-stack">
+    <p class="section-kicker">Science</p>
+    <h2>Audio Developer Conference 2025</h2>
+    <div class="text-panel">
+      <p>
+        The project was presented at Audio Developer Conference 2025
+        (November 10-12, 2025, Bristol, UK and online).
+      </p>
+      <p>
+        The presentation focused on connecting text-prompt workflows with generative audio pipelines and a real-time
+        granular VST engine.
+      </p>
+      <div class="hero-cta-row">
+        <a class="button button-primary" href={withBase('/assets/research/from-text-wishes-to-sound-adc-2025-poster.jpg')} target="_blank" rel="noreferrer">
+          View poster
+        </a>
+        <a class="button button-ghost" href={withBase('/assets/research/from-text-wishes-to-sound-adc-2025-poster.docx')} target="_blank" rel="noreferrer">
+          Download DOCX source
+        </a>
+      </div>
+    </div>
+  </section>
+</PageLayout>

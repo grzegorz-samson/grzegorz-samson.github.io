@@ -1,36 +1,104 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
 import ReleaseCard from '../../components/ReleaseCard.astro';
+import { withBase } from '../../lib/paths';
 ---
 
 <PageLayout
   lang="pl"
-  title="Pobieranie | Projekt stypendialny"
-  description="Wersje pluginu VST, wymagania i dokumentacja."
+  title="Wtyczka VST | Projekt stypendialny"
+  description="Opis wtyczki GranularVST-3: funkcjonalności, panele i zastosowania."
 >
   <section class="content-stack">
-    <p class="section-kicker">Pobieranie</p>
-    <h2>Najnowsze wydanie</h2>
+    <p class="section-kicker">Wtyczka VST</p>
+    <h2>GranularVST-3</h2>
+    <div class="text-panel">
+      <p>
+        GranularVST-3 to autorska wtyczka JUCE (VST3 + Standalone) do generatywnego przetwarzania krótkich nagrań
+        i budowania wielowarstwowych struktur granularnych. Narzędzie wspiera pracę kompozytorską, sound design
+        i eksperymentalne podejście do kreacji dźwięku.
+      </p>
+    </div>
     <ReleaseCard
       name="Generatywny syntezator granularny VST"
       version="v0.1.0-alpha"
       date="2026-02-21"
-      downloadUrl="https://example.com"
-      notes={['Link placeholder - podmien na Twoj hosting binarek.', 'Wersja testowa do dokumentacji i prezentacji.']}
-      checksum={{ algo: 'SHA256', value: 'TO_BE_ADDED' }}
+      pendingLabel="Publikacja binarna w przygotowaniu"
+      notes={[
+        'Instalator VST3 zostanie opublikowany po zamknięciu przeglądu stabilności.',
+        'Wraz z wydaniem zostaną opublikowane wymagania systemowe i suma kontrolna.'
+      ]}
+      checksum={{ algo: 'SHA256', value: 'Zostanie opublikowana wraz z wydaniem' }}
     />
   </section>
 
-  <section id="docs" class="content-stack">
-    <p class="section-kicker">Dokumentacja</p>
-    <h2>Materialy uzytkowe</h2>
+  <section class="content-stack">
+    <p class="section-kicker">Funkcjonalności</p>
+    <h2>Co potrafi wtyczka</h2>
     <div class="text-panel">
       <ul>
-        <li>Quickstart instalacji i konfiguracji VST.</li>
-        <li>Opis parametrow i workflow twórczego.</li>
-        <li>FAQ oraz lista znanych ograniczen.</li>
+        <li>Ładowanie wielu plików WAV do wspólnego bufora i budowanie chmur ziaren (grain clouds).</li>
+        <li>Kontrola czasu trwania ziaren, gęstości chmury, rozrzutu wysokości i głośności oraz obwiedni.</li>
+        <li>Tryb pracy oparty o waveform z selekcją, grupowaniem i edycją zakresów próbkowania.</li>
+        <li>Panel multichannel z routingiem, mute/solo i parami panorama dla złożonych układów wyjściowych.</li>
+        <li>Panel AI z generowaniem materiału audio i planowaniem zmian miksu (AI Mix).</li>
       </ul>
     </div>
   </section>
-</PageLayout>
 
+  <section class="content-stack">
+    <p class="section-kicker">Use case</p>
+    <h2>Zastosowania twórcze</h2>
+    <div class="text-panel">
+      <ul>
+        <li>Tekstury filmowe, ambientowe warstwy i drony.</li>
+        <li>Glitche rytmiczne i przetwarzanie materiału perkusyjnego.</li>
+        <li>Resynteza głosu i nagrań terenowych.</li>
+        <li>Praca badawcza nad interaktywnymi systemami audio i multimodalnością.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="content-stack">
+    <p class="section-kicker">Panele interfejsu</p>
+    <h2>Architektura GUI</h2>
+    <div class="plugin-panel-grid">
+      <article class="plugin-panel-card">
+        <img src={withBase('/assets/plugin/controls-panel.png')} alt="Panel Controls we wtyczce GranularVST-3" loading="lazy" />
+        <h3>Controls Panel</h3>
+        <p>
+          Główna warstwa kreacji: Duration, Pitch, Gain, Envelope i Cloud. To tutaj ustawiane są parametry
+          odpowiadające za charakter i dynamikę chmury granularnej.
+        </p>
+      </article>
+
+      <article class="plugin-panel-card">
+        <img src={withBase('/assets/plugin/multichannel-panel.png')} alt="Panel Multichannel we wtyczce GranularVST-3" loading="lazy" />
+        <h3>Multichannel Panel</h3>
+        <p>
+          Routing kanałów z kontrolą aktywności, mute/solo i konfiguracją par panorama. Panel umożliwia pracę
+          od stereo po rozszerzone układy wielokanałowe.
+        </p>
+      </article>
+
+      <article class="plugin-panel-card">
+        <img src={withBase('/assets/plugin/audio-generator-panel.png')} alt="Panel Audio Generator (AI) we wtyczce GranularVST-3" loading="lazy" />
+        <h3>Audio Generator (AI)</h3>
+        <p>
+          Interfejs konwersacyjny do generowania materiału audio i zarządzania sesją. Rozszerza workflow o komponent
+          promptowy i szybkie iteracje wariantów brzmieniowych.
+        </p>
+      </article>
+    </div>
+    <div class="text-panel">
+      <p>
+        Dodatkowo panel <strong>AI Mix</strong> umożliwia planowanie i stosowanie zmian parametrów na podstawie opisu
+        tekstowego, z podglądem planu i możliwością cofnięcia zmian.
+      </p>
+      <p>
+        Kontekst naukowy i materiały konferencyjne są dostępne w zakładce
+        <a href={withBase('/pl/science/')}> Nauka</a>.
+      </p>
+    </div>
+  </section>
+</PageLayout>

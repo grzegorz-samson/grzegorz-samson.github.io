@@ -1,5 +1,6 @@
 ---
 const {
+  kicker = 'Scholarship Project',
   title,
   subtitle,
   imageSrc,
@@ -12,7 +13,7 @@ const {
 
 <section class="hero-grid">
   <div class="hero-copy">
-    <p class="section-kicker">Scholarship Project</p>
+    <p class="section-kicker">{kicker}</p>
     <h1>{title}</h1>
     {subtitle && <p class="lead">{subtitle}</p>}
 
@@ -38,4 +39,3 @@ const {
     <img src={imageSrc} alt={imageAlt} loading="eager" />
   </div>
 </section>
-

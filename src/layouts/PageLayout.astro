@@ -1,5 +1,6 @@
 ---
 import LanguageSwitch from '../components/LanguageSwitch.astro';
+import FundingFooter from '../components/FundingFooter.astro';
 import { withBase } from '../lib/paths';
 import '../styles/global.css';
 
@@ -9,8 +10,10 @@ const labels =
   lang === 'pl'
     ? {
         project: 'Projekt',
-        downloads: 'Pobieranie',
-        updates: 'Aktualnosci',
+        plugin: 'Wtyczka VST',
+        science: 'Nauka',
+        workshops: 'Warsztaty',
+        scholarship: 'Stypendium',
         bio: 'Bio'
       }
     : {
@@ -19,6 +22,23 @@ const labels =
         updates: 'Updates',
         bio: 'Bio'
       };
+
+const navItems =
+  lang === 'pl'
+    ? [
+        { href: withBase('/pl/project/'), label: labels.project },
+        { href: withBase('/pl/downloads/'), label: labels.plugin },
+        { href: withBase('/pl/science/'), label: labels.science },
+        { href: withBase('/pl/workshops/'), label: labels.workshops },
+        { href: withBase('/pl/scholarship/'), label: labels.scholarship },
+        { href: withBase('/pl/bio/'), label: labels.bio }
+      ]
+    : [
+        { href: withBase('/en/project/'), label: labels.project },
+        { href: withBase('/en/downloads/'), label: labels.downloads },
+        { href: withBase('/en/updates/'), label: labels.updates },
+        { href: withBase('/en/bio/'), label: labels.bio }
+      ];
 ---
 
 <!doctype html>
@@ -37,10 +57,9 @@ const labels =
     <header class="main-header">
       <a class="brand" href={withBase(`/${lang}/`)}>GS</a>
       <nav>
-        <a href={withBase(`/${lang}/project/`)}>{labels.project}</a>
-        <a href={withBase(`/${lang}/downloads/`)}>{labels.downloads}</a>
-        <a href={withBase(`/${lang}/updates/`)}>{labels.updates}</a>
-        <a href={withBase(`/${lang}/bio/`)}>{labels.bio}</a>
+        {navItems.map((item) => (
+          <a href={item.href}>{item.label}</a>
+        ))}
       </nav>
       <LanguageSwitch />
     </header>
@@ -50,9 +69,9 @@ const labels =
     </main>
 
     <footer class="main-footer">
-      <p>Nowe technologie w rozwoju narzedzi i kompetencji technologicznych dla wspolczesnej muzyki</p>
+      <p>Nowe technologie w rozwoju narzędzi i kompetencji technologicznych dla współczesnej muzyki</p>
       <p>09.2025 - 02.2026</p>
     </footer>
+    {lang === 'pl' && <FundingFooter lang={lang} />}
   </body>
 </html>
-

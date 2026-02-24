@@ -1,0 +1,28 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { withBase } from '../../lib/paths';
+---
+
+<PageLayout
+  lang="en"
+  title="Workshops | Scholarship project"
+  description="Workshops and educational activities delivered within the scholarship project."
+>
+  <section class="content-stack">
+    <p class="section-kicker">Workshops</p>
+    <h2>Open workshop session | 2026-02-27</h2>
+    <div class="text-panel">
+      <p>
+        The workshop session covered two blocks: generative technologies in sound creation and a practical introduction
+        to VST plugin design with a live demonstration of the author’s granular instrument.
+      </p>
+      <ul>
+        <li>17:00-18:15: Generative technologies in sound creation.</li>
+        <li>18:30-19:45: Intro to VST plugin design and workflow.</li>
+      </ul>
+    </div>
+    <div class="workshop-poster">
+      <img src={withBase('/assets/workshops/warsztaty-27-02-2026-gs.png')} alt="Workshop poster from February 27, 2026" loading="lazy" />
+    </div>
+  </section>
+</PageLayout>

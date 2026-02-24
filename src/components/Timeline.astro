@@ -9,14 +9,13 @@ function statusClass(status: string) {
 ---
 
 <ol class="timeline-list">
-  {items.map((item: { label: string; date: string; status: string }) => (
+  {items.map((item: { label: string; date: string; status: string; statusLabel?: string }) => (
     <li>
       <div>
         <h3>{item.label}</h3>
         <p>{item.date}</p>
       </div>
-      <span class={`timeline-status ${statusClass(item.status)}`}>{item.status}</span>
+      <span class={`timeline-status ${statusClass(item.status)}`}>{item.statusLabel ?? item.status}</span>
     </li>
   ))}
 </ol>
-
