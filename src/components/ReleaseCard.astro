@@ -9,6 +9,8 @@ const {
   notes = [],
   checksum
 } = Astro.props;
+
+const hasActionSlot = Astro.slots.has('action');
 ---
 
 <article class="release-card">
@@ -21,12 +23,16 @@ const {
     <a class="button button-primary" href={downloadUrl} target="_blank" rel="noreferrer">
       {downloadLabel}
     </a>
+  ) : hasActionSlot ? (
+    <div class="release-action">
+      <slot name="action" />
+    </div>
   ) : (
     <p class="release-pending">{pendingLabel}</p>
   )}
 
   {notes.length > 0 && (
-    <ul>
+    <ul class="release-notes-list">
       {notes.map((note: string) => <li>{note}</li>)}
     </ul>
   )}

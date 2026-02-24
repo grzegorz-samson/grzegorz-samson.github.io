@@ -6,7 +6,8 @@ export interface DownloadGatePayload {
   email: string;
   purposes: string[];
   purposeOther?: string;
-  institution?: string;
+  affiliations: string[];
+  institutionOther?: string;
   consentTerms: boolean;
   consentStats?: boolean;
   consentUpdates: boolean;

@@ -1,5 +1,6 @@
 ---
 import { withBase } from '../lib/paths';
+import { API_BASE } from '../lib/config';
 
 type Lang = 'pl' | 'en';
 
@@ -20,9 +21,13 @@ const copy =
         firstName: 'Imię',
         lastName: 'Nazwisko',
         email: 'E-mail',
-        purposesTitle: 'Do jakich celów planujesz użyć wtyczki?',
-        institution: 'AMFN lub inna instytucja (opcjonalnie)',
+        purposesTitle: 'Zaznacz, które określenia pasują do Ciebie.',
         purposeOther: 'Inne (doprecyzuj)',
+        affiliationsTitle: 'Powiązanie instytucjonalne',
+        affiliationAmfn: 'Związany z AMFN',
+        affiliationOther: 'Inna instytucja',
+        affiliationNone: 'Żadna',
+        institutionOther: 'Nazwa innej instytucji',
         consentsTitle: 'Zgody',
         consentTermsPrefix: 'Akceptuję',
         consentTermsTerms: 'regulamin',
@@ -42,6 +47,9 @@ const copy =
         backToForm: 'Wypełnij ponownie',
         unsubscribeInfo: 'Aby wypisać się z informacji o aktualizacjach, napisz na',
         validationError: 'Sprawdź formularz i uzupełnij wymagane pola.',
+        affiliationsError: 'Zaznacz AMFN, Inna instytucja lub Żadna.',
+        institutionOtherError: 'Podaj nazwę innej instytucji.',
+        noneExclusivityError: 'Opcja „Żadna” nie może być łączona z innymi.',
         tooManyRequests: 'Za dużo prób. Odczekaj chwilę i spróbuj ponownie.',
         serverError: 'Wystąpił błąd po stronie serwera. Spróbuj ponownie za chwilę.',
         configError: 'Brak konfiguracji API pobierania. Ustaw PUBLIC_API_BASE.',
@@ -60,9 +68,13 @@ const copy =
         firstName: 'First name',
         lastName: 'Last name',
         email: 'Email',
-        purposesTitle: 'What is your intended use?',
-        institution: 'AMFN or another institution (optional)',
+        purposesTitle: 'Select which roles describe you.',
         purposeOther: 'Other (please specify)',
+        affiliationsTitle: 'Institutional affiliation',
+        affiliationAmfn: 'FNAM affiliated',
+        affiliationOther: 'Other institution',
+        affiliationNone: 'None',
+        institutionOther: 'Other institution name',
         consentsTitle: 'Consents',
         consentTermsPrefix: 'I accept the',
         consentTermsTerms: 'terms',
@@ -82,6 +94,9 @@ const copy =
         backToForm: 'Submit another request',
         unsubscribeInfo: 'To unsubscribe from update messages, contact',
         validationError: 'Please review the form and complete required fields.',
+        affiliationsError: 'Select FNAM affiliated, Other institution, or None.',
+        institutionOtherError: 'Please provide the other institution name.',
+        noneExclusivityError: 'The "None" option cannot be combined with other affiliations.',
         tooManyRequests: 'Too many attempts. Please wait and try again.',
         serverError: 'Server error. Please try again in a moment.',
         configError: 'Download API is not configured. Set PUBLIC_API_BASE.',
@@ -97,9 +112,9 @@ const purposes =
     ? [
         { value: 'student', label: 'Student' },
         { value: 'academic_staff', label: 'Pracownik uczelni' },
-        { value: 'amfn', label: 'Związany z AMFN' },
         { value: 'researcher', label: 'Badacz' },
         { value: 'sound_designer', label: 'Sound designer' },
+        { value: 'sound_director', label: 'Reżyser dźwięku' },
         { value: 'composer', label: 'Kompozytor' },
         { value: 'evaluation_test', label: 'Ewaluacja / test' },
         { value: 'commercial_rd', label: 'Komercyjne R&D' },
@@ -108,9 +123,9 @@ const purposes =
     : [
         { value: 'student', label: 'Student' },
         { value: 'academic_staff', label: 'Academic staff' },
-        { value: 'amfn', label: 'AMFN affiliated' },
         { value: 'researcher', label: 'Researcher' },
         { value: 'sound_designer', label: 'Sound designer' },
+        { value: 'sound_director', label: 'Sound Director' },
         { value: 'composer', label: 'Composer' },
         { value: 'evaluation_test', label: 'Evaluation / testing' },
         { value: 'commercial_rd', label: 'Commercial R&D' },
@@ -121,9 +136,10 @@ const termsHref = lang === 'pl' ? withBase('/pl/regulamin/') : withBase('/en/ter
 const privacyHref =
   lang === 'pl' ? `${withBase('/pl/regulamin/')}#polityka-prywatnosci` : `${withBase('/en/terms/')}#privacy-policy`;
 const modalHeadingId = `download-gate-title-${lang}`;
+const apiBase = API_BASE;
 ---
 
-<div class="download-gate" data-download-gate data-lang={lang} data-plugin-version={pluginVersion}>
+<div class="download-gate" data-download-gate data-lang={lang} data-plugin-version={pluginVersion} data-api-base={apiBase}>
   <button type="button" class="button button-primary" data-gate-open>{copy.openButton}</button>
 
   <div class="download-gate-modal" data-gate-modal hidden>
@@ -175,9 +191,27 @@ const modalHeadingId = `download-gate-title-${lang}`;
             <textarea name="purposeOther" rows={2} maxlength="280" disabled></textarea>
           </label>
 
-          <label>
-            <span>{copy.institution}</span>
-            <input type="text" name="institution" maxlength="120" />
+          <fieldset>
+            <legend>{copy.affiliationsTitle}</legend>
+            <div class="download-gate-check-grid">
+              <label class="download-gate-check">
+                <input type="checkbox" name="affiliations" value="amfn" />
+                <span>{copy.affiliationAmfn}</span>
+              </label>
+              <label class="download-gate-check">
+                <input type="checkbox" name="affiliations" value="other" data-affiliation-other-toggle="true" />
+                <span>{copy.affiliationOther}</span>
+              </label>
+              <label class="download-gate-check">
+                <input type="checkbox" name="affiliations" value="none" data-affiliation-none-toggle="true" />
+                <span>{copy.affiliationNone}</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <label class="download-gate-other" data-institution-other hidden>
+            <span>{copy.institutionOther}</span>
+            <input type="text" name="institutionOther" maxlength="140" disabled />
           </label>
 
           <input class="download-gate-honeypot" type="text" name="website" tabindex="-1" autocomplete="off" />
@@ -241,13 +275,14 @@ const modalHeadingId = `download-gate-title-${lang}`;
 </div>
 
 <script type="module">
-  import { DownloadGateApiError, fetchDownloadLink } from '../lib/downloadGate';
-
   const gates = document.querySelectorAll('[data-download-gate]');
 
   const messages = {
     pl: {
       validationError: 'Sprawdź formularz i uzupełnij wymagane pola.',
+      affiliationsError: 'Zaznacz AMFN, Inna instytucja lub Żadna.',
+      institutionOtherError: 'Podaj nazwę innej instytucji.',
+      noneExclusivityError: 'Opcja „Żadna” nie może być łączona z innymi.',
       tooManyRequests: 'Za dużo prób. Odczekaj chwilę i spróbuj ponownie.',
       serverError: 'Wystąpił błąd po stronie serwera. Spróbuj ponownie za chwilę.',
       configError: 'Brak konfiguracji API pobierania. Ustaw PUBLIC_API_BASE.',
@@ -259,6 +294,9 @@ const modalHeadingId = `download-gate-title-${lang}`;
     },
     en: {
       validationError: 'Please review the form and complete required fields.',
+      affiliationsError: 'Select FNAM affiliated, Other institution, or None.',
+      institutionOtherError: 'Please provide the other institution name.',
+      noneExclusivityError: 'The "None" option cannot be combined with other affiliations.',
       tooManyRequests: 'Too many attempts. Please wait and try again.',
       serverError: 'Server error. Please try again in a moment.',
       configError: 'Download API is not configured. Set PUBLIC_API_BASE.',
@@ -270,9 +308,61 @@ const modalHeadingId = `download-gate-title-${lang}`;
     }
   };
 
+  class DownloadGateApiError extends Error {
+    constructor(message, status, details = null) {
+      super(message);
+      this.name = 'DownloadGateApiError';
+      this.status = status;
+      this.details = details;
+    }
+  }
+
+  const fetchDownloadLink = async (apiBase, payload) => {
+    if (!apiBase) {
+      throw new DownloadGateApiError('PUBLIC_API_BASE is not configured.', 500);
+    }
+
+    const response = await fetch(`${apiBase.replace(/\/$/, '')}/download`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
+
+    let data = null;
+    try {
+      data = await response.json();
+    } catch {
+      data = null;
+    }
+
+    if (!response.ok) {
+      const message =
+        typeof data === 'object' && data && 'message' in data && typeof data.message === 'string'
+          ? data.message
+          : 'Download request failed.';
+      throw new DownloadGateApiError(message, response.status, data);
+    }
+
+    if (
+      typeof data !== 'object' ||
+      !data ||
+      !('downloadUrl' in data) ||
+      !('sha256' in data) ||
+      typeof data.downloadUrl !== 'string' ||
+      typeof data.sha256 !== 'string'
+    ) {
+      throw new DownloadGateApiError('Invalid response from download API.', 502, data);
+    }
+
+    return data;
+  };
+
   const toBoolean = (value) => value === 'on' || value === true || value === 'true';
 
   for (const gate of gates) {
+    const apiBase = gate.getAttribute('data-api-base') ?? '';
     const lang = gate.getAttribute('data-lang') === 'pl' ? 'pl' : 'en';
     const copy = messages[lang];
     const openButton = gate.querySelector('[data-gate-open]');
@@ -288,6 +378,11 @@ const modalHeadingId = `download-gate-title-${lang}`;
     const purposeOtherToggle = gate.querySelector('[data-purpose-other-toggle="true"]');
     const purposeOtherWrap = gate.querySelector('[data-purpose-other]');
     const purposeOtherInput = purposeOtherWrap?.querySelector('textarea[name="purposeOther"]');
+    const affiliationOtherToggle = gate.querySelector('[data-affiliation-other-toggle="true"]');
+    const affiliationNoneToggle = gate.querySelector('[data-affiliation-none-toggle="true"]');
+    const affiliationInputs = Array.from(gate.querySelectorAll('input[name="affiliations"]'));
+    const institutionOtherWrap = gate.querySelector('[data-institution-other]');
+    const institutionOtherInput = institutionOtherWrap?.querySelector('input[name="institutionOther"]');
     const downloadLink = gate.querySelector('[data-gate-download-link]');
     const shaCode = gate.querySelector('[data-gate-sha256]');
     const copyLinkButton = gate.querySelector('[data-copy-link]');
@@ -340,6 +435,32 @@ const modalHeadingId = `download-gate-title-${lang}`;
       }
     };
 
+    const toggleInstitutionOther = () => {
+      if (!affiliationOtherToggle || !institutionOtherWrap || !institutionOtherInput) return;
+      const enabled = affiliationOtherToggle.checked;
+      institutionOtherWrap.hidden = !enabled;
+      institutionOtherInput.disabled = !enabled;
+      institutionOtherInput.required = enabled;
+      if (!enabled) {
+        institutionOtherInput.value = '';
+      }
+    };
+
+    const normalizeAffiliations = (changedInput) => {
+      if (!(changedInput instanceof HTMLInputElement)) return;
+      if (changedInput.value === 'none' && changedInput.checked) {
+        for (const input of affiliationInputs) {
+          if (input !== changedInput) {
+            input.checked = false;
+          }
+        }
+      }
+      if (changedInput.value !== 'none' && changedInput.checked && affiliationNoneToggle instanceof HTMLInputElement) {
+        affiliationNoneToggle.checked = false;
+      }
+      toggleInstitutionOther();
+    };
+
     const closeModal = () => {
       modal.hidden = true;
       document.body.classList.remove('download-gate-open');
@@ -362,6 +483,7 @@ const modalHeadingId = `download-gate-title-${lang}`;
         expiryLine.hidden = true;
       }
       toggleOtherPurpose();
+      toggleInstitutionOther();
     };
 
     openButton.addEventListener('click', openModal);
@@ -370,6 +492,9 @@ const modalHeadingId = `download-gate-title-${lang}`;
     });
     resetButton?.addEventListener('click', resetViews);
     purposeOtherToggle?.addEventListener('change', toggleOtherPurpose);
+    affiliationInputs.forEach((input) => {
+      input.addEventListener('change', () => normalizeAffiliations(input));
+    });
 
     copyLinkButton.addEventListener('click', async () => {
       const href = downloadLink.getAttribute('href') ?? '';
@@ -409,7 +534,8 @@ const modalHeadingId = `download-gate-title-${lang}`;
         email: String(formData.get('email') ?? '').trim(),
         purposes: formData.getAll('purposes').map((value) => String(value)),
         purposeOther: String(formData.get('purposeOther') ?? '').trim(),
-        institution: String(formData.get('institution') ?? '').trim(),
+        affiliations: formData.getAll('affiliations').map((value) => String(value)),
+        institutionOther: String(formData.get('institutionOther') ?? '').trim(),
         consentTerms: toBoolean(formData.get('consentTerms')),
         consentStats: toBoolean(formData.get('consentStats')),
         consentUpdates: toBoolean(formData.get('consentUpdates')),
@@ -428,11 +554,26 @@ const modalHeadingId = `download-gate-title-${lang}`;
         return;
       }
 
+      if (payload.affiliations.length === 0) {
+        showError(copy.affiliationsError);
+        return;
+      }
+
+      if (payload.affiliations.includes('none') && payload.affiliations.length > 1) {
+        showError(copy.noneExclusivityError);
+        return;
+      }
+
+      if (payload.affiliations.includes('other') && payload.institutionOther.length < 2) {
+        showError(copy.institutionOtherError);
+        return;
+      }
+
       submitButton.disabled = true;
       submitButton.setAttribute('aria-busy', 'true');
 
       try {
-        const result = await fetchDownloadLink(payload);
+        const result = await fetchDownloadLink(apiBase, payload);
         downloadLink.setAttribute('href', result.downloadUrl);
         shaCode.textContent = result.sha256;
         if (expiryLine && result.expiresAt) {
@@ -467,6 +608,7 @@ const modalHeadingId = `download-gate-title-${lang}`;
     });
 
     toggleOtherPurpose();
+    toggleInstitutionOther();
     resetViews();
   }
 </script>

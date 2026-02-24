@@ -12,6 +12,8 @@ interface DownloadPayload {
   email: string;
   purposes: string[];
   purposeOther: string;
+  affiliations: string[];
+  institutionOther: string;
   institution: string;
   consentTerms: boolean;
   consentStats: boolean;
@@ -27,14 +29,15 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PURPOSE_VALUES = new Set([
   'student',
   'academic_staff',
-  'amfn',
   'researcher',
   'sound_designer',
+  'sound_director',
   'composer',
   'evaluation_test',
   'commercial_rd',
   'other'
 ]);
+const AFFILIATION_VALUES = new Set(['amfn', 'other', 'none']);
 
 function parseAllowedOrigins(env: Env): Set<string> {
   return new Set(
@@ -83,6 +86,11 @@ function normalizePurposes(value: unknown): string[] {
   return [...new Set(value.map((item) => normalizeText(item, 60)).filter((item) => PURPOSE_VALUES.has(item)))];
 }
 
+function normalizeAffiliations(value: unknown): string[] {
+  if (!Array.isArray(value)) return [];
+  return [...new Set(value.map((item) => normalizeText(item, 30)).filter((item) => AFFILIATION_VALUES.has(item)))];
+}
+
 function extractPayload(body: unknown): DownloadPayload | null {
   if (!body || typeof body !== 'object') return null;
   const input = body as Record<string, unknown>;
@@ -93,6 +101,8 @@ function extractPayload(body: unknown): DownloadPayload | null {
     email: normalizeText(input.email, 180).toLowerCase(),
     purposes: normalizePurposes(input.purposes),
     purposeOther: normalizeText(input.purposeOther, 280),
+    affiliations: normalizeAffiliations(input.affiliations),
+    institutionOther: normalizeText(input.institutionOther, 140),
     institution: normalizeText(input.institution, 120),
     consentTerms: input.consentTerms === true,
     consentStats: input.consentStats === true,
@@ -112,6 +122,11 @@ function validatePayload(payload: DownloadPayload): string | null {
   if (!payload.consentUpdates) return 'Updates consent is required.';
   if (payload.purposes.length === 0 && payload.purposeOther.length < 3) return 'At least one use purpose is required.';
   if (payload.purposes.includes('other') && payload.purposeOther.length < 3) return 'Please describe other purpose.';
+  if (payload.affiliations.length < 1) return 'At least one affiliation is required.';
+  if (payload.affiliations.includes('none') && payload.affiliations.length > 1) {
+    return 'Affiliation "none" cannot be combined with other options.';
+  }
+  if (payload.affiliations.includes('other') && payload.institutionOther.length < 2) return 'Please provide other institution.';
   return null;
 }
 
@@ -179,10 +194,10 @@ async function handleDownload(request: Request, env: Env): Promise<Response> {
     `
       INSERT INTO downloads (
         id, created_at, created_at_ms, first_name, last_name, email,
-        purposes_json, purpose_other, institution,
+        purposes_json, purpose_other, institution, affiliations_json, institution_other,
         consent_terms, consent_stats, consent_updates,
         lang, plugin_version, user_agent, ip_hash
-      ) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12, ?13, ?14, ?15, ?16)
+      ) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12, ?13, ?14, ?15, ?16, ?17, ?18)
     `
   )
     .bind(
@@ -195,6 +210,8 @@ async function handleDownload(request: Request, env: Env): Promise<Response> {
       JSON.stringify(payload.purposes),
       payload.purposeOther || null,
       payload.institution || null,
+      JSON.stringify(payload.affiliations),
+      payload.institutionOther || null,
       payload.consentTerms ? 1 : 0,
       payload.consentStats ? 1 : 0,
       payload.consentUpdates ? 1 : 0,
