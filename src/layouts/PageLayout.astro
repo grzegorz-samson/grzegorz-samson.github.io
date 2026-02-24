@@ -18,7 +18,7 @@ const labels =
       }
     : {
         project: 'Project',
-        downloads: 'Downloads',
+        downloads: 'Plugin',
         updates: 'Updates',
         bio: 'Bio'
       };
@@ -27,7 +27,7 @@ const navItems =
   lang === 'pl'
     ? [
         { href: withBase('/pl/project/'), label: labels.project },
-        { href: withBase('/pl/downloads/'), label: labels.plugin },
+        { href: withBase('/pl/plugin/'), label: labels.plugin },
         { href: withBase('/pl/science/'), label: labels.science },
         { href: withBase('/pl/workshops/'), label: labels.workshops },
         { href: withBase('/pl/scholarship/'), label: labels.scholarship },
@@ -35,7 +35,7 @@ const navItems =
       ]
     : [
         { href: withBase('/en/project/'), label: labels.project },
-        { href: withBase('/en/downloads/'), label: labels.downloads },
+        { href: withBase('/en/plugin/'), label: labels.downloads },
         { href: withBase('/en/updates/'), label: labels.updates },
         { href: withBase('/en/bio/'), label: labels.bio }
       ];

@@ -2,6 +2,107 @@
 import PageLayout from '../../layouts/PageLayout.astro';
 import ReleaseCard from '../../components/ReleaseCard.astro';
 import { withBase } from '../../lib/paths';
+
+const capabilityCards = [
+  {
+    icon: 'G',
+    title: 'Granularny silnik wieloźródłowy',
+    text: 'Ładowanie wielu plików WAV do wspólnego bufora i budowanie złożonych chmur ziaren w czasie rzeczywistym.',
+    tags: ['Granular', 'WAV', 'Live']
+  },
+  {
+    icon: 'P',
+    title: 'Precyzyjna kontrola parametrów',
+    text: 'Sterowanie czasem trwania ziaren, gęstością chmury, rozrzutem wysokości i głośności oraz obwiednią.',
+    tags: ['Pitch', 'Gain', 'Envelope']
+  },
+  {
+    icon: 'W',
+    title: 'Workflow oparty o waveform',
+    text: 'Selekcja, grupowanie i edycja zakresów próbkowania bezpośrednio na podglądzie fali.',
+    tags: ['Waveform', 'Selection', 'Editing']
+  },
+  {
+    icon: 'M',
+    title: 'Rozszerzony routing kanałów',
+    text: 'Panel multichannel z routingiem, mute/solo oraz parami panorama dla złożonych układów wyjściowych.',
+    tags: ['Routing', 'Multichannel', 'Pan']
+  },
+  {
+    icon: 'A',
+    title: 'Audio Generator (AI)',
+    text: 'Panel konwersacyjny wspierający generowanie materiału audio i szybkie iteracje wariantów brzmieniowych.',
+    tags: ['Generator', 'Prompt', 'Session']
+  }
+];
+
+const useCaseCards = [
+  {
+    icon: 'F',
+    title: 'Tekstury filmowe i drony',
+    text: 'Budowanie atmosfer i warstw tła o ciągłej, ewoluującej strukturze.',
+    tags: ['Cinematic', 'Ambient']
+  },
+  {
+    icon: 'R',
+    title: 'Rytmiczne glitche',
+    text: 'Dekonstrukcja i ponowne składanie materiału perkusyjnego w nieregularne sekwencje.',
+    tags: ['Glitch', 'Rhythm']
+  },
+  {
+    icon: 'V',
+    title: 'Resynteza głosu i field recording',
+    text: 'Przetwarzanie źródeł mowy i nagrań terenowych do form eksperymentalnych.',
+    tags: ['Voice', 'Field Recording']
+  },
+  {
+    icon: 'B',
+    title: 'Praca badawczo-artystyczna',
+    text: 'Eksploracja interaktywnych systemów audio i multimodalności w praktyce twórczej.',
+    tags: ['Research', 'Interactive']
+  }
+];
+
+const guiItems = [
+  {
+    id: 'controls',
+    chip: 'Controls',
+    title: 'Controls Panel',
+    shortDescription: 'Główna warstwa kreacji i parametry granulacji.',
+    imageSrc: withBase('/assets/plugin/controls-panel.png'),
+    imageAlt: 'Panel Controls we wtyczce GranularVST-3',
+    description:
+      'Główna warstwa kreacji: Duration, Pitch, Gain, Envelope i Cloud. To tutaj ustawiane są parametry odpowiadające za charakter i dynamikę chmury granularnej.',
+    bullets: ['Sterowanie zakresem i dynamiką', 'Szybki dostęp do kluczowych parametrów', 'Tryb pracy nastawiony na iteracje'],
+    tags: ['Duration', 'Pitch', 'Cloud']
+  },
+  {
+    id: 'multichannel',
+    chip: 'Multichannel',
+    title: 'Multichannel Panel',
+    shortDescription: 'Routing kanałów i panorama dla złożonych układów.',
+    imageSrc: withBase('/assets/plugin/multichannel-panel.png'),
+    imageAlt: 'Panel Multichannel we wtyczce GranularVST-3',
+    description:
+      'Routing kanałów z kontrolą aktywności, mute/solo i konfiguracją par panorama. Panel umożliwia pracę od stereo po rozszerzone układy wielokanałowe.',
+    bullets: ['Kontrola kanałów wyjściowych', 'Parowanie L/R i panorama', 'Skalowalność dla układów surround'],
+    tags: ['Routing', 'Mute/Solo', 'Surround']
+  },
+  {
+    id: 'audio-generator',
+    chip: 'Audio Generator',
+    title: 'Audio Generator (AI)',
+    shortDescription: 'Generowanie materiału audio i iteracje promptowe.',
+    imageSrc: withBase('/assets/plugin/audio-generator-panel.png'),
+    imageAlt: 'Panel Audio Generator (AI) we wtyczce GranularVST-3',
+    description:
+      'Interfejs konwersacyjny do generowania materiału audio i zarządzania sesją. Rozszerza workflow o komponent promptowy i szybkie iteracje wariantów brzmieniowych.',
+    bullets: ['Tworzenie wariantów materiału audio', 'Obsługa kontekstu sesji', 'Workflow promptowy dla sound designu'],
+    tags: ['Generator', 'Prompt', 'Session']
+  }
+];
+
+const initialPanel = guiItems[0];
 ---
 
 <PageLayout
@@ -35,70 +136,138 @@ import { withBase } from '../../lib/paths';
   <section class="content-stack">
     <p class="section-kicker">Funkcjonalności</p>
     <h2>Co potrafi wtyczka</h2>
-    <div class="text-panel">
-      <ul>
-        <li>Ładowanie wielu plików WAV do wspólnego bufora i budowanie chmur ziaren (grain clouds).</li>
-        <li>Kontrola czasu trwania ziaren, gęstości chmury, rozrzutu wysokości i głośności oraz obwiedni.</li>
-        <li>Tryb pracy oparty o waveform z selekcją, grupowaniem i edycją zakresów próbkowania.</li>
-        <li>Panel multichannel z routingiem, mute/solo i parami panorama dla złożonych układów wyjściowych.</li>
-        <li>Panel AI z generowaniem materiału audio i planowaniem zmian miksu (AI Mix).</li>
-      </ul>
+    <div class="plugin-feature-grid">
+      {capabilityCards.map((item) => (
+        <article class="plugin-feature-card">
+          <div class="plugin-feature-card__head">
+            <span class="plugin-feature-card__icon">{item.icon}</span>
+            <h3>{item.title}</h3>
+          </div>
+          <p>{item.text}</p>
+          <div class="plugin-tag-row">
+            {item.tags.map((tag) => (
+              <span class="plugin-tag">{tag}</span>
+            ))}
+          </div>
+        </article>
+      ))}
     </div>
   </section>
 
   <section class="content-stack">
     <p class="section-kicker">Use case</p>
     <h2>Zastosowania twórcze</h2>
-    <div class="text-panel">
-      <ul>
-        <li>Tekstury filmowe, ambientowe warstwy i drony.</li>
-        <li>Glitche rytmiczne i przetwarzanie materiału perkusyjnego.</li>
-        <li>Resynteza głosu i nagrań terenowych.</li>
-        <li>Praca badawcza nad interaktywnymi systemami audio i multimodalnością.</li>
-      </ul>
+    <div class="plugin-feature-grid plugin-feature-grid--compact">
+      {useCaseCards.map((item) => (
+        <article class="plugin-feature-card">
+          <div class="plugin-feature-card__head">
+            <span class="plugin-feature-card__icon">{item.icon}</span>
+            <h3>{item.title}</h3>
+          </div>
+          <p>{item.text}</p>
+          <div class="plugin-tag-row">
+            {item.tags.map((tag) => (
+              <span class="plugin-tag">{tag}</span>
+            ))}
+          </div>
+        </article>
+      ))}
     </div>
   </section>
 
   <section class="content-stack">
     <p class="section-kicker">Panele interfejsu</p>
-    <h2>Architektura GUI</h2>
-    <div class="plugin-panel-grid">
-      <article class="plugin-panel-card">
-        <img src={withBase('/assets/plugin/controls-panel.png')} alt="Panel Controls we wtyczce GranularVST-3" loading="lazy" />
-        <h3>Controls Panel</h3>
-        <p>
-          Główna warstwa kreacji: Duration, Pitch, Gain, Envelope i Cloud. To tutaj ustawiane są parametry
-          odpowiadające za charakter i dynamikę chmury granularnej.
-        </p>
-      </article>
+    <h2>Panele</h2>
+    <div class="plugin-panels" data-plugin-panels data-initial-id={initialPanel.id}>
+      <div class="plugin-panels-nav">
+      {guiItems.map((item) => (
+        <button type="button" class={`plugin-panel-tile ${item.id === initialPanel.id ? 'is-active' : ''}`} data-panel-id={item.id} aria-pressed={item.id === initialPanel.id ? 'true' : 'false'}>
+          <img src={item.imageSrc} alt={item.imageAlt} loading="lazy" />
+          <div class="plugin-panel-tile__body">
+            <h3>{item.title}</h3>
+            <p>{item.shortDescription}</p>
+            <div class="plugin-tag-row">
+              {item.tags.map((tag) => (
+                <span class="plugin-tag">{tag}</span>
+              ))}
+            </div>
+          </div>
+        </button>
+      ))}
+      </div>
 
-      <article class="plugin-panel-card">
-        <img src={withBase('/assets/plugin/multichannel-panel.png')} alt="Panel Multichannel we wtyczce GranularVST-3" loading="lazy" />
-        <h3>Multichannel Panel</h3>
-        <p>
-          Routing kanałów z kontrolą aktywności, mute/solo i konfiguracją par panorama. Panel umożliwia pracę
-          od stereo po rozszerzone układy wielokanałowe.
-        </p>
-      </article>
-
-      <article class="plugin-panel-card">
-        <img src={withBase('/assets/plugin/audio-generator-panel.png')} alt="Panel Audio Generator (AI) we wtyczce GranularVST-3" loading="lazy" />
-        <h3>Audio Generator (AI)</h3>
-        <p>
-          Interfejs konwersacyjny do generowania materiału audio i zarządzania sesją. Rozszerza workflow o komponent
-          promptowy i szybkie iteracje wariantów brzmieniowych.
-        </p>
+      <article class="plugin-panel-active" data-panel-active>
+        <img src={initialPanel.imageSrc} alt={initialPanel.imageAlt} loading="lazy" data-active-image />
+        <div class="plugin-panel-active__content">
+          <h3 data-active-title>{initialPanel.title}</h3>
+          <p data-active-description>{initialPanel.description}</p>
+          <ul data-active-bullets>
+            {initialPanel.bullets.map((bullet) => (
+              <li>{bullet}</li>
+            ))}
+          </ul>
+        </div>
       </article>
     </div>
+
     <div class="text-panel">
       <p>
-        Dodatkowo panel <strong>AI Mix</strong> umożliwia planowanie i stosowanie zmian parametrów na podstawie opisu
-        tekstowego, z podglądem planu i możliwością cofnięcia zmian.
-      </p>
-      <p>
-        Kontekst naukowy i materiały konferencyjne są dostępne w zakładce
-        <a href={withBase('/pl/science/')}> Nauka</a>.
+        Kontekst naukowy i materiały konferencyjne są dostępne w zakładce <a href={withBase('/pl/science/')}>Nauka</a>.
       </p>
     </div>
   </section>
 </PageLayout>
+
+<script define:vars={{ guiItems }}>
+  const roots = document.querySelectorAll('[data-plugin-panels]');
+
+  for (const root of roots) {
+    const buttons = Array.from(root.querySelectorAll('button[data-panel-id]'));
+    const activeCard = root.querySelector('[data-panel-active]');
+    const image = root.querySelector('[data-active-image]');
+    const title = root.querySelector('[data-active-title]');
+    const description = root.querySelector('[data-active-description]');
+    const bullets = root.querySelector('[data-active-bullets]');
+
+    if (!buttons.length || !activeCard || !image || !title || !description || !bullets) continue;
+
+    const itemMap = new Map(guiItems.map((item) => [item.id, item]));
+
+    const setActive = (id, scrollToCard = true) => {
+      const item = itemMap.get(id);
+      if (!item) return;
+
+      for (const button of buttons) {
+        const isActive = button.dataset.panelId === id;
+        button.classList.toggle('is-active', isActive);
+        button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+      }
+
+      image.setAttribute('src', item.imageSrc);
+      image.setAttribute('alt', item.imageAlt);
+      title.textContent = item.title;
+      description.textContent = item.description;
+
+      bullets.textContent = '';
+      for (const entry of item.bullets ?? []) {
+        const li = document.createElement('li');
+        li.textContent = entry;
+        bullets.appendChild(li);
+      }
+
+      if (scrollToCard) {
+        activeCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    };
+
+    for (const button of buttons) {
+      button.addEventListener('click', () => {
+        const id = button.dataset.panelId;
+        if (id) setActive(id, true);
+      });
+    }
+
+    const initialId = root.getAttribute('data-initial-id');
+    if (initialId) setActive(initialId, false);
+  }
+</script>
