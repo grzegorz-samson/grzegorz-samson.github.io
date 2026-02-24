@@ -196,16 +196,28 @@ const initialPanel = guiItems[0];
       ))}
       </div>
 
-      <article class="plugin-panel-active" data-panel-active>
-        <img src={initialPanel.imageSrc} alt={initialPanel.imageAlt} loading="lazy" data-active-image />
+      <article class="plugin-panel-active" data-panel-active aria-live="polite">
+        <div class="plugin-panel-active__media">
+          <img src={initialPanel.imageSrc} alt={initialPanel.imageAlt} loading="lazy" data-active-image />
+          <p class="plugin-panel-active__caption" data-active-caption>{initialPanel.shortDescription}</p>
+        </div>
         <div class="plugin-panel-active__content">
+          <p class="plugin-panel-active__kicker">Aktywny panel</p>
           <h3 data-active-title>{initialPanel.title}</h3>
-          <p data-active-description>{initialPanel.description}</p>
-          <ul data-active-bullets>
-            {initialPanel.bullets.map((bullet) => (
-              <li>{bullet}</li>
+          <p class="plugin-panel-active__description" data-active-description>{initialPanel.description}</p>
+          <section class="plugin-panel-active__highlights">
+            <h4>Szczegóły panelu</h4>
+            <ul data-active-bullets>
+              {initialPanel.bullets.map((bullet) => (
+                <li>{bullet}</li>
+              ))}
+            </ul>
+          </section>
+          <div class="plugin-tag-row plugin-panel-active__tags" data-active-tags>
+            {initialPanel.tags.map((tag) => (
+              <span class="plugin-tag">{tag}</span>
             ))}
-          </ul>
+          </div>
         </div>
       </article>
     </div>
@@ -225,11 +237,13 @@ const initialPanel = guiItems[0];
     const buttons = Array.from(root.querySelectorAll('button[data-panel-id]'));
     const activeCard = root.querySelector('[data-panel-active]');
     const image = root.querySelector('[data-active-image]');
+    const caption = root.querySelector('[data-active-caption]');
     const title = root.querySelector('[data-active-title]');
     const description = root.querySelector('[data-active-description]');
     const bullets = root.querySelector('[data-active-bullets]');
+    const tags = root.querySelector('[data-active-tags]');
 
-    if (!buttons.length || !activeCard || !image || !title || !description || !bullets) continue;
+    if (!buttons.length || !activeCard || !image || !caption || !title || !description || !bullets || !tags) continue;
 
     const itemMap = new Map(guiItems.map((item) => [item.id, item]));
 
@@ -245,6 +259,7 @@ const initialPanel = guiItems[0];
 
       image.setAttribute('src', item.imageSrc);
       image.setAttribute('alt', item.imageAlt);
+      caption.textContent = item.shortDescription ?? item.description;
       title.textContent = item.title;
       description.textContent = item.description;
 
@@ -253,6 +268,14 @@ const initialPanel = guiItems[0];
         const li = document.createElement('li');
         li.textContent = entry;
         bullets.appendChild(li);
+      }
+
+      tags.textContent = '';
+      for (const entry of item.tags ?? []) {
+        const span = document.createElement('span');
+        span.className = 'plugin-tag';
+        span.textContent = entry;
+        tags.appendChild(span);
       }
 
       if (scrollToCard) {
