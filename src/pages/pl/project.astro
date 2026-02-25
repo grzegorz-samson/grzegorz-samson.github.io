@@ -7,19 +7,22 @@ import Timeline from '../../components/Timeline.astro';
 import MediaEmbedSoundCloud from '../../components/MediaEmbedSoundCloud.astro';
 import CTAContact from '../../components/CTAContact.astro';
 import { withBase } from '../../lib/paths';
+
+const pluginPanelsHref = `${withBase('/pl/plugin/')}#panels`;
 ---
 
 <PageLayout
   lang="pl"
   title="Projekt stypendialny | Generatywny syntezator granularny VST"
-  description="Połączona strona narzędzia VST, kompozycji i materiałów badawczych projektu stypendialnego."
+  description="Strona łącząca rezultaty projektu stypendialnego: wtyczkę VST, materiał audio, badania i działania edukacyjne."
 >
   <HeroCta
     kicker="Projekt stypendialny"
     title="Generatywny syntezator granularny VST"
     subtitle="Nowe technologie w rozwoju narzędzi i kompetencji technologicznych dla współczesnej muzyki."
-    imageSrc={withBase('/images/plugin-hero.svg')}
+    imageSrc={withBase('/assets/plugin/controls-panel.png')}
     imageAlt="Interfejs wtyczki VST"
+    imageHref={pluginPanelsHref}
     badges={['Open source', 'Real-time sound design', 'Stypendium 2025/2026']}
     primaryCta={{ label: 'Wtyczka VST', href: withBase('/pl/plugin/') }}
     secondaryCtas={[
@@ -29,103 +32,105 @@ import { withBase } from '../../lib/paths';
   />
 
   <section>
-    <p class="section-kicker">3 główne rezultaty</p>
+    <p class="section-kicker">Projekt w skrócie</p>
     <FeatureGrid
       items={[
         {
           title: 'Wtyczka VST',
-          text: 'Narzędzie do generatywnego projektowania struktur i tekstur dźwiękowych.',
+          text: 'Autorskie narzędzie do generatywnego projektowania struktur i tekstur dźwiękowych.',
           href: '#vst'
         },
         {
-          title: 'Kompozycja',
-          text: 'Utwór stworzony z wykorzystaniem projektowanej wtyczki.',
-          href: '#composition'
+          title: 'Badania i konferencja',
+          text: 'Poster i opis metody zaprezentowane podczas Audio Developer Conference 2025.',
+          href: '#research'
         },
         {
-          title: 'Research / konferencja',
-          text: 'Materiały posterowe i opis metody zaprezentowane na konferencji.',
-          href: '#research'
+          title: 'Warsztaty i wdrożenia',
+          text: 'Działania edukacyjne oraz upowszechnianie rezultatów projektu.',
+          href: withBase('/pl/workshops/')
         }
       ]}
     />
   </section>
 
   <section id="vst" class="content-stack">
-    <p class="section-kicker">VST / narzędzie</p>
+    <p class="section-kicker">Rezultat 1</p>
     <h2>Wtyczka VST</h2>
     <div class="text-panel">
       <p>
         Głównym rezultatem projektu jest autorska wtyczka VST do generatywnego projektowania dźwięku,
-        zgodna z zakresem zadania 3 (10.2025 - 12.2025) oraz zadania 6 (01.2026 - 02.2026).
+        realizowana w ramach zadań dotyczących prototypowania, testów i dokumentacji.
       </p>
-      <ul>
+      <ul class="project-result-list">
         <li>Generowanie i modulacja struktur granularnych w czasie rzeczywistym.</li>
         <li>Workflow nastawiony na eksperymentalny sound design i praktykę kompozytorską.</li>
-        <li>Udostępnienie narzędzia i dokumentacji jako otwartego rezultatu projektu.</li>
+        <li>Publiczny opis funkcjonalności, paneli oraz procesu pobierania wersji testowej.</li>
       </ul>
+      <div class="hero-cta-row">
+        <a class="button button-primary" href={withBase('/pl/plugin/')}>Przejdź do zakładki Wtyczka VST</a>
+      </div>
     </div>
 
     <ReleaseCard
       name="Generatywny syntezator granularny VST"
       version="v0.1.0-alpha"
       date="2026-02-21"
-      pendingLabel="Pobieranie binarne w przygotowaniu"
+      pendingLabel="Pobieranie przez formularz (zakładka Wtyczka VST)"
       notes={[
-        'Wersja testowa jest przygotowywana do publikacji na zewnętrznym hostingu.',
-        'W zakładce „Wtyczka VST” pojawi się finalny changelog i wymagania systemowe.'
+        'Aktualna wersja testowa: v0.1.0-alpha.',
+        'Link do pobrania otrzymasz po poprawnym wysłaniu formularza w zakładce „Wtyczka VST”.'
       ]}
-      checksum={{ algo: 'SHA256', value: 'W trakcie przygotowania publikacji' }}
     />
   </section>
 
   <section id="composition" class="content-stack">
-    <p class="section-kicker">Kompozycja</p>
-    <h2>Utwór zrealizowany z użyciem wtyczki</h2>
+    <p class="section-kicker">Rezultat 2</p>
+    <h2>Materiał audio i proces twórczy</h2>
     <div class="text-panel">
       <p>
-        Sekcja realizuje cel zadania 4 (12.2025 - 01.2026): prezentację kompozycji powstałej z wykorzystaniem
-        narzędzia oraz krótkiej notatki procesu twórczego.
+        Część artystyczna projektu obejmuje pracę kompozytorską z wykorzystaniem narzędzia VST
+        oraz dokumentowanie procesu kreacji dźwięku.
       </p>
     </div>
     <MediaEmbedSoundCloud url="https://soundcloud.com/forss/flickermood" />
   </section>
 
   <section id="research" class="content-stack">
-    <p class="section-kicker">Research / konferencja</p>
-    <h2>Materiały badawcze i konferencyjne</h2>
-    <div class="text-panel">
-      <p>
-        Poster „From Text Wishes to Sound: A Real-Time Granular Synth VST with a Text-to-Audio Generative Companion”
-        prezentuje architekturę systemu, który łączy interfejs konwersacyjny, generowanie warstw audio i render
-        granularny w czasie rzeczywistym.
-      </p>
-      <p>
-        Materiał został przedstawiony podczas Audio Developer Conference 2025
-        (10-12 listopada 2025, Bristol, UK oraz online).
-      </p>
-      <ul>
-        <li>Pipeline: tekst użytkownika -> prompty audio -> generowane stemsy -> granularna synteza VST.</li>
-        <li>Nacisk na praktykę: bezpieczna wymiana buforów audio podczas odtwarzania i czytelny workflow.</li>
-        <li>Charakter projektu: edukacyjny, niekomercyjny, nastawiony na upowszechnianie narzędzi.</li>
-      </ul>
-      <div class="hero-cta-row">
-        <a class="button button-primary" href={withBase('/assets/research/from-text-wishes-to-sound-adc-2025-poster.jpg')} target="_blank" rel="noreferrer">
-          Zobacz poster
-        </a>
-        <a class="button button-ghost" href={withBase('/assets/research/from-text-wishes-to-sound-adc-2025-poster.docx')} target="_blank" rel="noreferrer">
-          Pobierz plik DOCX
-        </a>
+    <p class="section-kicker">Rezultat 3</p>
+    <h2>Badania i konferencja ADC 2025</h2>
+    <div class="project-research-preview">
+      <div class="text-panel">
+        <p>
+          Projekt został przedstawiony podczas Audio Developer Conference 2025
+          (10-12 listopada 2025, Bristol, UK oraz online).
+        </p>
+        <p>
+          Poster „From Text Wishes to Sound” prezentuje podejście łączące warstwę promptową,
+          generowanie materiału audio i granularne przetwarzanie w czasie rzeczywistym.
+        </p>
+        <div class="hero-cta-row">
+          <a class="button button-primary" href={withBase('/pl/research/')}>Zobacz pełną sekcję Badania</a>
+          <a class="button button-ghost" href={withBase('/assets/research/from-text-wishes-to-sound-adc-2025-poster.docx')} target="_blank" rel="noreferrer">
+            Pobierz plik DOCX
+          </a>
+        </div>
       </div>
-    </div>
 
-    <a class="research-poster-card" href={withBase('/assets/research/from-text-wishes-to-sound-adc-2025-poster.jpg')} target="_blank" rel="noreferrer">
-      <img
-        src={withBase('/assets/research/from-text-wishes-to-sound-adc-2025-poster.jpg')}
-        alt="Poster naukowy: From Text Wishes to Sound"
-        loading="lazy"
-      />
-    </a>
+      <a
+        class="research-poster-card research-poster-card--thumb"
+        href={withBase('/pl/research/')}
+      >
+        <img
+          src={withBase('/assets/research/from-text-wishes-to-sound-adc-2025-poster-thumb.jpg')}
+          alt="Poster naukowy: From Text Wishes to Sound"
+          loading="lazy"
+          decoding="async"
+          width="1132"
+          height="1600"
+        />
+      </a>
+    </div>
   </section>
 
   <section class="content-stack">
@@ -135,10 +140,10 @@ import { withBase } from '../../lib/paths';
       items={[
         { label: 'Kursy i szkolenia (zadanie 1)', date: '09.2025 - 10.2025', status: 'done', statusLabel: 'zrealizowane' },
         { label: 'Konferencja międzynarodowa (zadanie 2)', date: '10.2025 - 11.2025', status: 'done', statusLabel: 'zrealizowane' },
-        { label: 'Opracowanie wtyczki VST (zadanie 3)', date: '10.2025 - 12.2025', status: 'done', statusLabel: 'zrealizowane' },
-        { label: 'Kompozycja z wtyczką (zadanie 4)', date: '12.2025 - 01.2026', status: 'done', statusLabel: 'zrealizowane' },
-        { label: 'Warsztaty i wykłady (zadanie 5)', date: '12.2025 - 02.2026', status: 'done', statusLabel: 'zrealizowane' },
-        { label: 'Dokumentacja i dystrybucja (zadanie 6)', date: '01.2026 - 02.2026', status: 'done', statusLabel: 'zrealizowane' }
+        { label: 'Opracowanie koncepcji i realizacja wtyczki VST (zadanie 3)', date: '10.2025 - 12.2025', status: 'done', statusLabel: 'zrealizowane' },
+        { label: 'Kompozycja z wykorzystaniem narzędzia (zadanie 4)', date: '12.2025 - 01.2026', status: 'done', statusLabel: 'zrealizowane' },
+        { label: 'Warsztaty i wykłady otwarte (zadanie 5)', date: '12.2025 - 02.2026', status: 'done', statusLabel: 'zrealizowane' },
+        { label: 'Dokumentacja i dystrybucja rezultatów (zadanie 6)', date: '01.2026 - 02.2026', status: 'done', statusLabel: 'zrealizowane' }
       ]}
     />
   </section>
@@ -149,7 +154,8 @@ import { withBase } from '../../lib/paths';
     primary={{ label: 'Przejdź do bio', href: withBase('/pl/bio/') }}
     secondary={[
       { label: 'Wtyczka VST', href: withBase('/pl/plugin/') },
-      { label: 'Badania', href: withBase('/pl/research/') }
+      { label: 'Badania', href: withBase('/pl/research/') },
+      { label: 'Warsztaty', href: withBase('/pl/workshops/') }
     ]}
   />
 </PageLayout>

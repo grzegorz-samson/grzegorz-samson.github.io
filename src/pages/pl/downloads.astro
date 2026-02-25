@@ -71,7 +71,7 @@ const guiItems = [
     title: 'Controls Panel',
     shortDescription: 'Główna warstwa kreacji i parametry granulacji.',
     imageSrc: withBase('/assets/plugin/controls-panel.png'),
-    imageAlt: 'Panel Controls we wtyczce GranularVST-3',
+    imageAlt: 'Panel Controls we wtyczce GreggularVST',
     description:
       'Główna warstwa kreacji: Duration, Pitch, Gain, Envelope i Cloud. To tutaj ustawiane są parametry odpowiadające za charakter i dynamikę chmury granularnej.',
     bullets: ['Sterowanie zakresem i dynamiką', 'Szybki dostęp do kluczowych parametrów', 'Tryb pracy nastawiony na iteracje'],
@@ -83,7 +83,7 @@ const guiItems = [
     title: 'Multichannel Panel',
     shortDescription: 'Routing kanałów i panorama dla złożonych układów.',
     imageSrc: withBase('/assets/plugin/multichannel-panel.png'),
-    imageAlt: 'Panel Multichannel we wtyczce GranularVST-3',
+    imageAlt: 'Panel Multichannel we wtyczce GreggularVST',
     description:
       'Routing kanałów z kontrolą aktywności, mute/solo i konfiguracją par panorama. Panel umożliwia pracę od stereo po rozszerzone układy wielokanałowe.',
     bullets: ['Kontrola kanałów wyjściowych', 'Parowanie L/R i panorama', 'Skalowalność dla układów surround'],
@@ -95,7 +95,7 @@ const guiItems = [
     title: 'Audio Generator (AI)',
     shortDescription: 'Generowanie materiału audio i iteracje promptowe.',
     imageSrc: withBase('/assets/plugin/audio-generator-panel.png'),
-    imageAlt: 'Panel Audio Generator (AI) we wtyczce GranularVST-3',
+    imageAlt: 'Panel Audio Generator (AI) we wtyczce GreggularVST',
     description:
       'Interfejs konwersacyjny do generowania materiału audio i zarządzania sesją. Rozszerza workflow o komponent promptowy i szybkie iteracje wariantów brzmieniowych.',
     bullets: ['Tworzenie wariantów materiału audio', 'Obsługa kontekstu sesji', 'Workflow promptowy dla sound designu'],
@@ -109,17 +109,17 @@ const initialPanel = guiItems[0];
 <PageLayout
   lang="pl"
   title="Wtyczka VST | Projekt stypendialny"
-  description="Opis wtyczki GranularVST-3: funkcjonalności, panele i zastosowania."
+  description="Opis wtyczki GreggularVST: funkcjonalności, panele i zastosowania."
 >
-  <section class="content-stack">
+  <section id="panels" class="content-stack">
     <p class="section-kicker">Wtyczka VST</p>
     <article class="plugin-intro-panel">
       <div class="plugin-intro-panel__title">
-        <h2>GranularVST-3</h2>
+        <h2>GreggularVST</h2>
       </div>
       <div class="plugin-intro-panel__body">
         <p>
-          GranularVST-3 to autorska wtyczka JUCE (VST3 + Standalone) do generatywnego przetwarzania krótkich nagrań
+          GreggularVST to autorska wtyczka JUCE (VST3) do generatywnego przetwarzania krótkich nagrań
           i budowania wielowarstwowych struktur granularnych. Narzędzie wspiera pracę kompozytorską, sound design
           i eksperymentalne podejście do kreacji dźwięku.
         </p>
@@ -165,10 +165,9 @@ const initialPanel = guiItems[0];
               ))}
             </ul>
           </section>
-          <div class="plugin-tag-row plugin-panel-active__tags" data-active-tags>
-            {initialPanel.tags.map((tag) => (
-              <span class="plugin-tag">{tag}</span>
-            ))}
+          <div class="plugin-panel-active__switch" aria-label="Nawigacja paneli">
+            <button type="button" class="plugin-panel-active__arrow" data-panel-prev aria-label="Poprzedni panel">←</button>
+            <button type="button" class="plugin-panel-active__arrow" data-panel-next aria-label="Następny panel">→</button>
           </div>
         </div>
       </article>
@@ -249,15 +248,21 @@ const initialPanel = guiItems[0];
     const title = root.querySelector('[data-active-title]');
     const description = root.querySelector('[data-active-description]');
     const bullets = root.querySelector('[data-active-bullets]');
-    const tags = root.querySelector('[data-active-tags]');
+    const prevButton = root.querySelector('[data-panel-prev]');
+    const nextButton = root.querySelector('[data-panel-next]');
 
-    if (!buttons.length || !activeCard || !image || !caption || !title || !description || !bullets || !tags) continue;
+    if (!buttons.length || !activeCard || !image || !caption || !title || !description || !bullets) continue;
 
     const itemMap = new Map(guiItems.map((item) => [item.id, item]));
+    const ids = buttons
+      .map((button) => button.dataset.panelId)
+      .filter((value) => typeof value === 'string' && value.length > 0);
+    let activeId = ids[0] ?? '';
 
     const setActive = (id, scrollToCard = true) => {
       const item = itemMap.get(id);
       if (!item) return;
+      activeId = id;
 
       for (const button of buttons) {
         const isActive = button.dataset.panelId === id;
@@ -278,12 +283,12 @@ const initialPanel = guiItems[0];
         bullets.appendChild(li);
       }
 
-      tags.textContent = '';
-      for (const entry of item.tags ?? []) {
-        const span = document.createElement('span');
-        span.className = 'plugin-tag';
-        span.textContent = entry;
-        tags.appendChild(span);
+      const activeIndex = ids.indexOf(id);
+      if (prevButton instanceof HTMLButtonElement) {
+        prevButton.disabled = activeIndex <= 0;
+      }
+      if (nextButton instanceof HTMLButtonElement) {
+        nextButton.disabled = activeIndex === -1 || activeIndex >= ids.length - 1;
       }
 
       if (scrollToCard) {
@@ -298,8 +303,21 @@ const initialPanel = guiItems[0];
       });
     }
 
+    prevButton?.addEventListener('click', () => {
+      const index = ids.indexOf(activeId);
+      if (index > 0) {
+        setActive(ids[index - 1], true);
+      }
+    });
+
+    nextButton?.addEventListener('click', () => {
+      const index = ids.indexOf(activeId);
+      if (index >= 0 && index < ids.length - 1) {
+        setActive(ids[index + 1], true);
+      }
+    });
+
     const initialId = root.getAttribute('data-initial-id');
     if (initialId) setActive(initialId, false);
   }
 </script>
-

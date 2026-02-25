@@ -16,7 +16,7 @@ import { withBase } from '../../lib/paths';
         Zaproszenie na otwarte warsztaty poświęcone technologiom generatywnym w kreacji dźwięku
         oraz podstawom projektowania wtyczek VST.
       </p>
-      <ul>
+      <ul class="workshop-session-list">
         <li>Data: 27.02.2026 (piątek).</li>
         <li>Miejsce: Nowy Kampus Akademii Muzycznej, sala 235.</li>
         <li>Godziny: 17:00-19:45.</li>
@@ -37,38 +37,53 @@ import { withBase } from '../../lib/paths';
 
   <section class="content-stack">
     <p class="section-kicker">Materiały</p>
-    <h2>Materiały z warsztatów</h2>
-    <div class="text-panel">
-      <p>
-        Warsztaty obejmowały dwa bloki tematyczne i część praktyczną z prezentacją autorskiego instrumentu
-        granularnego.
-      </p>
-      <ul>
-        <li>17:00-18:15: „Wykorzystanie technologii generatywnych w kreacji dźwięku”.</li>
-        <li>18:30-19:45: „Wstęp do projektowania wtyczek VST” z prezentacją autorskiej wtyczki.</li>
-      </ul>
-    </div>
-    <div class="workshop-poster">
-      <img src={withBase('/assets/workshops/warsztaty-27-02-2026-gs.png')} alt="Plakat warsztatów z dnia 27.02.2026" loading="lazy" />
-    </div>
-  </section>
+    <h2>Dwa bloki warsztatowe</h2>
+    <div class="workshop-session-grid">
+      <article class="workshop-session">
+        <div class="workshop-poster">
+          <img
+            src={withBase('/assets/workshops/warsztaty-1-kreatywne-audio-gen.png')}
+            alt="Grafika warsztatów: Wykorzystanie technologii generatywnych w kreacji dźwięku"
+            loading="lazy"
+          />
+        </div>
+        <div class="text-panel workshop-session__content">
+          <p class="section-kicker">17:00-18:15</p>
+          <h3>Wykorzystanie technologii generatywnych w kreacji dźwięku</h3>
+          <p>
+            Blok poświęcony kreatywnemu wykorzystaniu modeli generatywnych w pracy z dźwiękiem i multimodalnym
+            przetwarzaniem treści.
+          </p>
+          <ul class="workshop-session-list">
+            <li>Transformery w przetwarzaniu multimodalnym i ich rola w procesie kreatywnym.</li>
+            <li>Przykłady praktycznych zastosowań modeli generatywnych w kreacji dźwięku.</li>
+            <li>Profil uczestników: reżyseria dźwięku, sound design, kompozycja i teoria muzyki.</li>
+          </ul>
+        </div>
+      </article>
 
-  <section class="content-stack">
-    <p class="section-kicker">Zakres merytoryczny</p>
-    <h2>Program i odbiorcy</h2>
-    <div class="text-panel">
-      <ul>
-        <li>Transformery w przetwarzaniu multimodalnym i ich użycie w procesie kreatywnym.</li>
-        <li>Przykłady praktycznego zastosowania modeli generatywnych w pracy z dźwiękiem.</li>
-        <li>Przegląd standardu JUCE i narzędzi do tworzenia/modyfikacji pluginów VST.</li>
-        <li>Prezentacja workflow dla osób studiujących reżyserię dźwięku, sound design, kompozycję i teorię muzyki.</li>
-      </ul>
-      <p>
-        Przed częścią VST rekomendowane było przygotowanie środowiska: Visual Studio Code, JUCE, Git/GitHub Desktop.
-      </p>
-      <p>
-        Dla osób uczestniczących zdalnie przewidziano kontakt organizacyjny przez Teams.
-      </p>
+      <article class="workshop-session">
+        <div class="workshop-poster">
+          <img
+            src={withBase('/assets/workshops/warsztaty-2-wprowadzenie-do-vst.png')}
+            alt="Grafika warsztatów: Wstęp do projektowania wtyczek VST"
+            loading="lazy"
+          />
+        </div>
+        <div class="text-panel workshop-session__content">
+          <p class="section-kicker">18:30-19:45</p>
+          <h3>Wstęp do projektowania wtyczek VST</h3>
+          <p>
+            Część praktyczna z prezentacją autorskiego generatywnego syntezatora granularnego i podstawami workflow
+            tworzenia pluginów.
+          </p>
+          <ul class="workshop-session-list">
+            <li>Pokaz autorskiej wtyczki i podejścia do projektowania narzędzia VST.</li>
+            <li>Wprowadzenie do standardu JUCE oraz narzędzi do tworzenia i modyfikacji pluginów.</li>
+            <li>Zalecane przygotowanie: Visual Studio Code, JUCE, Git lub GitHub Desktop.</li>
+          </ul>
+        </div>
+      </article>
     </div>
   </section>
 </PageLayout>

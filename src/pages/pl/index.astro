@@ -3,6 +3,8 @@ import PageLayout from '../../layouts/PageLayout.astro';
 import HeroCta from '../../components/HeroCta.astro';
 import FeatureGrid from '../../components/FeatureGrid.astro';
 import { withBase } from '../../lib/paths';
+
+const pluginPanelsHref = `${withBase('/pl/plugin/')}#panels`;
 ---
 
 <PageLayout
@@ -14,8 +16,9 @@ import { withBase } from '../../lib/paths';
     kicker="Projekt stypendialny"
     title="Generatywny syntezator granularny VST"
     subtitle="Strona projektu stypendialnego: „Nowe technologie w rozwoju narzędzi i kompetencji technologicznych dla współczesnej muzyki”."
-    imageSrc={withBase('/images/plugin-hero.svg')}
+    imageSrc={withBase('/assets/plugin/controls-panel.png')}
     imageAlt="Wizualizacja pluginu VST"
+    imageHref={pluginPanelsHref}
     badges={['Open source', 'VST3', 'AI-assisted', '09.2025 - 02.2026']}
     primaryCta={{ label: 'Wtyczka VST', href: withBase('/pl/plugin/') }}
     secondaryCtas={[

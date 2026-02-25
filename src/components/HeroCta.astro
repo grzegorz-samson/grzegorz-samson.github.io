@@ -5,6 +5,7 @@ const {
   subtitle,
   imageSrc,
   imageAlt = '',
+  imageHref,
   primaryCta,
   secondaryCtas = [],
   badges = []
@@ -35,7 +36,15 @@ const {
     </div>
   </div>
 
-  <div class="hero-image-wrap">
-    <img src={imageSrc} alt={imageAlt} loading="eager" />
-  </div>
+  {
+    imageHref ? (
+      <a class="hero-image-wrap" href={imageHref}>
+        <img src={imageSrc} alt={imageAlt} loading="eager" />
+      </a>
+    ) : (
+      <div class="hero-image-wrap">
+        <img src={imageSrc} alt={imageAlt} loading="eager" />
+      </div>
+    )
+  }
 </section>
