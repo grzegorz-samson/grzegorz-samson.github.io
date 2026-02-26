@@ -1,0 +1,105 @@
+<!DOCTYPE html><html lang="pl"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v5.17.3"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" href="/favicon.ico"><title>Regulamin, licencja i polityka prywatności | Projekt stypendialny</title><meta name="description" content="Regulamin korzystania z pluginu, warunki licencyjne oraz polityka prywatności (RODO)."><style>.obf-email[data-astro-cid-qs4irndd]{display:inline-flex;align-items:center;gap:.5rem;vertical-align:middle}.obf-email__button[data-astro-cid-qs4irndd]{appearance:none;border:1px solid rgba(255,255,255,.2);border-radius:999px;background:#ffffff14;color:var(--text-main);font:inherit;font-size:.8rem;line-height:1;padding:.32rem .58rem;cursor:pointer}.obf-email__button[data-astro-cid-qs4irndd]:hover{border-color:#f6c85f75;background:#ffffff1f}.obf-email__image-wrap[data-astro-cid-qs4irndd]{display:inline-flex;align-items:center;line-height:1}.obf-email__image-wrap[data-astro-cid-qs4irndd] img[data-astro-cid-qs4irndd]{display:block;max-width:none;width:auto;height:auto}
+</style>
+<link rel="stylesheet" href="/_astro/admin.vVUUiRBA.css"></head> <body> <div class="site-bg"></div> <header class="main-header"> <a class="brand" href="/pl/">GS</a> <nav> <a href="/pl/project/"> Projekt </a><a href="/pl/plugin/"> Wtyczka VST </a><a href="/pl/research/"> Badania </a><a href="/pl/workshops/"> Warsztaty </a><a href="/pl/scholarship/"> Stypendium </a><a href="/pl/bio/"> Bio </a> </nav> <div class="lang-switch"> <a class="active" href="/pl/regulamin/">PL</a> <a class href="/en/regulamin/">EN</a> </div> </header> <main class="container"> <section id="regulamin-korzystania" class="content-stack"><p class="section-kicker">Dokumenty prawne</p><h2>Regulamin korzystania z pluginu</h2><div class="text-panel"><p><p>Dokument określa zasady pobierania i używania pluginu GreggularVST oraz zasady przetwarzania danych osobowych
+w ramach formularza pobierania i formularza kontaktowego.</p></p><ol><li>Plugin ma charakter badawczo-rozwojowy i może zawierać błędy.</li><li>Użytkownik korzysta z pluginu na własną odpowiedzialność.</li><li>Link do pobrania i suma SHA256 są przekazywane po poprawnym przesłaniu formularza.</li><li>Zabronione jest wykorzystywanie narzędzia do działań niezgodnych z prawem.</li><li><p>Administrator może czasowo ograniczyć dostęp do pobierania w celu utrzymania bezpieczeństwa systemu
+i ochrony przed nadużyciami.</p></li></ol></div></section><section id="licencja" class="content-stack"><p class="section-kicker">Licencja</p><h2>Warunki licencyjne</h2><div class="text-panel"><h3>Pierwotny kod (materiały badawcze)</h3><p><p>Warunki licencyjne pierwotnego kodu są opublikowane na stronie źródłowej:
+<a href="https://osf.io/9m5dh/" target="_blank" rel="noreferrer"><a href="https://osf.io/9m5dh/">https://osf.io/9m5dh/</a></a>.</p></p><h3>Rozwinięta wersja pluginu (binary)</h3><p><p>Rozwinięta wersja pluginu GreggularVST jest udostępniana w modelu EULA NC (non-commercial, use-only).</p></p><ul><li>Dozwolone: użycie edukacyjne i artystyczne non-profit.</li><li>Niedozwolone: użycie komercyjne, modyfikacje i redystrybucja komercyjna.</li><li>Licencja komercyjna: wyłącznie na podstawie odrębnej umowy po kontakcie z administratorem.</li></ul></div></section><section id="polityka-prywatnosci" class="content-stack"><p class="section-kicker">RODO</p><h2>Polityka prywatności</h2><div class="text-panel"><p><p>Administratorem danych jest Grzegorz Samson (Polska, Warszawa). Kontakt w sprawach danych osobowych:
+<span class="obf-email" data-obf-email data-local-codes="103-114-122-101-103-111-114-122-115-97-109-115-111-110-50-49-56" data-domain-codes="104-111-116-109-97-105-108" data-tld-codes="99-111-109" data-astro-cid-qs4irndd> <button type="button" class="obf-email__button" data-obf-trigger data-astro-cid-qs4irndd>Pokaż e-mail</button> <span class="obf-email__image-wrap" data-obf-wrap hidden data-astro-cid-qs4irndd> <img data-obf-image alt="Adres e-mail kontaktowy" loading="lazy" decoding="async" data-astro-cid-qs4irndd> </span> </span> <script type="module">
+  const decodeCodes = (encoded) => {
+    return encoded
+      .split('-')
+      .map((value) => Number.parseInt(value, 10))
+      .filter((value) => Number.isFinite(value))
+      .map((value) => String.fromCharCode(value))
+      .join('');
+  };
+
+  const roots = document.querySelectorAll('[data-obf-email]');
+
+  for (const root of roots) {
+    if (root.getAttribute('data-obf-init') === '1') continue;
+    root.setAttribute('data-obf-init', '1');
+
+    const trigger = root.querySelector('[data-obf-trigger]');
+    const wrap = root.querySelector('[data-obf-wrap]');
+    const image = root.querySelector('[data-obf-image]');
+
+    if (!(trigger instanceof HTMLButtonElement) || !(wrap instanceof HTMLElement) || !(image instanceof HTMLImageElement)) {
+      continue;
+    }
+
+    trigger.addEventListener('click', () => {
+      const local = decodeCodes(root.getAttribute('data-local-codes') ?? '');
+      const domain = decodeCodes(root.getAttribute('data-domain-codes') ?? '');
+      const tld = decodeCodes(root.getAttribute('data-tld-codes') ?? '');
+      const email = `${local}@${domain}.${tld}`;
+
+      const canvas = document.createElement('canvas');
+      const context = canvas.getContext('2d');
+
+      if (!context) return;
+
+      const triggerHeight = Math.max(1, trigger.getBoundingClientRect().height);
+      const imageDisplayHeight = Math.round(triggerHeight * 1.35);
+      const pixelRatio = Math.max(1, window.devicePixelRatio || 1);
+      const fontSize = Math.round(imageDisplayHeight * 0.62 * pixelRatio);
+      const padX = Math.round(fontSize * 0.34);
+      const padY = Math.round(fontSize * 0.3);
+
+      context.font = `700 ${fontSize}px "Space Grotesk", "Manrope", "Segoe UI", sans-serif`;
+      const metrics = context.measureText(email);
+      const ascent = Math.ceil(metrics.actualBoundingBoxAscent || fontSize * 0.75);
+      const descent = Math.ceil(metrics.actualBoundingBoxDescent || fontSize * 0.25);
+      const textWidth = Math.ceil(metrics.width);
+      const textHeight = ascent + descent;
+
+      canvas.width = textWidth + padX * 2;
+      canvas.height = textHeight + padY * 2;
+
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      context.font = `700 ${fontSize}px "Space Grotesk", "Manrope", "Segoe UI", sans-serif`;
+      context.fillStyle = '#dbe4ef';
+      context.fillText(email, padX, padY + ascent);
+
+      image.src = canvas.toDataURL('image/png');
+      image.style.height = `${imageDisplayHeight}px`;
+      image.style.width = 'auto';
+      image.style.maxWidth = 'none';
+      wrap.hidden = false;
+      trigger.hidden = true;
+    });
+  }
+</script> .</p></p><p><p>Zakres przetwarzanych danych: imię, nazwisko, e-mail, deklarowane cele użycia, powiązania instytucjonalne,
+treść wiadomości kontaktowej, zgody, data zgłoszenia i dane techniczne (user agent, skrót IP).</p></p><p>Cele i podstawy przetwarzania:</p><ul><li>obsługa pobierania, kontaktu i bezpieczeństwa systemu (art. 6 ust. 1 lit. f RODO),</li><li>statystyka projektu (art. 6 ust. 1 lit. a RODO - zgoda opcjonalna),</li><li>kontakt o aktualizacjach pluginu (art. 6 ust. 1 lit. a RODO - zgoda).</li></ul><p><p>Dane są przechowywane przez okres niezbędny do realizacji celu, nie dłużej niż 24 miesiące, chyba że
+wcześniejsze usunięcie wynika z wycofania zgody lub skutecznego żądania usunięcia danych.</p></p><p><p>Masz prawo do dostępu do danych, sprostowania, usunięcia, ograniczenia przetwarzania, przenoszenia danych,
+sprzeciwu oraz cofnięcia zgody. Przysługuje Ci także prawo wniesienia skargi do Prezesa UODO.</p></p></div></section><section id="podstawa-prawna-i-zrodla" class="content-stack"><p class="section-kicker">Źródła prawne UE</p><h2>Podstawa prawna i wytyczne</h2><div class="text-panel"><ul><li><p>RODO (EUR-Lex):</p><a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj" target="_blank" rel="noreferrer"><p><a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj">https://eur-lex.europa.eu/eli/reg/2016/679/oj</a></p></a></li><li><p>EDPB Guidelines 05/2020 (Consent):</p><a href="https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en" target="_blank" rel="noreferrer"><p>EDPB 05/2020</p></a></li><li><p>Komisja Europejska - prawa osób:</p><a href="https://commission.europa.eu/law/law-topic/data-protection/reform/rights-citizens_en" target="_blank" rel="noreferrer"><p>Rights of citizens</p></a></li></ul></div></section><section id="wersjonowanie" class="content-stack"><p class="section-kicker">Wersjonowanie</p><h2>Historia zmian dokumentu</h2><div class="text-panel"><p>Wersja dokumentu: 2.0</p><p>Data wejścia w życie: 25 lutego 2026</p><ul><li>2.0 (25 lutego 2026): rozdzielenie sekcji regulamin/licencja/RODO oraz dodanie źródeł prawnych UE.</li><li>1.0 (24 lutego 2026): pierwsza publikacja regulaminu i polityki prywatności.</li></ul></div></section> </main> <footer class="main-footer"> <p>Nowe technologie w rozwoju narzędzi i kompetencji technologicznych dla współczesnej muzyki</p> <p>09.2025 - 02.2026</p> </footer> <section class="funding-footer" aria-label="Informacja o finansowaniu projektu"><div class="funding-logos"><img src="/assets/funding/kpo-ngeu-achromatic.png" alt="KPO i NextGenerationEU - wariant achromatyczny" class="funding-logo-white" loading="lazy"></div><p class="funding-note">Działania poprowadzone w ramach projektu stypendialnego „Nowe technologie w rozwoju narzędzi i kompetencji technologicznych dla współczesnej muzyki” realizowanego przez Grzegorza Samsona. Sfinansowane przez Unię Europejską NextGenerationEU.</p></section> <script>(function(){const apiBase = "https://download-gate-api.s20796-download-gate.workers.dev";
+const lang = "pl";
+
+    (() => {
+      try {
+        const endpoint = `${String(apiBase).replace(/\/$/, '')}/analytics/pageview`;
+        const payload = {
+          path: window.location.pathname,
+          lang: lang || document.documentElement.lang || '',
+          referrer: document.referrer || '',
+          website: ''
+        };
+        const body = JSON.stringify(payload);
+
+        if (navigator.sendBeacon) {
+          const blob = new Blob([body], { type: 'application/json' });
+          navigator.sendBeacon(endpoint, blob);
+          return;
+        }
+
+        fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body,
+          keepalive: true
+        }).catch(() => {});
+      } catch {
+        // noop
+      }
+    })();
+  })();</script> </body></html>

@@ -1,0 +1,588 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v5.17.3"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" href="/favicon.ico"><title>VST Plugin | Scholarship project</title><meta name="description" content="GreggularVST overview: features, panels, and use cases."><link rel="stylesheet" href="/_astro/admin.vVUUiRBA.css">
+<style>.obf-email[data-astro-cid-qs4irndd]{display:inline-flex;align-items:center;gap:.5rem;vertical-align:middle}.obf-email__button[data-astro-cid-qs4irndd]{appearance:none;border:1px solid rgba(255,255,255,.2);border-radius:999px;background:#ffffff14;color:var(--text-main);font:inherit;font-size:.8rem;line-height:1;padding:.32rem .58rem;cursor:pointer}.obf-email__button[data-astro-cid-qs4irndd]:hover{border-color:#f6c85f75;background:#ffffff1f}.obf-email__image-wrap[data-astro-cid-qs4irndd]{display:inline-flex;align-items:center;line-height:1}.obf-email__image-wrap[data-astro-cid-qs4irndd] img[data-astro-cid-qs4irndd]{display:block;max-width:none;width:auto;height:auto}
+</style></head> <body> <div class="site-bg"></div> <header class="main-header"> <a class="brand" href="/en/">GS</a> <nav> <a href="/en/project/"> Project </a><a href="/en/plugin/" aria-current="page"> VST Plugin </a><a href="/en/research/"> Research </a><a href="/en/workshops/"> Workshops </a><a href="/en/scholarship/"> Scholarship </a><a href="/en/bio/"> Bio </a> </nav> <div class="lang-switch"> <a class href="/pl/plugin/">PL</a> <a class="active" href="/en/plugin/">EN</a> </div> </header> <main class="container">  <section id="panels" class="content-stack"> <p class="section-kicker">VST Plugin</p> <article class="plugin-intro-panel"> <div class="plugin-intro-panel__title"> <h2>GreggularVST</h2> </div> <div class="plugin-intro-panel__body"> <p>
+GreggularVST is a custom JUCE plugin (VST3) for generative processing of short recordings and
+          building multilayer granular structures. The tool supports composition work, sound design,
+          and experimental approaches to sound creation.
+</p> </div> </article> </section> <section class="content-stack"> <p class="section-kicker">Interface panels</p> <h2>Panels</h2> <div class="plugin-panels" data-plugin-panels data-initial-id="controls"> <div class="plugin-panels-nav"> <button type="button" class="plugin-panel-tile is-active" data-panel-id="controls" aria-pressed="true"> <img src="/assets/plugin/controls-panel.png" alt="Controls panel in GreggularVST plugin" loading="lazy"> <div class="plugin-panel-tile__body"> <h3>Controls Panel</h3> <p>Core creation layer and key granular parameters.</p> <div class="plugin-tag-row"> <span class="plugin-tag">Duration</span><span class="plugin-tag">Pitch</span><span class="plugin-tag">Cloud</span> </div> </div> </button><button type="button" class="plugin-panel-tile " data-panel-id="multichannel" aria-pressed="false"> <img src="/assets/plugin/multichannel-panel.png" alt="Multichannel panel in GreggularVST plugin" loading="lazy"> <div class="plugin-panel-tile__body"> <h3>Multichannel Panel</h3> <p>Channel routing and panning for complex output layouts.</p> <div class="plugin-tag-row"> <span class="plugin-tag">Routing</span><span class="plugin-tag">Mute/Solo</span><span class="plugin-tag">Surround</span> </div> </div> </button><button type="button" class="plugin-panel-tile " data-panel-id="audio-generator" aria-pressed="false"> <img src="/assets/plugin/audio-generator-panel.png" alt="Audio Generator (AI) panel in GreggularVST plugin" loading="lazy"> <div class="plugin-panel-tile__body"> <h3>Audio Generator (AI)</h3> <p>Audio material generation with prompt-driven iteration.</p> <div class="plugin-tag-row"> <span class="plugin-tag">Generator</span><span class="plugin-tag">Prompt</span><span class="plugin-tag">Session</span> </div> </div> </button> </div> <article class="plugin-panel-active" data-panel-active aria-live="polite"> <div class="plugin-panel-active__media"> <img src="/assets/plugin/controls-panel.png" alt="Controls panel in GreggularVST plugin" loading="lazy" data-active-image> <p class="plugin-panel-active__caption" data-active-caption>Core creation layer and key granular parameters.</p> </div> <div class="plugin-panel-active__content"> <p class="plugin-panel-active__kicker">Active panel</p> <h3 data-active-title>Controls Panel</h3> <p class="plugin-panel-active__description" data-active-description>Core creation layer: Duration, Pitch, Gain, Envelope, and Cloud. This is where parameters that shape the character and dynamics of the granular cloud are configured.</p> <section class="plugin-panel-active__highlights"> <h4>Panel details</h4> <ul data-active-bullets> <li>Range and dynamics control</li><li>Fast access to key parameters</li><li>Iteration-focused working mode</li> </ul> </section> <div class="plugin-panel-active__switch" aria-label="Panel navigation"> <button type="button" class="plugin-panel-active__arrow" data-panel-prev aria-label="Previous panel">←</button> <button type="button" class="plugin-panel-active__arrow" data-panel-next aria-label="Next panel">→</button> </div> </div> </article> </div> <div class="text-panel"> <p>
+Research context and conference materials are available in the <a href="/en/research/">Research</a> tab.
+</p> </div> </section> <section class="content-stack"> <p class="section-kicker">Capabilities</p> <h2>What the plugin can do</h2> <div class="plugin-feature-grid"> <article class="plugin-feature-card"> <div class="plugin-feature-card__head"> <span class="plugin-feature-card__icon">G</span> <h3>Multi-source granular engine</h3> </div> <p>Load multiple WAV files into a shared buffer and build complex grain clouds in real time.</p> <div class="plugin-tag-row"> <span class="plugin-tag">Granular</span><span class="plugin-tag">WAV</span><span class="plugin-tag">Live</span> </div> </article><article class="plugin-feature-card"> <div class="plugin-feature-card__head"> <span class="plugin-feature-card__icon">P</span> <h3>Precise parameter control</h3> </div> <p>Control grain duration, cloud density, pitch and loudness spread, and envelope behavior.</p> <div class="plugin-tag-row"> <span class="plugin-tag">Pitch</span><span class="plugin-tag">Gain</span><span class="plugin-tag">Envelope</span> </div> </article><article class="plugin-feature-card"> <div class="plugin-feature-card__head"> <span class="plugin-feature-card__icon">W</span> <h3>Waveform-driven workflow</h3> </div> <p>Select, group, and edit sampling ranges directly on waveform previews.</p> <div class="plugin-tag-row"> <span class="plugin-tag">Waveform</span><span class="plugin-tag">Selection</span><span class="plugin-tag">Editing</span> </div> </article><article class="plugin-feature-card"> <div class="plugin-feature-card__head"> <span class="plugin-feature-card__icon">M</span> <h3>Extended channel routing</h3> </div> <p>Multichannel panel with routing, mute/solo, and pan pairs for complex output layouts.</p> <div class="plugin-tag-row"> <span class="plugin-tag">Routing</span><span class="plugin-tag">Multichannel</span><span class="plugin-tag">Pan</span> </div> </article><article class="plugin-feature-card"> <div class="plugin-feature-card__head"> <span class="plugin-feature-card__icon">A</span> <h3>Audio Generator (AI)</h3> </div> <p>Conversation-based panel supporting audio material generation and rapid sonic iterations.</p> <div class="plugin-tag-row"> <span class="plugin-tag">Generator</span><span class="plugin-tag">Prompt</span><span class="plugin-tag">Session</span> </div> </article> </div> </section> <section class="content-stack"> <p class="section-kicker">Use case</p> <h2>Creative applications</h2> <div class="plugin-feature-grid plugin-feature-grid--compact"> <article class="plugin-feature-card"> <div class="plugin-feature-card__head"> <span class="plugin-feature-card__icon">F</span> <h3>Film textures and drones</h3> </div> <p>Build atmospheres and background layers with continuous, evolving structure.</p> <div class="plugin-tag-row"> <span class="plugin-tag">Cinematic</span><span class="plugin-tag">Ambient</span> </div> </article><article class="plugin-feature-card"> <div class="plugin-feature-card__head"> <span class="plugin-feature-card__icon">R</span> <h3>Rhythmic glitches</h3> </div> <p>Deconstruct and reassemble percussive material into irregular sequences.</p> <div class="plugin-tag-row"> <span class="plugin-tag">Glitch</span><span class="plugin-tag">Rhythm</span> </div> </article><article class="plugin-feature-card"> <div class="plugin-feature-card__head"> <span class="plugin-feature-card__icon">V</span> <h3>Voice and field recording resynthesis</h3> </div> <p>Transform speech and field sources into experimental forms.</p> <div class="plugin-tag-row"> <span class="plugin-tag">Voice</span><span class="plugin-tag">Field Recording</span> </div> </article><article class="plugin-feature-card"> <div class="plugin-feature-card__head"> <span class="plugin-feature-card__icon">B</span> <h3>Artistic-research practice</h3> </div> <p>Explore interactive audio systems and multimodality in creative work.</p> <div class="plugin-tag-row"> <span class="plugin-tag">Research</span><span class="plugin-tag">Interactive</span> </div> </article> </div> </section> <section class="content-stack"> <p class="section-kicker">Download</p> <h2>Download</h2> <article class="release-card"> <div class="release-head"> <h3>Generative granular synthesizer VST</h3> <p>v0.1.0-alpha | 2026-02-21</p> </div> <div class="release-action">  <div class="download-gate" data-download-gate data-lang="en" data-plugin-version="v0.1.0-alpha" data-api-base="https://download-gate-api.s20796-download-gate.workers.dev"> <button type="button" class="button button-primary" data-gate-open>Download via form</button> <div class="download-gate-modal" data-gate-modal hidden> <div class="download-gate-modal__backdrop" data-gate-close></div> <div class="download-gate-modal__panel" role="dialog" aria-modal="true" aria-labelledby="download-gate-title-en"> <button type="button" class="download-gate-modal__close" data-gate-close aria-label="Close">x</button> <div class="download-gate-modal__scroll"> <div data-gate-form-view> <p class="section-kicker">Secure download</p> <h3 id="download-gate-title-en">Download request form</h3> <p>After submitting the form, you will get the download link and SHA256 checksum for the current plugin version.</p> <form class="download-gate-form" data-gate-form novalidate> <div class="download-gate-grid"> <label> <span>First name</span> <input type="text" name="firstName" minlength="2" maxlength="80" required> </label> <label> <span>Last name</span> <input type="text" name="lastName" minlength="2" maxlength="80" required> </label> </div> <label> <span>Email</span> <input type="email" name="email" maxlength="180" required> </label> <fieldset> <legend>Select which roles describe you.</legend> <div class="download-gate-check-grid"> <label class="download-gate-check"> <input type="checkbox" name="purposes" value="student" data-purpose-other-toggle="false"> <span>Student</span> </label><label class="download-gate-check"> <input type="checkbox" name="purposes" value="academic_staff" data-purpose-other-toggle="false"> <span>Academic staff</span> </label><label class="download-gate-check"> <input type="checkbox" name="purposes" value="researcher" data-purpose-other-toggle="false"> <span>Researcher</span> </label><label class="download-gate-check"> <input type="checkbox" name="purposes" value="sound_designer" data-purpose-other-toggle="false"> <span>Sound designer</span> </label><label class="download-gate-check"> <input type="checkbox" name="purposes" value="sound_director" data-purpose-other-toggle="false"> <span>Sound Director</span> </label><label class="download-gate-check"> <input type="checkbox" name="purposes" value="composer" data-purpose-other-toggle="false"> <span>Composer</span> </label><label class="download-gate-check"> <input type="checkbox" name="purposes" value="evaluation_test" data-purpose-other-toggle="false"> <span>Evaluation / testing</span> </label><label class="download-gate-check"> <input type="checkbox" name="purposes" value="commercial_rd" data-purpose-other-toggle="false"> <span>Commercial R&amp;D</span> </label><label class="download-gate-check"> <input type="checkbox" name="purposes" value="other" data-purpose-other-toggle="true"> <span>Other</span> </label> </div> </fieldset> <label class="download-gate-other" data-purpose-other hidden> <span>Other (please specify)</span> <textarea name="purposeOther" rows="2" maxlength="280" disabled></textarea> </label> <fieldset> <legend>Institutional affiliation</legend> <div class="download-gate-check-grid"> <label class="download-gate-check"> <input type="checkbox" name="affiliations" value="amfn"> <span>FNAM affiliated</span> </label> <label class="download-gate-check"> <input type="checkbox" name="affiliations" value="other" data-affiliation-other-toggle="true"> <span>Other institution</span> </label> <label class="download-gate-check"> <input type="checkbox" name="affiliations" value="none" data-affiliation-none-toggle="true"> <span>None</span> </label> </div> </fieldset> <label class="download-gate-other" data-institution-other hidden> <span>Other institution name</span> <input type="text" name="institutionOther" maxlength="140" disabled> </label> <input class="download-gate-honeypot" type="text" name="website" tabindex="-1" autocomplete="off"> <fieldset> <legend>Consents</legend> <label class="download-gate-check"> <input type="checkbox" name="consentTerms" required> <span> I accept the   <a href="/en/terms/" target="_blank" rel="noreferrer">terms</a> ,  <a href="/en/terms/" target="_blank" rel="noreferrer">license terms</a>   and   <a href="/en/terms/#privacy-policy" target="_blank" rel="noreferrer">privacy policy</a>.
+</span> </label> <label class="download-gate-check"> <input type="checkbox" name="consentStats"> <span>I consent to anonymous usage statistics for this project.</span> </label> <label class="download-gate-check"> <input type="checkbox" name="consentUpdates" required> <span>I consent to receiving plugin update information (required, you can unsubscribe at any time).</span> </label> </fieldset> <p class="download-gate-form__error" data-gate-error hidden></p> <div class="download-gate-actions download-gate-actions--center"> <button type="submit" class="button button-primary" data-gate-submit>Submit and download</button> <button type="button" class="button button-ghost" data-gate-close>Cancel</button> </div> </form> </div> <div class="download-gate-success" data-gate-success hidden> <p class="section-kicker">Secure download</p> <h3>Access granted</h3> <p>Use the link below and verify the SHA256 checksum before installation.</p> <div class="download-gate-result download-gate-result--center"> <a class="button button-primary" href="#" target="_blank" rel="noreferrer" data-gate-download-link>Download file</a> <button type="button" class="button button-ghost" data-copy-link>Copy link</button> </div> <div class="download-gate-hash"> <p>SHA256 (optional checksum for verifying downloaded file)</p> <code data-gate-sha256></code> <button type="button" class="button button-ghost" data-copy-sha>Copy SHA256</button> </div> <p class="download-gate-expiry" data-gate-expiry hidden></p> <p> To unsubscribe from update messages, contact   <span class="obf-email" data-obf-email data-local-codes="103-114-122-101-103-111-114-122-115-97-109-115-111-110-50-49-56" data-domain-codes="104-111-116-109-97-105-108" data-tld-codes="99-111-109" data-astro-cid-qs4irndd> <button type="button" class="obf-email__button" data-obf-trigger data-astro-cid-qs4irndd>Show email</button> <span class="obf-email__image-wrap" data-obf-wrap hidden data-astro-cid-qs4irndd> <img data-obf-image alt="Contact email address" loading="lazy" decoding="async" data-astro-cid-qs4irndd> </span> </span> <script type="module">
+  const decodeCodes = (encoded) => {
+    return encoded
+      .split('-')
+      .map((value) => Number.parseInt(value, 10))
+      .filter((value) => Number.isFinite(value))
+      .map((value) => String.fromCharCode(value))
+      .join('');
+  };
+
+  const roots = document.querySelectorAll('[data-obf-email]');
+
+  for (const root of roots) {
+    if (root.getAttribute('data-obf-init') === '1') continue;
+    root.setAttribute('data-obf-init', '1');
+
+    const trigger = root.querySelector('[data-obf-trigger]');
+    const wrap = root.querySelector('[data-obf-wrap]');
+    const image = root.querySelector('[data-obf-image]');
+
+    if (!(trigger instanceof HTMLButtonElement) || !(wrap instanceof HTMLElement) || !(image instanceof HTMLImageElement)) {
+      continue;
+    }
+
+    trigger.addEventListener('click', () => {
+      const local = decodeCodes(root.getAttribute('data-local-codes') ?? '');
+      const domain = decodeCodes(root.getAttribute('data-domain-codes') ?? '');
+      const tld = decodeCodes(root.getAttribute('data-tld-codes') ?? '');
+      const email = `${local}@${domain}.${tld}`;
+
+      const canvas = document.createElement('canvas');
+      const context = canvas.getContext('2d');
+
+      if (!context) return;
+
+      const triggerHeight = Math.max(1, trigger.getBoundingClientRect().height);
+      const imageDisplayHeight = Math.round(triggerHeight * 1.35);
+      const pixelRatio = Math.max(1, window.devicePixelRatio || 1);
+      const fontSize = Math.round(imageDisplayHeight * 0.62 * pixelRatio);
+      const padX = Math.round(fontSize * 0.34);
+      const padY = Math.round(fontSize * 0.3);
+
+      context.font = `700 ${fontSize}px "Space Grotesk", "Manrope", "Segoe UI", sans-serif`;
+      const metrics = context.measureText(email);
+      const ascent = Math.ceil(metrics.actualBoundingBoxAscent || fontSize * 0.75);
+      const descent = Math.ceil(metrics.actualBoundingBoxDescent || fontSize * 0.25);
+      const textWidth = Math.ceil(metrics.width);
+      const textHeight = ascent + descent;
+
+      canvas.width = textWidth + padX * 2;
+      canvas.height = textHeight + padY * 2;
+
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      context.font = `700 ${fontSize}px "Space Grotesk", "Manrope", "Segoe UI", sans-serif`;
+      context.fillStyle = '#dbe4ef';
+      context.fillText(email, padX, padY + ascent);
+
+      image.src = canvas.toDataURL('image/png');
+      image.style.height = `${imageDisplayHeight}px`;
+      image.style.width = 'auto';
+      image.style.maxWidth = 'none';
+      wrap.hidden = false;
+      trigger.hidden = true;
+    });
+  }
+</script> 
+.
+</p> <p class="download-gate-form__error" data-gate-feedback hidden></p> <div class="download-gate-actions download-gate-actions--center"> <button type="button" class="button button-ghost" data-gate-reset>Submit another request</button> <button type="button" class="button button-primary" data-gate-close>Close</button> </div> </div> </div> </div> </div> </div> <script type="module">
+  const gates = document.querySelectorAll('[data-download-gate]');
+
+  const messages = {
+    pl: {
+      validationError: 'Sprawdź formularz i uzupełnij wymagane pola.',
+      affiliationsError: 'Zaznacz AMFN, Inna instytucja lub Żadna.',
+      institutionOtherError: 'Podaj nazwę innej instytucji.',
+      noneExclusivityError: 'Opcja „Żadna” nie może być łączona z innymi.',
+      tooManyRequests: 'Za dużo prób. Odczekaj chwilę i spróbuj ponownie.',
+      serverError: 'Wystąpił błąd po stronie serwera. Spróbuj ponownie za chwilę.',
+      configError: 'Brak konfiguracji API pobierania. Ustaw PUBLIC_API_BASE.',
+      genericError: 'Nie udało się przetworzyć formularza.',
+      copiedLink: 'Link został skopiowany.',
+      copiedHash: 'SHA256 zostało skopiowane.',
+      copyFailed: 'Nie udało się skopiować. Skopiuj ręcznie.',
+      expiresAtLabel: 'Ważność linku'
+    },
+    en: {
+      validationError: 'Please review the form and complete required fields.',
+      affiliationsError: 'Select FNAM affiliated, Other institution, or None.',
+      institutionOtherError: 'Please provide the other institution name.',
+      noneExclusivityError: 'The "None" option cannot be combined with other affiliations.',
+      tooManyRequests: 'Too many attempts. Please wait and try again.',
+      serverError: 'Server error. Please try again in a moment.',
+      configError: 'Download API is not configured. Set PUBLIC_API_BASE.',
+      genericError: 'Could not process the request.',
+      copiedLink: 'Link copied.',
+      copiedHash: 'SHA256 copied.',
+      copyFailed: 'Copy failed. Please copy manually.',
+      expiresAtLabel: 'Link expiry'
+    }
+  };
+
+  class DownloadGateApiError extends Error {
+    constructor(message, status, details = null) {
+      super(message);
+      this.name = 'DownloadGateApiError';
+      this.status = status;
+      this.details = details;
+    }
+  }
+
+  const fetchDownloadLink = async (apiBase, payload) => {
+    if (!apiBase) {
+      throw new DownloadGateApiError('PUBLIC_API_BASE is not configured.', 500);
+    }
+
+    const response = await fetch(`${apiBase.replace(/\/$/, '')}/download`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
+
+    let data = null;
+    try {
+      data = await response.json();
+    } catch {
+      data = null;
+    }
+
+    if (!response.ok) {
+      const message =
+        typeof data === 'object' && data && 'message' in data && typeof data.message === 'string'
+          ? data.message
+          : 'Download request failed.';
+      throw new DownloadGateApiError(message, response.status, data);
+    }
+
+    if (
+      typeof data !== 'object' ||
+      !data ||
+      !('downloadUrl' in data) ||
+      !('sha256' in data) ||
+      typeof data.downloadUrl !== 'string' ||
+      typeof data.sha256 !== 'string'
+    ) {
+      throw new DownloadGateApiError('Invalid response from download API.', 502, data);
+    }
+
+    return data;
+  };
+
+  const sendGateEvent = (apiBase, payload) => {
+    if (!apiBase) return;
+    const endpoint = `${apiBase.replace(/\/$/, '')}/event`;
+    const body = JSON.stringify(payload);
+
+    try {
+      if (navigator.sendBeacon) {
+        const blob = new Blob([body], { type: 'application/json' });
+        navigator.sendBeacon(endpoint, blob);
+        return;
+      }
+    } catch {
+      // noop
+    }
+
+    fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body,
+      keepalive: true
+    }).catch(() => {});
+  };
+
+  const toBoolean = (value) => value === 'on' || value === true || value === 'true';
+
+  for (const gate of gates) {
+    const apiBase = gate.getAttribute('data-api-base') ?? '';
+    const lang = gate.getAttribute('data-lang') === 'pl' ? 'pl' : 'en';
+    const copy = messages[lang];
+    const openButton = gate.querySelector('[data-gate-open]');
+    const modal = gate.querySelector('[data-gate-modal]');
+    const closeButtons = gate.querySelectorAll('[data-gate-close]');
+    const form = gate.querySelector('[data-gate-form]');
+    const formView = gate.querySelector('[data-gate-form-view]');
+    const successView = gate.querySelector('[data-gate-success]');
+    const errorBox = gate.querySelector('[data-gate-error]');
+    const feedbackBox = gate.querySelector('[data-gate-feedback]');
+    const submitButton = gate.querySelector('[data-gate-submit]');
+    const resetButton = gate.querySelector('[data-gate-reset]');
+    const purposeOtherToggle = gate.querySelector('[data-purpose-other-toggle="true"]');
+    const purposeOtherWrap = gate.querySelector('[data-purpose-other]');
+    const purposeOtherInput = purposeOtherWrap?.querySelector('textarea[name="purposeOther"]');
+    const affiliationOtherToggle = gate.querySelector('[data-affiliation-other-toggle="true"]');
+    const affiliationNoneToggle = gate.querySelector('[data-affiliation-none-toggle="true"]');
+    const affiliationInputs = Array.from(gate.querySelectorAll('input[name="affiliations"]'));
+    const institutionOtherWrap = gate.querySelector('[data-institution-other]');
+    const institutionOtherInput = institutionOtherWrap?.querySelector('input[name="institutionOther"]');
+    const downloadLink = gate.querySelector('[data-gate-download-link]');
+    const shaCode = gate.querySelector('[data-gate-sha256]');
+    const copyLinkButton = gate.querySelector('[data-copy-link]');
+    const copyShaButton = gate.querySelector('[data-copy-sha]');
+    const expiryLine = gate.querySelector('[data-gate-expiry]');
+    const pluginVersion = gate.getAttribute('data-plugin-version') ?? '';
+    const pagePath = window.location.pathname;
+
+    if (
+      !openButton ||
+      !modal ||
+      !form ||
+      !formView ||
+      !successView ||
+      !errorBox ||
+      !submitButton ||
+      !downloadLink ||
+      !shaCode ||
+      !copyLinkButton ||
+      !copyShaButton
+    ) {
+      continue;
+    }
+
+    const showError = (message) => {
+      errorBox.textContent = message;
+      errorBox.hidden = false;
+    };
+
+    const clearError = () => {
+      errorBox.textContent = '';
+      errorBox.hidden = true;
+    };
+
+    const showFeedback = (message) => {
+      if (!feedbackBox) return;
+      feedbackBox.textContent = message;
+      feedbackBox.hidden = false;
+      window.setTimeout(() => {
+        feedbackBox.hidden = true;
+      }, 1800);
+    };
+
+    const toggleOtherPurpose = () => {
+      if (!purposeOtherToggle || !purposeOtherWrap || !purposeOtherInput) return;
+      const enabled = purposeOtherToggle.checked;
+      purposeOtherWrap.hidden = !enabled;
+      purposeOtherInput.disabled = !enabled;
+      purposeOtherInput.required = enabled;
+      if (!enabled) {
+        purposeOtherInput.value = '';
+      }
+    };
+
+    const toggleInstitutionOther = () => {
+      if (!affiliationOtherToggle || !institutionOtherWrap || !institutionOtherInput) return;
+      const enabled = affiliationOtherToggle.checked;
+      institutionOtherWrap.hidden = !enabled;
+      institutionOtherInput.disabled = !enabled;
+      institutionOtherInput.required = enabled;
+      if (!enabled) {
+        institutionOtherInput.value = '';
+      }
+    };
+
+    const normalizeAffiliations = (changedInput) => {
+      if (!(changedInput instanceof HTMLInputElement)) return;
+      if (changedInput.value === 'none' && changedInput.checked) {
+        for (const input of affiliationInputs) {
+          if (input !== changedInput) {
+            input.checked = false;
+          }
+        }
+      }
+      if (changedInput.value !== 'none' && changedInput.checked && affiliationNoneToggle instanceof HTMLInputElement) {
+        affiliationNoneToggle.checked = false;
+      }
+      toggleInstitutionOther();
+    };
+
+    const closeModal = () => {
+      modal.hidden = true;
+      document.body.classList.remove('download-gate-open');
+    };
+
+    const openModal = () => {
+      modal.hidden = false;
+      document.body.classList.add('download-gate-open');
+    };
+
+    const emitEvent = (eventName, status = '') => {
+      sendGateEvent(apiBase, {
+        event: eventName,
+        path: pagePath,
+        lang,
+        pluginVersion,
+        status,
+        source: 'download_gate_modal',
+        website: ''
+      });
+    };
+
+    const resetViews = () => {
+      formView.hidden = false;
+      successView.hidden = true;
+      form.reset();
+      clearError();
+      if (feedbackBox) {
+        feedbackBox.hidden = true;
+      }
+      if (expiryLine) {
+        expiryLine.hidden = true;
+      }
+      toggleOtherPurpose();
+      toggleInstitutionOther();
+    };
+
+    openButton.addEventListener('click', () => {
+      openModal();
+      emitEvent('download_modal_open');
+    });
+    closeButtons.forEach((button) => {
+      button.addEventListener('click', closeModal);
+    });
+    resetButton?.addEventListener('click', resetViews);
+    purposeOtherToggle?.addEventListener('change', toggleOtherPurpose);
+    affiliationInputs.forEach((input) => {
+      input.addEventListener('change', () => normalizeAffiliations(input));
+    });
+
+    copyLinkButton.addEventListener('click', async () => {
+      const href = downloadLink.getAttribute('href') ?? '';
+      if (!href) return;
+      try {
+        await navigator.clipboard.writeText(href);
+        showFeedback(copy.copiedLink);
+      } catch {
+        showFeedback(copy.copyFailed);
+      }
+    });
+
+    copyShaButton.addEventListener('click', async () => {
+      const sha = shaCode.textContent ?? '';
+      if (!sha) return;
+      try {
+        await navigator.clipboard.writeText(sha);
+        showFeedback(copy.copiedHash);
+      } catch {
+        showFeedback(copy.copyFailed);
+      }
+    });
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      clearError();
+
+      if (!form.reportValidity()) {
+        showError(copy.validationError);
+        emitEvent('download_submit_error', 'client_validation');
+        return;
+      }
+
+      const formData = new FormData(form);
+      const payload = {
+        firstName: String(formData.get('firstName') ?? '').trim(),
+        lastName: String(formData.get('lastName') ?? '').trim(),
+        email: String(formData.get('email') ?? '').trim(),
+        purposes: formData.getAll('purposes').map((value) => String(value)),
+        purposeOther: String(formData.get('purposeOther') ?? '').trim(),
+        affiliations: formData.getAll('affiliations').map((value) => String(value)),
+        institutionOther: String(formData.get('institutionOther') ?? '').trim(),
+        consentTerms: toBoolean(formData.get('consentTerms')),
+        consentStats: toBoolean(formData.get('consentStats')),
+        consentUpdates: toBoolean(formData.get('consentUpdates')),
+        lang: gate.getAttribute('data-lang') ?? 'pl',
+        pluginVersion: gate.getAttribute('data-plugin-version') ?? '',
+        website: String(formData.get('website') ?? '').trim()
+      };
+
+      if (payload.purposes.length === 0 && payload.purposeOther.length < 3) {
+        showError(copy.validationError);
+        emitEvent('download_submit_error', 'purpose_validation');
+        return;
+      }
+
+      if (payload.purposes.includes('other') && payload.purposeOther.length < 3) {
+        showError(copy.validationError);
+        emitEvent('download_submit_error', 'purpose_other_validation');
+        return;
+      }
+
+      if (payload.affiliations.length === 0) {
+        showError(copy.affiliationsError);
+        emitEvent('download_submit_error', 'affiliation_validation');
+        return;
+      }
+
+      if (payload.affiliations.includes('none') && payload.affiliations.length > 1) {
+        showError(copy.noneExclusivityError);
+        emitEvent('download_submit_error', 'affiliation_none_conflict');
+        return;
+      }
+
+      if (payload.affiliations.includes('other') && payload.institutionOther.length < 2) {
+        showError(copy.institutionOtherError);
+        emitEvent('download_submit_error', 'institution_other_validation');
+        return;
+      }
+
+      submitButton.disabled = true;
+      submitButton.setAttribute('aria-busy', 'true');
+
+      try {
+        const result = await fetchDownloadLink(apiBase, payload);
+        downloadLink.setAttribute('href', result.downloadUrl);
+        shaCode.textContent = result.sha256;
+        if (expiryLine && result.expiresAt) {
+          expiryLine.textContent = `${copy.expiresAtLabel}: ${result.expiresAt}`;
+          expiryLine.hidden = false;
+        } else if (expiryLine) {
+          expiryLine.hidden = true;
+        }
+
+        formView.hidden = true;
+        successView.hidden = false;
+        emitEvent('download_submit_ok');
+        emitEvent('download_link_shown');
+      } catch (error) {
+        let errorStatus = 'runtime_error';
+        if (error instanceof DownloadGateApiError && error.status === 429) {
+          showError(copy.tooManyRequests);
+          errorStatus = '429';
+        } else if (error instanceof DownloadGateApiError && error.status >= 500) {
+          if (error.message.includes('PUBLIC_API_BASE')) {
+            showError(copy.configError);
+            errorStatus = 'config';
+          } else {
+            showError(copy.serverError);
+            errorStatus = String(error.status);
+          }
+        } else if (error instanceof DownloadGateApiError && error.status === 400) {
+          showError(error.message || copy.validationError);
+          errorStatus = '400';
+        } else if (error instanceof Error) {
+          showError(error.message || copy.genericError);
+          errorStatus = 'client_error';
+        } else {
+          showError(copy.genericError);
+          errorStatus = 'unknown_error';
+        }
+        emitEvent('download_submit_error', errorStatus);
+      } finally {
+        submitButton.disabled = false;
+        submitButton.removeAttribute('aria-busy');
+      }
+    });
+
+    downloadLink.addEventListener('click', () => {
+      emitEvent('download_clicked');
+    });
+
+    toggleOtherPurpose();
+    toggleInstitutionOther();
+    resetViews();
+  }
+</script>  </div>   </article> </section>  </main> <footer class="main-footer"> <p>New technologies in developing tools and technological competences for contemporary music</p> <p>09.2025 - 02.2026</p> </footer>  <script>(function(){const apiBase = "https://download-gate-api.s20796-download-gate.workers.dev";
+const lang = "en";
+
+    (() => {
+      try {
+        const endpoint = `${String(apiBase).replace(/\/$/, '')}/analytics/pageview`;
+        const payload = {
+          path: window.location.pathname,
+          lang: lang || document.documentElement.lang || '',
+          referrer: document.referrer || '',
+          website: ''
+        };
+        const body = JSON.stringify(payload);
+
+        if (navigator.sendBeacon) {
+          const blob = new Blob([body], { type: 'application/json' });
+          navigator.sendBeacon(endpoint, blob);
+          return;
+        }
+
+        fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body,
+          keepalive: true
+        }).catch(() => {});
+      } catch {
+        // noop
+      }
+    })();
+  })();</script> </body></html> <script>(function(){const guiItems = [{"id":"controls","chip":"Controls","title":"Controls Panel","shortDescription":"Core creation layer and key granular parameters.","imageSrc":"/assets/plugin/controls-panel.png","imageAlt":"Controls panel in GreggularVST plugin","description":"Core creation layer: Duration, Pitch, Gain, Envelope, and Cloud. This is where parameters that shape the character and dynamics of the granular cloud are configured.","bullets":["Range and dynamics control","Fast access to key parameters","Iteration-focused working mode"],"tags":["Duration","Pitch","Cloud"]},{"id":"multichannel","chip":"Multichannel","title":"Multichannel Panel","shortDescription":"Channel routing and panning for complex output layouts.","imageSrc":"/assets/plugin/multichannel-panel.png","imageAlt":"Multichannel panel in GreggularVST plugin","description":"Channel routing with activity control, mute/solo, and pan pair configuration. The panel supports workflows from stereo to extended multichannel setups.","bullets":["Output channel control","L/R pairing and panning","Scalable for surround layouts"],"tags":["Routing","Mute/Solo","Surround"]},{"id":"audio-generator","chip":"Audio Generator","title":"Audio Generator (AI)","shortDescription":"Audio material generation with prompt-driven iteration.","imageSrc":"/assets/plugin/audio-generator-panel.png","imageAlt":"Audio Generator (AI) panel in GreggularVST plugin","description":"Conversation interface for generating audio material and managing session context. It extends the workflow with prompt-driven ideation and rapid sonic variation.","bullets":["Create variants of audio material","Session context handling","Prompt workflow for sound design"],"tags":["Generator","Prompt","Session"]}];
+
+  const roots = document.querySelectorAll('[data-plugin-panels]');
+
+  for (const root of roots) {
+    const buttons = Array.from(root.querySelectorAll('button[data-panel-id]'));
+    const activeCard = root.querySelector('[data-panel-active]');
+    const image = root.querySelector('[data-active-image]');
+    const caption = root.querySelector('[data-active-caption]');
+    const title = root.querySelector('[data-active-title]');
+    const description = root.querySelector('[data-active-description]');
+    const bullets = root.querySelector('[data-active-bullets]');
+    const prevButton = root.querySelector('[data-panel-prev]');
+    const nextButton = root.querySelector('[data-panel-next]');
+
+    if (!buttons.length || !activeCard || !image || !caption || !title || !description || !bullets) continue;
+
+    const itemMap = new Map(guiItems.map((item) => [item.id, item]));
+    const ids = buttons
+      .map((button) => button.dataset.panelId)
+      .filter((value) => typeof value === 'string' && value.length > 0);
+    let activeId = ids[0] ?? '';
+
+    const setActive = (id, scrollToCard = true) => {
+      const item = itemMap.get(id);
+      if (!item) return;
+      activeId = id;
+
+      for (const button of buttons) {
+        const isActive = button.dataset.panelId === id;
+        button.classList.toggle('is-active', isActive);
+        button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+      }
+
+      image.setAttribute('src', item.imageSrc);
+      image.setAttribute('alt', item.imageAlt);
+      caption.textContent = item.shortDescription ?? item.description;
+      title.textContent = item.title;
+      description.textContent = item.description;
+
+      bullets.textContent = '';
+      for (const entry of item.bullets ?? []) {
+        const li = document.createElement('li');
+        li.textContent = entry;
+        bullets.appendChild(li);
+      }
+
+      const activeIndex = ids.indexOf(id);
+      if (prevButton instanceof HTMLButtonElement) {
+        prevButton.disabled = activeIndex <= 0;
+      }
+      if (nextButton instanceof HTMLButtonElement) {
+        nextButton.disabled = activeIndex === -1 || activeIndex >= ids.length - 1;
+      }
+
+      if (scrollToCard) {
+        activeCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    };
+
+    for (const button of buttons) {
+      button.addEventListener('click', () => {
+        const id = button.dataset.panelId;
+        if (id) setActive(id, true);
+      });
+    }
+
+    prevButton?.addEventListener('click', () => {
+      const index = ids.indexOf(activeId);
+      if (index > 0) {
+        setActive(ids[index - 1], true);
+      }
+    });
+
+    nextButton?.addEventListener('click', () => {
+      const index = ids.indexOf(activeId);
+      if (index >= 0 && index < ids.length - 1) {
+        setActive(ids[index + 1], true);
+      }
+    });
+
+    const initialId = root.getAttribute('data-initial-id');
+    if (initialId) setActive(initialId, false);
+  }
+})();</script>
