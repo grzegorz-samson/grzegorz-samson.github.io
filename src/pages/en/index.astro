@@ -1,25 +1,29 @@
----
+﻿---
 import PageLayout from '../../layouts/PageLayout.astro';
 import HeroCta from '../../components/HeroCta.astro';
 import FeatureGrid from '../../components/FeatureGrid.astro';
 import { withBase } from '../../lib/paths';
+
+const pluginPanelsHref = `${withBase('/en/plugin/')}#panels`;
 ---
 
 <PageLayout
   lang="en"
   title="Scholarship project portfolio"
-  description="Project website: VST tool, composition, and conference materials."
+  description="Project website: VST tool, research, and conference materials."
 >
   <HeroCta
-    title="Generative Granular Synthesizer VST"
-    subtitle="Scholarship project page: New technologies for developing tools and technological competences for contemporary music."
+    kicker="Scholarship project"
+    title="Generative granular synthesizer VST"
+    subtitle="Scholarship project website: New technologies in developing tools and technological competences for contemporary music."
     imageSrc={withBase('/assets/plugin/controls-panel.png')}
-    imageAlt="VST plugin visual"
-    badges={['Open source', 'VST3', 'AI-assisted', 'Sep 2025 - Feb 2026']}
-    primaryCta={{ label: 'Download plugin', href: withBase('/en/plugin/') }}
+    imageAlt="VST plugin visualization"
+    imageHref={pluginPanelsHref}
+    badges={['Open source', 'VST3', 'AI-assisted', '09.2025 - 02.2026']}
+    primaryCta={{ label: 'VST Plugin', href: withBase('/en/plugin/') }}
     secondaryCtas={[
       { label: 'View project', href: withBase('/en/project/') },
-      { label: 'Updates', href: withBase('/en/updates/') }
+      { label: 'Research (ADC 2025)', href: withBase('/en/research/') }
     ]}
   />
 
@@ -28,19 +32,19 @@ import { withBase } from '../../lib/paths';
     <FeatureGrid
       items={[
         {
-          title: 'VST + docs',
-          text: 'Public plugin release, technical documentation, and usage guide.',
-          href: withBase('/en/project/#vst')
+          title: 'VST + documentation',
+          text: 'Public plugin, technical documentation, and usage guide.',
+          href: withBase('/en/plugin/')
         },
         {
-          title: 'Audio composition',
-          text: 'A composition created with the plugin plus process notes.',
-          href: withBase('/en/project/#composition')
+          title: 'Workshops and implementations',
+          text: 'Educational activities, open sessions, and dissemination of project outcomes.',
+          href: withBase('/en/workshops/')
         },
         {
-          title: 'Research / conference',
-          text: 'Presentation materials: abstract, slides, recording, and notes.',
-          href: withBase('/en/project/#research')
+          title: 'Research and conferences',
+          text: 'ADC 2025 materials: poster, method overview, and project research context.',
+          href: withBase('/en/research/')
         }
       ]}
     />

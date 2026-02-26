@@ -1,25 +1,170 @@
----
+﻿---
 import PageLayout from '../../layouts/PageLayout.astro';
+import HorizontalTimeline from '../../components/HorizontalTimeline.astro';
 import ContactForm from '../../components/ContactForm.astro';
+import ObfuscatedEmailImage from '../../components/ObfuscatedEmailImage.astro';
+import { withBase } from '../../lib/paths';
+
+const timelineItems = [
+  {
+    id: 'isset-2023',
+    year: '2023',
+    date: '2023-10-12',
+    label: 'ISSET',
+    title: 'ISSET 2023, Warsaw',
+    description: 'Presentation on procedurally generated AI compound media and immersive experience design.'
+  },
+  {
+    id: 'musa-2023',
+    year: '2023',
+    date: '2023-10-28',
+    label: 'MuSA',
+    title: 'MuSA 2023, University of Manchester',
+    description: 'Presentation of generative model capabilities in creative sound design contexts.'
+  },
+  {
+    id: 'renewable-2024',
+    year: '2024',
+    date: '2024-10-15 to 2024-10-17',
+    label: 'RenMus',
+    title: 'International Online Conference on Renewable Music',
+    description: 'Talk on renewable music approaches using generative transformer networks.'
+  },
+  {
+    id: 'soundspektrum-2024',
+    year: '2024',
+    date: '2024',
+    label: 'SPEK',
+    title: 'AI SoundSpektrum Conference, Bydgoszcz',
+    description: 'Organizer and speaker role with practical AI tool applications in sound art.'
+  },
+  {
+    id: 'kpo-ai-2024',
+    year: '2024',
+    date: '2024-09 to 2024-12',
+    label: 'KPO',
+    title: 'KPO Project: AI educational implementations',
+    description:
+      'Implementation of interactive AI tutors supporting specialist English language learning in the music academy context.'
+  },
+  {
+    id: 'aes-2025',
+    year: '2025',
+    date: '2025-05',
+    label: 'AES',
+    title: 'Audio Engineering Society European Convention, Warsaw',
+    description: 'Presentation of an artistic-research project in generative sound and audiovisual content.'
+  }
+];
 ---
 
-<PageLayout lang="en" title="Bio | Scholarship project" description="Short bio of the project author.">
+<PageLayout lang="en" title="Bio | Scholarship project" description="Biography and activity profile of Grzegorz Samson.">
   <section class="content-stack">
     <p class="section-kicker">Bio</p>
-    <h2>Audio development + sound art</h2>
-    <div class="text-panel">
+    <h2>Grzegorz Samson</h2>
+    <div class="bio-grid">
+      <div class="bio-photo">
+        <img src={withBase('/assets/bio/grzegorz-samson-profile.png')} alt="Portrait of Grzegorz Samson" loading="lazy" />
+      </div>
+      <div class="text-panel bio-rich-text">
+        <p>
+          Grzegorz Samson develops artistic-research projects in new sound technologies,
+          with a focus on artificial intelligence, generativity, and interactivity in musical environments.
+        </p>
+        <p>
+          His work combines creative practice with scientific publications and educational implementations.
+          Full biographical note:
+          <a href="#full-biographical-note"> go to the section below</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-stack">
+    <p class="section-kicker">Publications</p>
+    <h2>Selected scientific papers</h2>
+    <div class="publication-list">
+      <article class="publication-card">
+        <h3>Perspectives on Generative Sound Design: A Generative Soundscapes Showcase</h3>
+        <p class="publication-meta">Arts (MDPI), published: 2025-06-12</p>
+        <div class="publication-links">
+          <a class="button button-primary" href="https://doi.org/10.3390/arts14030067" target="_blank" rel="noreferrer">
+            DOI: 10.3390/arts14030067
+          </a>
+        </div>
+      </article>
+
+      <article class="publication-card">
+        <h3>Exploring the Process of Interconnected Procedurally Generated Visual and Audial Content</h3>
+        <p class="publication-meta">AES Journal, published: 2025-05-12</p>
+        <div class="publication-links">
+          <a class="button button-primary" href="https://aes.org/publications/elibrary-page/?id=22884" target="_blank" rel="noreferrer">
+            AES E-Library (id 22884)
+          </a>
+        </div>
+      </article>
+
+      <article class="publication-card">
+        <h3>Procedurally Generated AI Compound Media for Expanding Audial Creations, Broadening Immersion and Perception Experience</h3>
+        <p class="publication-meta">International Journal of Electronics and Telecommunications, published: 2024-06-25</p>
+        <div class="publication-links">
+          <a class="button button-primary" href="https://doi.org/10.24425/ijet.2024.149550" target="_blank" rel="noreferrer">
+            DOI: 10.24425/ijet.2024.149550
+          </a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="content-stack">
+    <p class="section-kicker">Conferences and activity</p>
+    <h2>Selected talks and activities</h2>
+    <p class="timeline-hint">Hover over or click an event shortcut to display the full description card.</p>
+    <HorizontalTimeline items={timelineItems} initialId="aes-2025" />
+  </section>
+
+  <section class="content-stack" id="full-biographical-note">
+    <p class="section-kicker">Full note</p>
+    <h2>Full biographical note</h2>
+    <div class="text-panel bio-rich-text">
       <p>
-        This page focuses on building audio tools (VST), creating composition work with new
-        technologies, and sharing outcomes in research and educational formats.
+        Grzegorz Samson has completed a series of artistic-research projects and activities in new sound technologies,
+        with particular emphasis on artificial intelligence, generativity, and interactivity in music environments.
       </p>
-      <ul>
-        <li>Focus: VST development, generative audio, AI-assisted workflow.</li>
-        <li>Outputs: open-source plugin, composition, conference and workshop materials.</li>
-      </ul>
+      <p>
+        One of the key initiatives was implementing AI solutions within the project carried out at the Academy of Music
+        in Bydgoszcz:
+        <a href="https://www.konkurspaderewskiego.pl/inkluzywnosc-wsparcie-nowe-technologie/" target="_blank" rel="noreferrer">
+          "Inclusiveness, Support, New Technologies - improving language and social competences of the Academy community"
+        </a>
+        , co-financed by KPO. He was responsible for developing and implementing interactive AI tutors that support
+        language education for musicians in specialist English.
+      </p>
+      <p>
+        In artistic practice and project presentations, he presented an interactive multimedia project at the National
+        Multimedia May Festival organized by the Fryderyk Chopin University of Music, and at the Audio Engineering
+        Society European Convention 2025 in Warsaw, where he presented an artistic-research project based on
+        interconnected generative visual-audial systems.
+      </p>
+      <p>
+        Grzegorz Samson actively publishes scientific papers in recognized international journals, focusing on
+        generative sound design, audiovisual interactivity, and the use of artificial intelligence in creative
+        processes. These works address both practical and theoretical aspects of AI-driven sound content generation
+        and exploration of relationships between media.
+      </p>
     </div>
   </section>
 
   <section class="content-stack">
     <ContactForm lang="en" />
+    <div class="text-panel">
+      <p class="section-kicker">Direct contact</p>
+      <p>
+        If you prefer direct email contact, click:
+        {' '}
+        <ObfuscatedEmailImage lang="en" localPart="grzegorzsamson218" domain="hotmail" tld="com" />
+        .
+      </p>
+    </div>
   </section>
 </PageLayout>

@@ -1,4 +1,4 @@
----
+﻿---
 import PageLayout from '../../layouts/PageLayout.astro';
 import Timeline from '../../components/Timeline.astro';
 import { withBase } from '../../lib/paths';
@@ -7,7 +7,7 @@ import { withBase } from '../../lib/paths';
 <PageLayout
   lang="en"
   title="Scholarship | Scholarship project"
-  description="Milestones and completed training courses within the scholarship project."
+  description="Milestones and training completed as part of the scholarship project."
 >
   <section class="content-stack">
     <p class="section-kicker">Scholarship</p>
@@ -15,11 +15,11 @@ import { withBase } from '../../lib/paths';
     <Timeline
       items={[
         { label: 'Courses and training (task 1)', date: '09.2025 - 10.2025', status: 'done', statusLabel: 'completed' },
-        { label: 'International conference activity (task 2)', date: '10.2025 - 11.2025', status: 'done', statusLabel: 'completed' },
-        { label: 'VST plugin implementation (task 3)', date: '10.2025 - 12.2025', status: 'done', statusLabel: 'completed' },
-        { label: 'Composition with the plugin (task 4)', date: '12.2025 - 01.2026', status: 'done', statusLabel: 'completed' },
+        { label: 'International conference (task 2)', date: '10.2025 - 11.2025', status: 'done', statusLabel: 'completed' },
+        { label: 'VST plugin concept and implementation (task 3)', date: '10.2025 - 12.2025', status: 'done', statusLabel: 'completed' },
+        { label: 'Composition with the tool (task 4)', date: '12.2025 - 01.2026', status: 'done', statusLabel: 'completed' },
         { label: 'Workshops and public lectures (task 5)', date: '12.2025 - 02.2026', status: 'done', statusLabel: 'completed' },
-        { label: 'Documentation and distribution (task 6)', date: '01.2026 - 02.2026', status: 'done', statusLabel: 'completed' }
+        { label: 'Documentation and distribution of outcomes (task 6)', date: '01.2026 - 02.2026', status: 'done', statusLabel: 'completed' }
       ]}
     />
   </section>
@@ -30,7 +30,7 @@ import { withBase } from '../../lib/paths';
     <div class="publication-list">
       <article class="publication-card">
         <h3>Signal Processing Onramp (MATLAB)</h3>
-        <p class="publication-meta">Completed within the scholarship training pathway.</p>
+        <p class="publication-meta">Course completed within scholarship activities.</p>
         <div class="publication-links">
           <a class="button button-primary" href={withBase('/assets/certificates/certyfikat-kurs-1-matlab.pdf')} target="_blank" rel="noreferrer">
             Open certificate
@@ -53,7 +53,7 @@ import { withBase } from '../../lib/paths';
 
       <article class="publication-card">
         <h3>Introduction to Generative AI - Art of the Possible (AWS)</h3>
-        <p class="publication-meta">Completed within the scholarship training pathway.</p>
+        <p class="publication-meta">Course completed within scholarship activities.</p>
         <div class="publication-links">
           <a class="button button-primary" href={withBase('/assets/certificates/certyfikat-kurs-3-aws.pdf')} target="_blank" rel="noreferrer">
             Open certificate

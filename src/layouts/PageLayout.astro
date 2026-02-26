@@ -1,4 +1,4 @@
----
+﻿---
 import LanguageSwitch from '../components/LanguageSwitch.astro';
 import FundingFooter from '../components/FundingFooter.astro';
 import { withBase } from '../lib/paths';
@@ -23,8 +23,10 @@ const labels =
       }
     : {
         project: 'Project',
-        downloads: 'Plugin',
-        updates: 'Updates',
+        plugin: 'VST Plugin',
+        research: 'Research',
+        workshops: 'Workshops',
+        scholarship: 'Scholarship',
         bio: 'Bio'
       };
 
@@ -40,10 +42,17 @@ const navItems =
       ]
     : [
         { href: withBase('/en/project/'), label: labels.project },
-        { href: withBase('/en/plugin/'), label: labels.downloads },
-        { href: withBase('/en/updates/'), label: labels.updates },
+        { href: withBase('/en/plugin/'), label: labels.plugin },
+        { href: withBase('/en/research/'), label: labels.research },
+        { href: withBase('/en/workshops/'), label: labels.workshops },
+        { href: withBase('/en/scholarship/'), label: labels.scholarship },
         { href: withBase('/en/bio/'), label: labels.bio }
       ];
+
+const footerText =
+  lang === 'pl'
+    ? 'Nowe technologie w rozwoju narzędzi i kompetencji technologicznych dla współczesnej muzyki'
+    : 'New technologies in developing tools and technological competences for contemporary music';
 ---
 
 <!doctype html>
@@ -79,7 +88,7 @@ const navItems =
     </main>
 
     <footer class="main-footer">
-      <p>Nowe technologie w rozwoju narzędzi i kompetencji technologicznych dla współczesnej muzyki</p>
+      <p>{footerText}</p>
       <p>09.2025 - 02.2026</p>
     </footer>
     {lang === 'pl' && <FundingFooter lang={lang} />}

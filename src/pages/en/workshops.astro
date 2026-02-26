@@ -1,4 +1,4 @@
----
+﻿---
 import PageLayout from '../../layouts/PageLayout.astro';
 import { withBase } from '../../lib/paths';
 ---
@@ -9,20 +9,81 @@ import { withBase } from '../../lib/paths';
   description="Workshops and educational activities delivered within the scholarship project."
 >
   <section class="content-stack">
-    <p class="section-kicker">Workshops</p>
-    <h2>Open workshop session | 2026-02-27</h2>
+    <p class="section-kicker">Invitation</p>
+    <h2>Open workshops | 2026-02-27</h2>
     <div class="text-panel">
       <p>
-        The workshop session covered two blocks: generative technologies in sound creation and a practical introduction
-        to VST plugin design with a live demonstration of the author’s granular instrument.
+        Invitation to open workshops focused on generative technologies in sound creation
+        and the basics of VST plugin design.
       </p>
-      <ul>
-        <li>17:00-18:15: Generative technologies in sound creation.</li>
-        <li>18:30-19:45: Intro to VST plugin design and workflow.</li>
+      <ul class="workshop-session-list">
+        <li>Date: 2026-02-27 (Friday).</li>
+        <li>Venue: New Campus of the Academy of Music, room 235.</li>
+        <li>Time: 17:00-19:45.</li>
       </ul>
+      <p>
+        Location (map):
+        <a href="https://maps.google.com/?q=Nowy+Kampus+Akademii+Muzycznej+Bydgoszcz" target="_blank" rel="noreferrer">
+          New Campus of the Academy of Music in Bydgoszcz
+        </a>
+      </p>
+      <div class="hero-cta-row">
+        <a class="button button-primary" href="https://maps.google.com/?q=Nowy+Kampus+Akademii+Muzycznej+Bydgoszcz" target="_blank" rel="noreferrer">
+          Open map
+        </a>
+      </div>
     </div>
-    <div class="workshop-poster">
-      <img src={withBase('/assets/workshops/warsztaty-27-02-2026-gs.png')} alt="Workshop poster from February 27, 2026" loading="lazy" />
+  </section>
+
+  <section class="content-stack">
+    <p class="section-kicker">Materials</p>
+    <h2>Two workshop blocks</h2>
+    <div class="workshop-session-grid">
+      <article class="workshop-session">
+        <div class="workshop-poster">
+          <img
+            src={withBase('/assets/workshops/warsztaty-1-kreatywne-audio-gen.png')}
+            alt="Workshop graphic: Creative use of generative technologies in sound creation"
+            loading="lazy"
+          />
+        </div>
+        <div class="text-panel workshop-session__content">
+          <p class="section-kicker">17:00-18:15</p>
+          <h3>Using generative technologies in sound creation</h3>
+          <p>
+            A block focused on creative use of generative models in sound work and multimodal
+            content processing.
+          </p>
+          <ul class="workshop-session-list">
+            <li>Transformers in multimodal processing and their role in creative workflows.</li>
+            <li>Practical examples of generative models in sound creation.</li>
+            <li>Audience profile: sound direction, sound design, composition, and music theory.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="workshop-session">
+        <div class="workshop-poster">
+          <img
+            src={withBase('/assets/workshops/warsztaty-2-wprowadzenie-do-vst.png')}
+            alt="Workshop graphic: Introduction to VST plugin design"
+            loading="lazy"
+          />
+        </div>
+        <div class="text-panel workshop-session__content">
+          <p class="section-kicker">18:30-19:45</p>
+          <h3>Introduction to VST plugin design</h3>
+          <p>
+            A practical block featuring the custom generative granular synthesizer and
+            basics of plugin development workflow.
+          </p>
+          <ul class="workshop-session-list">
+            <li>Demo of the custom plugin and VST tool design approach.</li>
+            <li>Introduction to JUCE and tools for creating and modifying plugins.</li>
+            <li>Recommended setup: Visual Studio Code, JUCE, Git, or GitHub Desktop.</li>
+          </ul>
+        </div>
+      </article>
     </div>
   </section>
 </PageLayout>

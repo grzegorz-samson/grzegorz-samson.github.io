@@ -1,62 +1,132 @@
----
+﻿---
 ---
 
 import PageLayout from '../../layouts/PageLayout.astro';
+import ObfuscatedEmailImage from '../../components/ObfuscatedEmailImage.astro';
 
 <PageLayout
   lang="en"
-  title="Terms and Privacy Policy | Scholarship project"
-  description="Plugin download terms and privacy policy."
+  title="Terms, license, and privacy policy | Scholarship project"
+  description="Terms of plugin use, license terms, and privacy policy (GDPR)."
 >
-  <section class="content-stack">
+  <section id="terms-of-use" class="content-stack">
     <p class="section-kicker">Legal documents</p>
-    <h2>Plugin download and usage terms</h2>
+    <h2>Terms of plugin use</h2>
     <div class="text-panel">
+      <p>
+        This document defines the rules for downloading and using the GreggularVST plugin,
+        as well as personal data processing rules for the download and contact forms.
+      </p>
       <ol>
-        <li>The plugin is released for research and development and may contain defects.</li>
-        <li>You use the plugin at your own responsibility.</li>
-        <li>The download link and SHA256 checksum are provided after submitting the download form.</li>
-        <li>Any unlawful use of the software is prohibited.</li>
-        <li>Update notices are sent only based on your consent.</li>
+        <li>The plugin is an R&D release and may contain defects.</li>
+        <li>The user uses the plugin at their own responsibility.</li>
+        <li>The download link and SHA256 checksum are provided after successful form submission.</li>
+        <li>Using the tool for unlawful activities is prohibited.</li>
+        <li>
+          The administrator may temporarily limit download access to maintain system security
+          and protect against abuse.
+        </li>
       </ol>
     </div>
   </section>
 
+  <section id="license" class="content-stack">
+    <p class="section-kicker">License</p>
+    <h2>License terms</h2>
+    <div class="text-panel">
+      <h3>Original code (research materials)</h3>
+      <p>
+        Licensing terms for the original source code are published on the source page:
+        <a href="https://osf.io/9m5dh/" target="_blank" rel="noreferrer">https://osf.io/9m5dh/</a>.
+      </p>
+
+      <h3>Extended plugin version (binary)</h3>
+      <p>
+        The extended GreggularVST binary is provided under an EULA NC model (non-commercial, use-only).
+      </p>
+      <ul>
+        <li>Allowed: educational and artistic non-profit use.</li>
+        <li>Not allowed: commercial use, modifications, and commercial redistribution.</li>
+        <li>Commercial licensing: only under a separate individual agreement with the administrator.</li>
+      </ul>
+    </div>
+  </section>
+
   <section id="privacy-policy" class="content-stack">
-    <p class="section-kicker">Privacy</p>
+    <p class="section-kicker">GDPR</p>
     <h2>Privacy policy</h2>
     <div class="text-panel">
       <p>
-        The project owner is the data controller. Add your active contact email to fully meet legal notice
-        requirements.
+        Data controller: Grzegorz Samson (Poland, Warsaw). Data protection contact:
+        <ObfuscatedEmailImage lang="en" localPart="grzegorzsamson218" domain="hotmail" tld="com" />.
       </p>
       <p>
-        Processed data scope: first name, last name, email, declared use cases, institution details, consent flags,
-        submission timestamp, technical metadata (user agent, hashed IP).
+        Processed data scope: first name, last name, email, declared use purposes, institutional affiliations,
+        contact message content, consent flags, submission date, and technical data (user agent, hashed IP).
       </p>
-      <p>Processing purposes:</p>
+      <p>Purposes and legal basis:</p>
       <ul>
-        <li>download flow handling and service security (legitimate interest),</li>
-        <li>project analytics (optional consent),</li>
-        <li>plugin update communication (required consent for download access).</li>
+        <li>download flow, contact handling, and service security (Art. 6(1)(f) GDPR),</li>
+        <li>project statistics (Art. 6(1)(a) GDPR - optional consent),</li>
+        <li>plugin update communication (Art. 6(1)(a) GDPR - consent).</li>
       </ul>
       <p>
-        Data retention: only as long as needed for the stated purpose, no longer than 24 months or until effective
-        consent withdrawal.
+        Data is retained only as long as required for the stated purpose, no longer than 24 months,
+        unless earlier deletion is requested or consent is withdrawn.
       </p>
       <p>
-        You have the right to access, rectify, erase, restrict processing, and withdraw consent at any time. Update
-        consent withdrawal is handled via contact email.
+        You have the right to access, rectify, erase, restrict processing, data portability,
+        object to processing, and withdraw consent. You also have the right to lodge a complaint
+        with the President of the Polish DPA (UODO).
       </p>
     </div>
   </section>
 
-  <section class="content-stack">
-    <p class="section-kicker">Versioning</p>
-    <h2>Document history</h2>
+  <section id="legal-basis-and-sources" class="content-stack">
+    <p class="section-kicker">EU legal sources</p>
+    <h2>Legal basis and guidance</h2>
     <div class="text-panel">
-      <p>Document version: 1.0</p>
-      <p>Effective date: February 24, 2026</p>
+      <ul>
+        <li>
+          GDPR (EUR-Lex):
+          <a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj" target="_blank" rel="noreferrer">
+            https://eur-lex.europa.eu/eli/reg/2016/679/oj
+          </a>
+        </li>
+        <li>
+          EDPB Guidelines 05/2020 (Consent):
+          <a
+            href="https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en"
+            target="_blank"
+            rel="noreferrer"
+          >
+            EDPB 05/2020
+          </a>
+        </li>
+        <li>
+          European Commission - rights of citizens:
+          <a
+            href="https://commission.europa.eu/law/law-topic/data-protection/reform/rights-citizens_en"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Rights of citizens
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="versioning" class="content-stack">
+    <p class="section-kicker">Versioning</p>
+    <h2>Document changelog</h2>
+    <div class="text-panel">
+      <p>Document version: 2.0</p>
+      <p>Effective date: February 25, 2026</p>
+      <ul>
+        <li>2.0 (February 25, 2026): split into terms/license/GDPR sections and added EU legal sources.</li>
+        <li>1.0 (February 24, 2026): first publication of terms and privacy policy.</li>
+      </ul>
     </div>
   </section>
 </PageLayout>
