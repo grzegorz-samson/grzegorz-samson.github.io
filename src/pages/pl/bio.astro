@@ -2,6 +2,7 @@
 import PageLayout from '../../layouts/PageLayout.astro';
 import HorizontalTimeline from '../../components/HorizontalTimeline.astro';
 import ContactForm from '../../components/ContactForm.astro';
+import ObfuscatedEmailImage from '../../components/ObfuscatedEmailImage.astro';
 import { withBase } from '../../lib/paths';
 
 const timelineItems = [
@@ -160,6 +161,15 @@ const timelineItems = [
 
   <section class="content-stack">
     <ContactForm lang="pl" />
+    <div class="text-panel">
+      <p class="section-kicker">Kontakt bezpośredni</p>
+      <p>
+        Jeśli wolisz kontakt mailowy, kliknij:
+        {' '}
+        <ObfuscatedEmailImage lang="pl" localPart="grzegorzsamson218" domain="hotmail" tld="com" />
+        .
+      </p>
+    </div>
   </section>
 </PageLayout>
 

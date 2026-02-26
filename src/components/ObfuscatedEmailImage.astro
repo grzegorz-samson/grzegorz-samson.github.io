@@ -1,0 +1,147 @@
+﻿---
+type Lang = 'pl' | 'en';
+
+interface Props {
+  lang?: Lang;
+  localPart: string;
+  domain: string;
+  tld: string;
+}
+
+const {
+  lang = 'pl',
+  localPart,
+  domain,
+  tld
+} = Astro.props as Props;
+
+const toCodes = (value: string) => Array.from(value).map((char) => char.charCodeAt(0)).join('-');
+
+const localCodes = toCodes(localPart);
+const domainCodes = toCodes(domain);
+const tldCodes = toCodes(tld);
+
+const revealLabel = lang === 'pl' ? 'Poka\u017c e-mail' : 'Show email';
+const imageAlt = lang === 'pl' ? 'Adres e-mail kontaktowy' : 'Contact email address';
+---
+
+<span
+  class="obf-email"
+  data-obf-email
+  data-local-codes={localCodes}
+  data-domain-codes={domainCodes}
+  data-tld-codes={tldCodes}
+>
+  <button type="button" class="obf-email__button" data-obf-trigger>{revealLabel}</button>
+  <span class="obf-email__image-wrap" data-obf-wrap hidden>
+    <img data-obf-image alt={imageAlt} loading="lazy" decoding="async" />
+  </span>
+</span>
+
+<script type="module">
+  const decodeCodes = (encoded) => {
+    return encoded
+      .split('-')
+      .map((value) => Number.parseInt(value, 10))
+      .filter((value) => Number.isFinite(value))
+      .map((value) => String.fromCharCode(value))
+      .join('');
+  };
+
+  const roots = document.querySelectorAll('[data-obf-email]');
+
+  for (const root of roots) {
+    if (root.getAttribute('data-obf-init') === '1') continue;
+    root.setAttribute('data-obf-init', '1');
+
+    const trigger = root.querySelector('[data-obf-trigger]');
+    const wrap = root.querySelector('[data-obf-wrap]');
+    const image = root.querySelector('[data-obf-image]');
+
+    if (!(trigger instanceof HTMLButtonElement) || !(wrap instanceof HTMLElement) || !(image instanceof HTMLImageElement)) {
+      continue;
+    }
+
+    trigger.addEventListener('click', () => {
+      const local = decodeCodes(root.getAttribute('data-local-codes') ?? '');
+      const domain = decodeCodes(root.getAttribute('data-domain-codes') ?? '');
+      const tld = decodeCodes(root.getAttribute('data-tld-codes') ?? '');
+      const email = `${local}@${domain}.${tld}`;
+
+      const canvas = document.createElement('canvas');
+      const context = canvas.getContext('2d');
+
+      if (!context) return;
+
+      const triggerHeight = Math.max(1, trigger.getBoundingClientRect().height);
+      const imageDisplayHeight = Math.round(triggerHeight * 1.35);
+      const pixelRatio = Math.max(1, window.devicePixelRatio || 1);
+      const fontSize = Math.round(imageDisplayHeight * 0.62 * pixelRatio);
+      const padX = Math.round(fontSize * 0.34);
+      const padY = Math.round(fontSize * 0.3);
+
+      context.font = `700 ${fontSize}px "Space Grotesk", "Manrope", "Segoe UI", sans-serif`;
+      const metrics = context.measureText(email);
+      const ascent = Math.ceil(metrics.actualBoundingBoxAscent || fontSize * 0.75);
+      const descent = Math.ceil(metrics.actualBoundingBoxDescent || fontSize * 0.25);
+      const textWidth = Math.ceil(metrics.width);
+      const textHeight = ascent + descent;
+
+      canvas.width = textWidth + padX * 2;
+      canvas.height = textHeight + padY * 2;
+
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      context.font = `700 ${fontSize}px "Space Grotesk", "Manrope", "Segoe UI", sans-serif`;
+      context.fillStyle = '#dbe4ef';
+      context.fillText(email, padX, padY + ascent);
+
+      image.src = canvas.toDataURL('image/png');
+      image.style.height = `${imageDisplayHeight}px`;
+      image.style.width = 'auto';
+      image.style.maxWidth = 'none';
+      wrap.hidden = false;
+      trigger.hidden = true;
+    });
+  }
+</script>
+
+<style>
+  .obf-email {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    vertical-align: middle;
+  }
+
+  .obf-email__button {
+    appearance: none;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-main);
+    font: inherit;
+    font-size: 0.8rem;
+    line-height: 1;
+    padding: 0.32rem 0.58rem;
+    cursor: pointer;
+  }
+
+  .obf-email__button:hover {
+    border-color: rgba(246, 200, 95, 0.46);
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  .obf-email__image-wrap {
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+  }
+
+  .obf-email__image-wrap img {
+    display: block;
+    max-width: none;
+    width: auto;
+    height: auto;
+  }
+</style>
+

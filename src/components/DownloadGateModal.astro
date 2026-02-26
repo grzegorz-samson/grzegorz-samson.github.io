@@ -1,13 +1,22 @@
 ---
 import { withBase } from '../lib/paths';
 import { API_BASE } from '../lib/config';
+import ObfuscatedEmailImage from './ObfuscatedEmailImage.astro';
 
 type Lang = 'pl' | 'en';
 
-const { lang = 'pl', pluginVersion = 'v0.1.0-alpha', contactEmail = 'contact[at]example.com' } = Astro.props as {
+const {
+  lang = 'pl',
+  pluginVersion = 'v0.1.0-alpha',
+  contactEmailLocal = 'contact',
+  contactEmailDomain = 'example',
+  contactEmailTld = 'com'
+} = Astro.props as {
   lang?: Lang;
   pluginVersion?: string;
-  contactEmail?: string;
+  contactEmailLocal?: string;
+  contactEmailDomain?: string;
+  contactEmailTld?: string;
 };
 
 const copy =
@@ -31,6 +40,7 @@ const copy =
         consentsTitle: 'Zgody',
         consentTermsPrefix: 'Akceptuję',
         consentTermsTerms: 'regulamin',
+        consentTermsLicense: 'warunki licencji',
         consentTermsAnd: 'oraz',
         consentTermsPrivacy: 'politykę prywatności',
         consentStats: 'Wyrażam zgodę na wykorzystanie danych do statystyk projektu.',
@@ -79,6 +89,7 @@ const copy =
         consentsTitle: 'Consents',
         consentTermsPrefix: 'I accept the',
         consentTermsTerms: 'terms',
+        consentTermsLicense: 'license terms',
         consentTermsAnd: 'and',
         consentTermsPrivacy: 'privacy policy',
         consentStats: 'I consent to anonymous usage statistics for this project.',
@@ -135,6 +146,7 @@ const purposes =
       ];
 
 const termsHref = lang === 'pl' ? withBase('/pl/regulamin/') : withBase('/en/terms/');
+const licenseHref = lang === 'pl' ? `${withBase('/pl/regulamin/')}#licencja` : withBase('/en/terms/');
 const privacyHref =
   lang === 'pl' ? `${withBase('/pl/regulamin/')}#polityka-prywatnosci` : `${withBase('/en/terms/')}#privacy-policy`;
 const modalHeadingId = `download-gate-title-${lang}`;
@@ -227,6 +239,8 @@ const apiBase = API_BASE;
                   {copy.consentTermsPrefix}
                   {' '}
                   <a href={termsHref} target="_blank" rel="noreferrer">{copy.consentTermsTerms}</a>
+                  {', '}
+                  <a href={licenseHref} target="_blank" rel="noreferrer">{copy.consentTermsLicense}</a>
                   {' '}
                   {copy.consentTermsAnd}
                   {' '}
@@ -266,7 +280,17 @@ const apiBase = API_BASE;
             <button type="button" class="button button-ghost" data-copy-sha>{copy.copyHash}</button>
           </div>
           <p class="download-gate-expiry" data-gate-expiry hidden></p>
-          <p>{copy.unsubscribeInfo} <span class="download-gate-obfuscated-email">{contactEmail}</span>.</p>
+          <p>
+            {copy.unsubscribeInfo}
+            {' '}
+            <ObfuscatedEmailImage
+              lang={lang}
+              localPart={contactEmailLocal}
+              domain={contactEmailDomain}
+              tld={contactEmailTld}
+            />
+            .
+          </p>
           <p class="download-gate-form__error" data-gate-feedback hidden></p>
           <div class="download-gate-actions download-gate-actions--center">
             <button type="button" class="button button-ghost" data-gate-reset>{copy.backToForm}</button>

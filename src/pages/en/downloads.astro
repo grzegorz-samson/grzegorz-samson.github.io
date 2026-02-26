@@ -29,7 +29,13 @@ import DownloadGateModal from '../../components/DownloadGateModal.astro';
         To access the test build, submit the download form. Data is collected for project statistics and release
         update communication.
       </p>
-      <DownloadGateModal lang="en" pluginVersion="v0.1.0-alpha" contactEmail="contact@example.com" />
+      <DownloadGateModal
+        lang="en"
+        pluginVersion="v0.1.0-alpha"
+        contactEmailLocal="contact"
+        contactEmailDomain="example"
+        contactEmailTld="com"
+      />
     </div>
   </section>
 
