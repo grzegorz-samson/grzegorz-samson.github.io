@@ -1,0 +1,44 @@
+<!DOCTYPE html><html lang="pl"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v5.17.3"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" href="/favicon.ico"><title>Badania | Projekt stypendialny</title><meta name="description" content="Materiały badawcze i konferencyjne projektu, w tym ADC 2025."><link rel="stylesheet" href="/_astro/admin.vVUUiRBA.css"></head> <body> <div class="site-bg"></div> <header class="main-header"> <a class="brand" href="/pl/">GS</a> <nav> <a href="/pl/project/"> Projekt </a><a href="/pl/plugin/"> Wtyczka VST </a><a href="/pl/research/" aria-current="page"> Badania </a><a href="/pl/workshops/"> Warsztaty </a><a href="/pl/scholarship/"> Stypendium </a><a href="/pl/bio/"> Bio </a> </nav> <div class="lang-switch"> <a class="active" href="/pl/research/">PL</a> <a class href="/en/research/">EN</a> </div> </header> <main class="container">  <section class="content-stack"> <p class="section-kicker">Badania</p> <h2>Audio Developer Conference 2025</h2> <div class="text-panel"> <p>
+Projekt został zaprezentowany podczas Audio Developer Conference 2025
+        (10-12 listopada 2025, Bristol, UK i online).
+</p> <p>
+Wystąpienie dotyczyło koncepcji łączenia warstwy tekstowej (promptowej) z generatywnym przetwarzaniem audio
+        oraz granularnym silnikiem VST działającym w czasie rzeczywistym.
+</p> <ul> <li>Temat posteru: „From Text Wishes to Sound”.</li> <li>Zakres: pipeline tekst -> generacja audio -> granularna obróbka -> wynikowa tekstura.</li> <li>Nacisk: praktyczne wykorzystanie AI w workflow twórczym i edukacyjnym.</li> </ul> <p>
+Warunki licencyjne pierwotnego kodu programu są opublikowane na stronie źródłowej:
+<a href="https://osf.io/9m5dh/" target="_blank" rel="noreferrer">https://osf.io/9m5dh/</a>.
+</p> <div class="hero-cta-row"> <a class="button button-primary" href="/assets/research/from-text-wishes-to-sound-adc-2025-poster.jpg" target="_blank" rel="noreferrer">
+Zobacz poster
+</a> <a class="button button-ghost" href="/assets/research/from-text-wishes-to-sound-adc-2025-poster.docx" target="_blank" rel="noreferrer">
+Pobierz źródło DOCX
+</a> </div> </div> <a class="research-poster-card" href="/assets/research/from-text-wishes-to-sound-adc-2025-poster.jpg" target="_blank" rel="noreferrer"> <img src="/assets/research/from-text-wishes-to-sound-adc-2025-poster-thumb.jpg" alt="Poster naukowy zaprezentowany podczas Audio Developer Conference 2025" loading="lazy" decoding="async" width="1132" height="1600"> </a> </section>  </main> <footer class="main-footer"> <p>Nowe technologie w rozwoju narzędzi i kompetencji technologicznych dla współczesnej muzyki</p> <p>09.2025 - 02.2026</p> </footer> <section class="funding-footer" aria-label="Informacja o finansowaniu projektu"><div class="funding-logos"><img src="/assets/funding/kpo-ngeu-achromatic.png" alt="KPO i NextGenerationEU - wariant achromatyczny" class="funding-logo-white" loading="lazy"></div><p class="funding-note">Działania poprowadzone w ramach projektu stypendialnego „Nowe technologie w rozwoju narzędzi i kompetencji technologicznych dla współczesnej muzyki” realizowanego przez Grzegorza Samsona. Sfinansowane przez Unię Europejską NextGenerationEU.</p></section> <script>(function(){const apiBase = "https://download-gate-api.s20796-download-gate.workers.dev";
+const lang = "pl";
+
+    (() => {
+      try {
+        const endpoint = `${String(apiBase).replace(/\/$/, '')}/analytics/pageview`;
+        const payload = {
+          path: window.location.pathname,
+          lang: lang || document.documentElement.lang || '',
+          referrer: document.referrer || '',
+          website: ''
+        };
+        const body = JSON.stringify(payload);
+
+        if (navigator.sendBeacon) {
+          const blob = new Blob([body], { type: 'application/json' });
+          navigator.sendBeacon(endpoint, blob);
+          return;
+        }
+
+        fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body,
+          keepalive: true
+        }).catch(() => {});
+      } catch {
+        // noop
+      }
+    })();
+  })();</script> </body></html>
