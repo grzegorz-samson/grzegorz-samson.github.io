@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; media-src 'self' blob:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'none'">
+  <title>Wishing Well</title><link rel="icon" href="data:,"><link rel="stylesheet" href="panel.css">
+  <link rel="stylesheet" href="controls.css">
+  <link rel="stylesheet" href="interaction-modes.css">
+</head>
+<body>
+  <canvas id="water" aria-hidden="true"></canvas>
+  <div id="audio-map-backdrop" aria-hidden="true" hidden></div>
+  <div id="audio-emitter-preview" aria-hidden="true" hidden></div>
+  <div id="interaction-modes"></div>
+  <main id="stage" aria-label="Conversation on water">
+    <div id="messages" role="log" aria-live="polite" aria-label="Conversation" tabindex="0"></div>
+    <form id="composer"><button id="approve" type="button" hidden><span>Create</span></button><label class="sr-only" for="message">Describe sounds</label><div id="typing-surface"><div id="typing-ink" aria-hidden="true"><p id="typing-letters"></p></div><textarea id="message" rows="1" maxlength="2000" placeholder="What would you like to hear?" autocomplete="off"></textarea></div><button id="send" aria-label="Send message" title="Send">↑</button></form>
+    <p id="public-status" role="status"></p>
+  </main>
+  <nav id="presentation-tools" aria-label="Presentation"><button id="settings" aria-label="Technical panel" title="Technical panel (F2)">⋯</button><button id="fullscreen" aria-label="Full screen" title="Full screen">⛶</button></nav>
+  <aside id="operator" aria-label="Technical panel">
+    <header><h1>Wishing Well</h1><button id="hide-settings" aria-label="Close panel">×</button></header>
+    <section id="text-scale-controls" aria-label="Text size"><h2>Text size</h2><div class="toolbar"><button id="text-scale-less" aria-label="Decrease text size">A−</button><output id="text-scale-value" aria-live="polite">100%</output><button id="text-scale-more" aria-label="Increase text size">A+</button></div></section>
+    <section id="connection"><label>Instance <select id="instances"><option value="">Select instance</option></select></label><button id="refresh-instances">Refresh</button><p id="connection-label"></p></section>
+    <div class="toolbar"><button id="present">Show Premiere</button><button id="open-window" hidden>Open separate window</button></div>
+    <p id="operator-status" role="status"></p><p id="graphics-status"></p>
+    <section aria-label="Engine task"><p id="job-detail"></p><button id="cancel-job" hidden>Cancel task</button></section>
+    <section><h2>Background layers</h2>
+      <label>New background gradients <input id="background-gradients" type="checkbox" checked></label>
+      <label>Legacy upward light bands <input id="background-rising-bands" type="checkbox"></label>
+      <div class="toolbar"><button id="background-only-bands">Legacy bands only</button></div>
+      <p>Layers can be enabled independently. The button removes gradients and keeps the older moving bands on the water. Reduced motion freezes the animation; the older bands require WebGL.</p>
+      <p id="background-layers-status" role="status">Local choice, saved across reloads, outside engine presets.</p>
+    </section>
+    <section><h2>Chat layout</h2><label>Text flows into the conversation <input id="chat-flow" type="checkbox"></label><label>Placement <select id="chat-flow-layout"><option value="user-left">You on the left · reply on the right</option><option value="user-right">You on the right · reply on the left</option></select></label><p>Text moves from the composer to the selected side of the conversation. The reply appears one letter at a time. Disable this for a conventional layout. This local choice is outside engine presets.</p></section>
+    <section><h2>Underwater text</h2><label>Gentle motion across all text <input id="underwater-ink" type="checkbox" checked></label><label>Strength <input id="underwater-strength" type="range" min="0" max="1" step="0.05" value="0.55"></label><label>Wave period (s) <input id="underwater-period" type="number" min="2" max="12" step="0.5" value="6"></label><p>Applies to history, replies and typed letters. This local choice is outside engine presets; reduced motion disables the effect.</p></section>
+    <section><h2>Text and water surface</h2><label>Distort text with the water surface <input id="surface-text-enabled" type="checkbox" checked></label><label>Distortion strength <input id="surface-text-strength" type="range" min="0" max="1" step="0.05" value="0.25"></label><p>The filter follows the background wave simulation. It affects history, replies and typed text without changing the text or cursor. Set it to zero to disable it. Saved locally, outside engine presets.</p><p id="surface-text-status" aria-live="off"></p></section>
+    <section><h2>Generation</h2><label>Approval <select id="generation"><option value="manual">Manual approval</option><option value="automatic">Automatically</option></select></label><label>Show sound count next to “Create” <input id="generation-show-count" type="checkbox"></label><p>The count applies to a prepared plan. Your choice is saved locally.</p><p id="generation-duration-status" role="status"></p><p>Set the duration of new files in the conversation, for example “Make new sounds 8 seconds long” or “Choose duration automatically”. Fixed range: 0.5–30 s. This does not change grain length or existing samples. You can request up to 10 new files. Visual presets do not change these settings.</p></section>
+    <section><h2>Audio emitters</h2><label>Mapping <select id="audio-mapping"><option value="topology">Grains → channel topology</option><option value="energy">Overall output energy</option><option value="off">No audio driven waves</option></select></label><label>Topology <select id="audio-topology"><option value="auto">From engine</option><option value="stereo">LR</option><option value="5.1">5.1</option><option value="7.1">7.1</option></select></label><label>Spread <select id="audio-spread"><option value="regions">Full channel space</option><option value="compact">Near speakers</option></select></label><label>Spread X <input id="audio-spread-x" type="range" min="0" max="1" step="0.05" value="1"></label><label>Spread Y <input id="audio-spread-y" type="range" min="0" max="1" step="0.05" value="1"></label><label>Small spread radius <input id="audio-jitter" type="range" min="0" max="0.12" step="0.005" value="0.055"></label><p>Top is front; bottom is rear. Sparse grains have individual emitters, while dense clouds combine into channel sources. LFE sits in the middle. This local choice does not change audio routing.</p><p id="audio-mapping-status" aria-live="off"></p><label>Static emitter map <input id="audio-map-debug" type="checkbox"></label><label>Marker layout <select id="audio-map-layout"><option value="auto">Automatic (LR preview)</option><option value="stereo">LR</option><option value="lrc">LRC</option><option value="5.1">5.1</option><option value="7.1">7.1</option></select></label><label>Map style <select id="audio-map-style"><option value="overlay">On water · channel colors</option><option value="monochrome">Black screen · white dots</option></select></label><p id="audio-map-debug-status">Dots show possible emitter positions, not grains being played. This preview does not start audio or waves and is not saved.</p></section>
+    <section><h2>Emitter count and audio waves</h2>
+      <label>Target emitters per channel <input id="audio-slots" type="number" min="1" max="8" step="1" value="4"></label>
+      <label>Threshold for 2 / channel (starts/s) <input id="audio-pressure-two" type="number" min="10" max="200" step="1" value="40"></label>
+      <label>Threshold for 1 / channel (starts/s) <input id="audio-pressure-one" type="number" min="20" max="500" step="1" value="120"></label>
+      <label>Target grain wave interval (ms) <input id="audio-heartbeat" type="number" min="300" max="3000" step="50" value="900"></label>
+      <label>Slow emitter drift <input id="audio-drift-enabled" type="checkbox" checked></label>
+      <label>Drift range <output id="audio-drift-amount-value">0.35</output><input id="audio-drift-amount" type="range" min="0" max="1" step="0.05" value="0.35"></label>
+      <label>Transition time (s) <input id="audio-drift-period" type="number" min="8" max="120" step="1" value="24"></label>
+      <label>Audio wave size <output id="audio-size-value">1.00×</output><input id="audio-size" type="range" min="0.25" max="3" step="0.05" value="1"></label>
+      <label>Audio wave strength <output id="audio-strength-value">1.00×</output><input id="audio-strength" type="range" min="0" max="3" step="0.05" value="1"></label>
+      <p>Set X/Y spread and placement above. Slow drift gradually moves emitters within each channel and only affects visuals. The combined emitter limit is 16; density can reduce the count, which recovers after 2 seconds of lower load. Size scales wave radius and strength scales audio sensitivity. The visual budget is 12 pulses/s, so intervals may lengthen with many sources.</p>
+      <p>Cloud size limits audio voices, not waves. Emitters use the nominal grain duration. A wave remains on the water and fades after emission ends.</p>
+      <h3>Local emitter presets</h3>
+      <label>Preset <select id="audio-presets"><option value="">Select emitter preset</option></select></label>
+      <label>Name <input id="audio-preset-name" maxlength="80" placeholder="Emitter preset name"></label>
+      <div class="toolbar"><button id="audio-preset-save">Save / overwrite</button><button id="audio-preset-load">Load</button><button id="audio-preset-delete">Delete</button><button id="audio-reset">Defaults</button></div>
+      <p>Recent settings and emitter presets are stored in this browser for this address. They are separate from engine presets and do not transfer automatically between browsers.</p>
+      <p id="audio-settings-status" role="status"></p>
+    </section>
+    <section><h2>Presets</h2><select id="presets" aria-label="Configuration preset"></select><span id="modified"></span><input id="preset-name" maxlength="80" placeholder="Preset name" aria-label="Preset name"><div class="toolbar"><button id="save-as">Save as</button><button id="overwrite">Overwrite</button><button id="rename">Rename</button><button id="delete">Delete</button><button id="export">Export</button><label class="file-button">Import<input id="import" type="file" accept="application/json,.json"></label></div><p>Export is portable; camera and screen are selected on the destination machine.</p></section>
+    <div id="fields"></div>
+    <section><h2>Water diagnostics</h2><label>Waves on background click and drag <input id="debug-pointer" type="checkbox"></label><div class="toolbar"><button id="debug-clear">Clear waves</button></div><p>Click and drag on the background to draw an irregular wave trail. Chat and controls do not trigger this effect. It does not control audio and is not saved in presets.</p><p id="render-debug-status" aria-live="off"></p></section>
+    <section id="control-inspector" aria-labelledby="control-inspector-title">
+      <h2 id="control-inspector-title">Engine control contract</h2>
+      <p>Technical view of parameters and control plans. This is a local panel.</p>
+      <button type="button" data-control="refresh">Refresh contract</button>
+      <pre data-control="operation-catalog" aria-label="Available operations"></pre>
+      <label>Scope <select data-control="scope"><option value="default">Defaults</option><option value="group">Group</option><option value="file">File</option></select></label>
+      <label>Target <select data-control="target" disabled></select></label>
+      <label>Parameter <select data-control="parameter" disabled></select></label>
+      <label>Value <input data-control="value" type="number" disabled></label>
+      <pre data-control="metadata" aria-live="polite"></pre>
+      <p>Range and units come from engine metadata. Advanced JSON accepts only an array of operations; it does not execute code or import files.</p>
+      <button type="button" data-control="build-op" disabled>Add setting operation</button>
+      <label>Advanced JSON operation list (max. 32) <textarea data-control="ops" rows="6" spellcheck="false">[]</textarea></label>
+      <div class="toolbar"><button type="button" data-control="preview" disabled>Preview plan</button><button type="button" data-control="apply" disabled>Apply reviewed plan</button></div>
+      <p data-control="status" role="status">Connect to the engine to read its contract.</p>
+    </section>
+    <section id="camera-controls" hidden><select id="cameras"></select><button id="camera-permission" disabled></button><button id="refresh-cameras" disabled></button><button id="camera-start" disabled></button><button id="camera-stop" disabled></button><p id="camera-status">Camera unavailable in this demo.</p></section>
+    <footer>F2: settings · Escape: exit full screen. Conversation remains available without GPU.</footer>
+  </aside>
+  <script type="module" src="panel.js"></script>
+</body>
+</html>

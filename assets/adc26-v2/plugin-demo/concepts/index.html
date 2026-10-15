@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; media-src 'self' blob:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'none'">
+<meta name="theme-color" content="#07191f">
+<title>Greggular Concepts</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="panel.css">
+<script type="module" src="panel.js"></script>
+</head>
+<body>
+  <canvas id="water" aria-hidden="true"></canvas>
+  <div class="water-shade" aria-hidden="true"></div>
+  <main class="app" id="app" data-caption-portal="true">
+    <div id="connection" class="connection" role="status" aria-live="polite"><i></i><span>Łączenie z silnikiem…</span></div>
+    <section id="scene" class="scene" aria-label="Ośrodki i obiekty dźwiękowe">
+      <div id="scene-camera" class="scene-camera">
+        <div id="centres" class="centres"></div>
+        <div id="loose" class="loose-sounds" aria-label="Dźwięki bez emitera"></div>
+      </div>
+      <div id="empty" class="empty-state" hidden><span aria-hidden="true">◌</span><h1>Ośrodki</h1><p>Chmury · wspólne parametry</p><button type="button" class="primary-button" data-action="first-centre" aria-label="Utwórz ośrodek" title="Utwórz ośrodek">＋</button></div>
+      <div id="inactive" class="inactive-state" hidden><span aria-hidden="true">◉</span><h1>Concepts</h1><p>◌ · ◌ · ◌</p><button type="button" class="primary-button" data-action="activate" aria-label="Włącz Concepts" title="Włącz">⏻</button></div>
+      <aside id="inspector" class="inspector" aria-live="polite" hidden></aside>
+    </section>
+    <section id="creation" class="creation" aria-label="Nowe obiekty dźwiękowe">
+      <div id="shelf-heading" class="shelf-heading"><div><span class="eyebrow">◌</span><h2 aria-label="Nowe obiekty">Obiekty</h2></div><span id="shelf-count" class="shelf-count">0</span><button type="button" id="import-objects" class="quiet-link" aria-label="Importuj obiekty" title="Importuj" hidden>⇩</button><span id="demo-label" class="demo-label" hidden>Dane przykładowe</span></div>
+      <p id="import-status" class="import-status" role="status" aria-live="polite" hidden></p>
+      <div id="object-rail" class="object-rail" aria-label="Obiekty i propozycje">
+        <div id="shelf" class="shelf" aria-label="Nieprzypisane obiekty"></div>
+        <div id="suggestions" class="sound-suggestions" aria-label="Propozycje kolejnych dźwięków"></div>
+      </div>
+      <p id="generation-note" class="generation-note" role="status" hidden></p>
+      <div id="generation-job" class="generation-job" hidden><span id="generation-job-label" role="status" aria-live="polite"></span><div><button type="button" class="quiet-link" data-action="generate-pending" aria-label="Wygeneruj obiekt" title="Wygeneruj">↻</button><button type="button" class="quiet-link" data-action="cancel-generation" aria-label="Anuluj" title="Anuluj">×</button></div></div>
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+    </section>
+    <footer class="topbar bottom-bar" aria-label="Główny pasek Concepts">
+      <a class="brand" href="?demo=1" aria-label="Greggular — tryb webowy"><span class="brand-mark" aria-hidden="true">≈</span><span>Greggular <b>Concepts</b></span></a>
+      <form id="generator" class="generator">
+        <label class="sr-only" for="prompt">Opisz nowy obiekt dźwiękowy</label>
+        <span class="prompt-mark" aria-hidden="true">♫</span>
+        <textarea id="prompt" rows="1" maxlength="500" placeholder="Dźwięk…" aria-label="Opisz nowy obiekt dźwiękowy" required></textarea>
+        <button id="generate" type="submit" class="primary-button" aria-label="Generuj dźwięk" title="Generuj" disabled>↗</button>
+      </form>
+      <div class="top-actions">
+        <button type="button" id="library-toggle" class="icon-button" aria-label="Biblioteka i presety" aria-controls="library-drawer" aria-expanded="false"><span aria-hidden="true">▱</span></button>
+        <details id="concepts-settings" class="concepts-settings"><summary aria-label="Ustawienia Concepts" title="Ustawienia">⚙</summary><div class="settings-options"><label><input id="concepts-cards" type="checkbox"> Karty dźwięków</label><label><input id="concepts-motion" type="checkbox" checked> Pływanie</label><button type="button" class="quiet-link" data-action="reset-layout" aria-label="Przywróć układ ośrodków i dźwięków" title="Przywróć układ">↺</button></div></details>
+        <button type="button" id="add-centre" class="subtle-button" aria-label="Dodaj ośrodek" title="Dodaj ośrodek" disabled>＋</button>
+      </div>
+    </footer>
+    <div class="concepts-floating-controls" aria-label="Odtwarzanie i zasilanie">
+      <button type="button" id="master-transport" class="icon-button" aria-label="Uruchom transport" title="Transport" disabled><span aria-hidden="true">▶</span></button>
+      <button type="button" id="deactivate-concepts" class="icon-button" aria-label="Wyłącz Concepts" title="Wyłącz" hidden><span aria-hidden="true">⏻</span></button>
+    </div>
+    <aside id="library-drawer" class="library-drawer" aria-label="Biblioteka i presety" hidden>
+      <header class="library-heading">
+        <div class="library-tabs" role="tablist" aria-label="Biblioteka">
+          <button type="button" id="library-presets-tab" role="tab" aria-selected="true" aria-controls="library-presets">Presety</button>
+          <button type="button" id="library-samples-tab" role="tab" aria-selected="false" aria-controls="library-samples" tabindex="-1">Sample</button>
+        </div>
+        <select id="library-target" aria-label="Zakres presetu i ośrodek dla sampli"><option value="">◌ Scena</option></select>
+        <button type="button" id="library-close" class="library-icon" aria-label="Zamknij bibliotekę">×</button>
+      </header>
+      <section id="library-presets" role="tabpanel" aria-labelledby="library-presets-tab">
+        <form id="library-save-form" class="library-tools">
+          <input id="library-preset-name" aria-label="Nazwa presetu" placeholder="Nazwa presetu…" maxlength="80" required>
+          <button type="submit" id="library-save" class="library-icon" aria-label="Zapisz preset">▣</button>
+          <button type="button" id="library-load" class="library-icon" aria-label="Wczytaj preset z pliku">↥</button>
+        </form>
+        <div id="library-preset-list" class="library-grid" aria-label="Presety"></div>
+      </section>
+      <section id="library-samples" role="tabpanel" aria-labelledby="library-samples-tab" hidden>
+        <div class="library-tools library-import-tools">
+          <button type="button" id="library-files" class="library-icon" aria-label="Dodaj pliki dźwiękowe do biblioteki">♫</button>
+          <button type="button" id="library-folder" class="library-icon" aria-label="Dodaj folder sampli do biblioteki">▱</button>
+          <button type="button" id="library-native-folder" class="library-icon" aria-label="Importuj folder WAV w silniku" hidden>⇩</button>
+          <span id="library-sample-count" class="library-count"></span>
+        </div>
+        <div id="library-sample-list" class="library-grid" aria-label="Własne sample"></div>
+      </section>
+      <progress id="library-progress" max="1" value="0" aria-label="Postęp operacji biblioteki" hidden></progress>
+      <p id="library-note" class="library-note" role="status" aria-live="polite" hidden></p>
+      <input id="library-audio-input" type="file" accept=".wav,.aif,.aiff,.flac,.ogg,.mp3" multiple hidden>
+      <input id="library-folder-input" type="file" accept=".wav,.aif,.aiff,.flac,.ogg,.mp3" webkitdirectory directory multiple hidden>
+      <input id="library-preset-input" type="file" accept=".json,.greggular.json" multiple hidden>
+    </aside>
+    <div id="library-drop-overlay" class="library-drop-overlay" aria-hidden="true" hidden><span>＋</span><small id="library-drop-label"></small></div>
+    <div id="sound-focus" class="sound-focus" hidden></div>
+    <div id="control-caption" class="control-caption" aria-hidden="true" hidden></div>
+    <dialog id="centre-dialog" class="concepts-dialog"><form id="centre-form" method="dialog"><h2>Nowy ośrodek</h2><label for="centre-name-input">Nazwa ośrodka</label><input id="centre-name-input" maxlength="60" value="α" required><div class="dialog-actions"><button type="button" class="quiet-link" data-action="dismiss-centre-dialog">Anuluj</button><button type="submit" class="primary-button">Utwórz ośrodek</button></div></form></dialog>
+    <dialog id="delete-dialog" class="concepts-dialog"><form id="delete-form" method="dialog"><h2>Usunąć ośrodek?</h2><p id="delete-copy"></p><div class="dialog-actions"><button type="button" class="quiet-link" data-action="dismiss-delete-dialog">Anuluj</button><button type="submit" class="primary-button">Usuń ośrodek</button></div></form></dialog>
+  </main>
+</body>
+</html>

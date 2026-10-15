@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; media-src 'self' blob:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'none'">
+  <title>Greggular — Premiere</title><link rel="icon" href="data:,"><link rel="stylesheet" href="panel.css">
+  <link rel="stylesheet" href="controls.css">
+  <link rel="stylesheet" href="interaction-modes.css">
+</head>
+<body>
+  <canvas id="water" aria-hidden="true"></canvas>
+  <div id="audio-map-backdrop" aria-hidden="true" hidden></div>
+  <div id="audio-emitter-preview" aria-hidden="true" hidden></div>
+  <div id="interaction-modes"></div>
+  <main id="stage" aria-label="Rozmowa na wodzie">
+    <div id="messages" role="log" aria-live="polite" aria-label="Rozmowa" tabindex="0"></div>
+    <form id="composer"><button id="approve" type="button" hidden><span>Utwórz</span></button><label class="sr-only" for="message">Opisz dźwięki</label><div id="typing-surface"><div id="typing-ink" aria-hidden="true"><p id="typing-letters"></p></div><textarea id="message" rows="1" maxlength="2000" placeholder="Co chcesz usłyszeć?" autocomplete="off"></textarea></div><button id="send" aria-label="Wyślij wiadomość" title="Wyślij">↑</button></form>
+    <p id="public-status" role="status"></p>
+  </main>
+  <nav id="presentation-tools" aria-label="Prezentacja"><button id="settings" aria-label="Panel techniczny" title="Panel techniczny (F2)">⋯</button><button id="fullscreen" aria-label="Pełny ekran" title="Pełny ekran">⛶</button></nav>
+  <aside id="operator" hidden aria-label="Panel techniczny">
+    <header><h1>Premiera</h1><button id="hide-settings" aria-label="Zamknij panel">×</button></header>
+    <section id="text-scale-controls" aria-label="Wielkość tekstu"><h2>Wielkość tekstu</h2><div class="toolbar"><button id="text-scale-less" aria-label="Zmniejsz tekst">A−</button><output id="text-scale-value" aria-live="polite">100%</output><button id="text-scale-more" aria-label="Powiększ tekst">A+</button></div></section>
+    <section id="connection"><label>Instancja <select id="instances"><option value="">Wybierz instancję</option></select></label><button id="refresh-instances">Odśwież</button><p id="connection-label"></p></section>
+    <div class="toolbar"><button id="present">Pokaż premierę</button><button id="open-window" hidden>Otwórz osobne okno</button></div>
+    <p id="operator-status" role="status"></p><p id="graphics-status"></p>
+    <section aria-label="Zadanie silnika"><p id="job-detail"></p><button id="cancel-job" hidden>Anuluj zadanie</button></section>
+    <section><h2>Warstwy tła</h2>
+      <label>Nowe gradienty tła <input id="background-gradients" type="checkbox" checked></label>
+      <label>Dawne pasma światła w górę <input id="background-rising-bands" type="checkbox"></label>
+      <div class="toolbar"><button id="background-only-bands">Same dawne pasma</button></div>
+      <p>Warstwy można włączać niezależnie. Przycisk wyłącza gradienty i pozostawia dawne przesuwające się pasma na wodzie. Wektorowe kreski nie wracają. Ograniczenie ruchu zamraża animację; dawne pasma wymagają WebGL.</p>
+      <p id="background-layers-status" role="status">Wybór lokalny, zapamiętywany po reloadzie, poza presetami silnika.</p>
+    </section>
+    <section><h2>Układ czatu</h2><label>Tekst płynie do rozmowy <input id="chat-flow" type="checkbox"></label><label>Rozmieszczenie <select id="chat-flow-layout"><option value="user-left">Ty po lewej · odpowiedź po prawej</option><option value="user-right">Ty po prawej · odpowiedź po lewej</option></select></label><p>Tekst płynnie przemieszcza się z pola pisania na wybraną stronę rozmowy. Odpowiedź odsłania się litera po literze w docelowych miejscach. Po wyłączeniu: klasyczny układ bez lotu tekstu. Wybór lokalny, poza presetami silnika.</p></section>
+    <section><h2>Tekst pod wodą</h2><label>Miarowe falowanie całego tekstu <input id="underwater-ink" type="checkbox" checked></label><label>Siła <input id="underwater-strength" type="range" min="0" max="1" step="0.05" value="0.55"></label><label>Okres fali (s) <input id="underwater-period" type="number" min="2" max="12" step="0.5" value="6"></label><p>Historia, odpowiedzi i wpisywane litery. Wybór lokalny, poza presetami silnika; ograniczenie ruchu wyłącza efekt.</p></section>
+    <section><h2>Tekst i tafla wody</h2><label>Zniekształcaj tekst wraz z taflą <input id="surface-text-enabled" type="checkbox" checked></label><label>Siła zniekształcenia <input id="surface-text-strength" type="range" min="0" max="1" step="0.05" value="0.25"></label><p>Filtr podąża za tą samą symulacją fal co tło. Obejmuje historię, odpowiedzi i wpisywany tekst; nie zmienia treści ani kursora. 0 wyłącza efekt. Zapis lokalny, poza presetami silnika.</p><p id="surface-text-status" aria-live="off"></p></section>
+    <section><h2>Generowanie</h2><label>Zatwierdzanie <select id="generation"><option value="manual">Zatwierdzenie ręczne</option><option value="automatic">Automatycznie</option></select></label><label>Pokaż liczbę dźwięków przy „Utwórz” <input id="generation-show-count" type="checkbox"></label><p>Licznik dotyczy gotowego planu. Wybór jest zapamiętywany lokalnie.</p><p id="generation-duration-status" role="status"></p><p>Długość nowych plików ustaw w rozmowie: „Ustaw długość nowych dźwięków na 8 sekund” lub „Dobieraj długość automatycznie”. Zakres stały: 0,5–30 s. Nie zmienia to długości granul ani już załadowanych próbek. Liczbę nowych dźwięków możesz podać w wiadomości; plan obejmuje do 10 plików. Preset wizualny nie zmienia tych ustawień.</p></section>
+    <section><h2>Emitery audio</h2><label>Mapowanie <select id="audio-mapping"><option value="topology">Granule → topologia kanałów</option><option value="energy">Energia całego wyjścia</option><option value="off">Bez fal od audio</option></select></label><label>Topologia <select id="audio-topology"><option value="auto">Z silnika</option><option value="stereo">LR</option><option value="5.1">5.1</option><option value="7.1">7.1</option></select></label><label>Rozłożenie <select id="audio-spread"><option value="regions">Cała przestrzeń kanałów</option><option value="compact">Blisko głośników</option></select></label><label>Rozrzut X <input id="audio-spread-x" type="range" min="0" max="1" step="0.05" value="1"></label><label>Rozrzut Y <input id="audio-spread-y" type="range" min="0" max="1" step="0.05" value="1"></label><label>Promień małego rozrzutu <input id="audio-jitter" type="range" min="0" max="0.12" step="0.005" value="0.055"></label><p>Góra: front. Dół: tył. Nieliczne granule mają osobne emitery; gęste chmury łączą się w źródła kanałowe. LFE w środku. Wybór lokalny, poza presetami silnika; nie zmienia routingu dźwięku.</p><p id="audio-mapping-status" aria-live="off"></p><label>Statyczna mapa emiterów <input id="audio-map-debug" type="checkbox"></label><label>Układ znaczników <select id="audio-map-layout"><option value="auto">Automatycznie (podgląd LR)</option><option value="stereo">LR</option><option value="lrc">LRC</option><option value="5.1">5.1</option><option value="7.1">7.1</option></select></label><label>Styl mapy <select id="audio-map-style"><option value="overlay">Na wodzie · kolory kanałów</option><option value="monochrome">Czarny ekran · białe kropki</option></select></label><p id="audio-map-debug-status">Kropki pokazują potencjalne pozycje emiterów, nie odtwarzane granule. Mapa testowa nie uruchamia audio ani fal i nie jest zapisywana.</p></section>
+    <section><h2>Liczba emiterów i fale audio</h2>
+      <label>Docelowe emitery na kanał <input id="audio-slots" type="number" min="1" max="8" step="1" value="4"></label>
+      <label>Próg redukcji do 2 / kanał (starty/s) <input id="audio-pressure-two" type="number" min="10" max="200" step="1" value="40"></label>
+      <label>Próg redukcji do 1 / kanał (starty/s) <input id="audio-pressure-one" type="number" min="20" max="500" step="1" value="120"></label>
+      <label>Docelowy odstęp fal granul (ms) <input id="audio-heartbeat" type="number" min="300" max="3000" step="50" value="900"></label>
+      <label>Powolny dryf emiterów <input id="audio-drift-enabled" type="checkbox" checked></label>
+      <label>Zasięg dryfu <output id="audio-drift-amount-value">0.35</output><input id="audio-drift-amount" type="range" min="0" max="1" step="0.05" value="0.35"></label>
+      <label>Czas przejścia (s) <input id="audio-drift-period" type="number" min="8" max="120" step="1" value="24"></label>
+      <label>Rozmiar fal audio <output id="audio-size-value">1.00×</output><input id="audio-size" type="range" min="0.25" max="3" step="0.05" value="1"></label>
+      <label>Siła fal audio <output id="audio-strength-value">1.00×</output><input id="audio-strength" type="range" min="0" max="3" step="0.05" value="1"></label>
+      <p>Rozrzut X/Y i rozmieszczenie ustaw wyżej. Powolny dryf jest wyłącznie wizualny: stopniowo przesuwa emitery w dostępnej przestrzeni kanału. Działa dla pojedynczych granuli i emiterów zbiorczych; nie zmienia dźwięku ani routingu. Limit dotyczy emiterów zbiorczych: w LR do 8 na stronę, domyślnie 4; łącznie najwyżej 16. Przy większej gęstości liczba maleje; powrót następuje po 2 s niższego obciążenia. Rozmiar mnoży globalny promień fali; siła mnoży czułość audio. Budżet bezpieczeństwa: do 12 impulsów/s, dlatego przy wielu źródłach rzeczywisty odstęp może być dłuższy. Odstęp dotyczy trybu topologii, nie energii całego wyjścia.</p>
+      <p>Cloudsize to limit głosów audio w chmurze, nie liczby fal. Emitery bazują na nominalnym czasie życia granuli; wcześniejsze przerwanie głosu nie jest jeszcze raportowane. Fala pozostaje na wodzie i wygasa także po zakończeniu emisji.</p>
+      <h3>Lokalne presety emiterów</h3>
+      <label>Preset <select id="audio-presets"><option value="">Wybierz preset emiterów</option></select></label>
+      <label>Nazwa <input id="audio-preset-name" maxlength="80" placeholder="Nazwa presetu emiterów"></label>
+      <div class="toolbar"><button id="audio-preset-save">Zapisz / nadpisz</button><button id="audio-preset-load">Wczytaj</button><button id="audio-preset-delete">Usuń</button><button id="audio-reset">Domyślne</button></div>
+      <p>Automatyczny zapis ostatnich ustawień i presety emiterów są lokalne dla tej przeglądarki i adresu. Nie należą do presetów silnika poniżej i nie przenoszą się automatycznie między przeglądarkami.</p>
+      <p id="audio-settings-status" role="status"></p>
+    </section>
+    <section><h2>Presety</h2><select id="presets" aria-label="Preset konfiguracji"></select><span id="modified"></span><input id="preset-name" maxlength="80" placeholder="Nazwa presetu" aria-label="Nazwa presetu"><div class="toolbar"><button id="save-as">Zapisz jako</button><button id="overwrite">Nadpisz</button><button id="rename">Zmień nazwę</button><button id="delete">Usuń</button><button id="export">Eksportuj</button><label class="file-button">Importuj<input id="import" type="file" accept="application/json,.json"></label></div><p>Eksport jest przenośny: kamera i ekran są wybierane na nowej maszynie.</p></section>
+    <div id="fields"></div>
+    <section><h2>Diagnostyka wody</h2><label>Fale po kliknięciu i przeciąganiu tła <input id="debug-pointer" type="checkbox"></label><div class="toolbar"><button id="debug-clear">Wyczyść fale</button></div><p>Kliknij tło, a następnie przeciągnij z wciśniętym lewym przyciskiem, aby rysować nieregularny ślad fal. Czat i kontrolki nie wzbudzają tego efektu. Bez sterowania audio; ustawienie testowe nie jest zapisywane w presecie.</p><p id="render-debug-status" aria-live="off"></p></section>
+    <section id="control-inspector" aria-labelledby="control-inspector-title">
+      <h2 id="control-inspector-title">Sterowanie silnikiem — kontrakt</h2>
+      <p>Zaawansowany podgląd parametrów i planów sterowania. To lokalny panel techniczny, nie serwer MCP ani dodatkowy model.</p>
+      <button type="button" data-control="refresh">Odśwież kontrakt</button>
+      <pre data-control="operation-catalog" aria-label="Dostępne operacje"></pre>
+      <label>Zakres <select data-control="scope"><option value="default">Domyślne</option><option value="group">Grupa</option><option value="file">Plik</option></select></label>
+      <label>Cel <select data-control="target" disabled></select></label>
+      <label>Parametr <select data-control="parameter" disabled></select></label>
+      <label>Wartość <input data-control="value" type="number" disabled></label>
+      <pre data-control="metadata" aria-live="polite"></pre>
+      <p>Zakres i jednostka wynikają z metadanych silnika. Zaawansowany JSON przyjmuje wyłącznie tablicę operacji; nie wykonuje kodu ani nie importuje plików.</p>
+      <button type="button" data-control="build-op" disabled>Dodaj operację ustawienia</button>
+      <label>Zaawansowana lista operacji JSON (maks. 32) <textarea data-control="ops" rows="6" spellcheck="false">[]</textarea></label>
+      <div class="toolbar"><button type="button" data-control="preview" disabled>Sprawdź plan</button><button type="button" data-control="apply" disabled>Zastosuj sprawdzony plan</button></div>
+      <p data-control="status" role="status">Połącz z silnikiem, aby odczytać kontrakt.</p>
+    </section>
+    <section id="camera-controls" hidden><select id="cameras"></select><button id="camera-permission" disabled></button><button id="refresh-cameras" disabled></button><button id="camera-start" disabled></button><button id="camera-stop" disabled></button><p id="camera-status">Kamera niedostępna w lokalnej demonstracji.</p></section>
+    <footer>F2: ustawienia · Escape: wyjście z pełnego ekranu. Brak GPU nie blokuje rozmowy.</footer>
+  </aside>
+  <script type="module" src="panel.js"></script>
+</body>
+</html>
